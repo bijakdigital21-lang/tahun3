@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bijak Math Tahun 2 / Smart Math Grade 2</title>
+    <!-- Tailwind CSS untuk Rekabentuk Moden & Responsif -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Google Fonts - Nunito (Mudah dibaca & Mesra Kanak-kanak) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght=400;700;900&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti untuk Animasi Kejayaan -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #dcfce7 100%);
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        /* Bounce Animation untuk Butang */
+        .btn-bounce {
+            transition: transform 0.1s ease;
+        }
+        .btn-bounce:active {
+            transform: scale(0.92);
+        }
+        /* Shake Animation untuk Jawapan Salah */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+        .animate-shake {
+            animation: shake 0.2s ease-in-out 2;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start overflow-x-hidden antialiased text-slate-800">
+
+    <!-- APP CONTAINER - Ditukar kepada h-auto untuk membolehkan skrol keseluruhan halaman -->
+    <div class="max-w-md w-full mx-auto bg-white/80 backdrop-blur-md min-h-screen h-auto shadow-2xl flex flex-col relative pb-6 border-x border-white/40">
+        
+        <!-- HEADER / STATUS BAR -->
+        <header id="appHeader" class="hidden bg-gradient-to-r from-blue-500 to-cyan-500 text-white p-4 rounded-b-3xl shadow-lg sticky top-0 z-40">
+            <div class="flex justify-between items-center">
+                <!-- Profil Info -->
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl">👤</span>
+                    <div>
+                        <div id="headerName" class="font-black text-base truncate max-w-[100px]">Nama</div>
+                        <div class="flex items-center text-xs text-yellow-200">
+                            <span class="mr-1">⭐</span> <span id="headerStars" class="font-bold">0</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Status Nyawa -->
+                <div class="flex items-center space-x-2 bg-white/20 px-2.5 py-1.5 rounded-full backdrop-blur-sm">
+                    <div id="livesContainer" class="flex space-x-0.5 text-base">
+                        <span>❤️</span><span>❤️</span><span>❤️</span>
+                    </div>
+                </div>
+                <!-- Butang Kawalan -->
+                <div class="flex items-center space-x-2">
+                    <button onclick="toggleLanguage()" class="btn-bounce bg-white/20 hover:bg-white/30 font-black text-xs px-2.5 py-1.5 rounded-xl border border-white/30 cursor-pointer" id="btnLangToggle" title="Tukar Bahasa / Change Language">
+                        🌐 EN
+                    </button>
+                    <button onclick="openSettings()" class="btn-bounce text-xl p-1 focus:outline-none cursor-pointer" title="Tetapan">
+                        ⚙️
+                    </button>
+                    <button onclick="logoutProfile()" class="btn-bounce text-xl p-1 focus:outline-none cursor-pointer" title="Log Keluar">
+                        🚪
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN VIEWPORT -->
+        <main class="flex-grow p-5 flex flex-col justify-center">
+
+            <!-- 1. PAPARAN PERMULAAN -->
+            <section id="viewWelcome" class="flex flex-col items-center text-center space-y-8 py-8">
+                <div class="relative w-full flex justify-end px-2 -mt-4">
+                    <button onclick="toggleLanguage()" class="btn-bounce bg-blue-500 text-white font-black text-xs px-3 py-1.5 rounded-xl border-b-2 border-blue-700 cursor-pointer shadow-md" id="btnWelcomeLangToggle">
+                        🌐 EN
+                    </button>
+                </div>
+                <div class="space-y-2">
+                    <div class="text-7xl drop-shadow-md animate-bounce inline-block">✏️🔢</div>
+                    <h1 class="text-4xl font-extrabold text-blue-600 tracking-wide drop-shadow" id="welcomeTitle">Bijak Math<br><span class="text-emerald-500 text-3xl">Tahun 2</span></h1>
+                </div>
+                <!-- Maskot Kartun -->
+                <div class="w-48 h-48 bg-yellow-300 rounded-full flex items-center justify-center shadow-inner relative border-4 border-white animate-pulse">
+                    <span class="text-8xl">🦁</span>
+                    <div class="absolute -bottom-2 bg-green-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow" id="welcomeMascot">Hai Kawan!</div>
+                </div>
+                <button onclick="navigateTo('viewProfile')" class="btn-bounce w-full bg-blue-500 hover:bg-blue-600 text-white font-black text-2xl py-4 px-8 rounded-2xl shadow-xl shadow-blue-300 border-b-4 border-blue-700 uppercase tracking-wider cursor-pointer" id="btnWelcomeStart">
+                    Mula Belajar
+                </button>
+            </section>
+
+            <!-- 2. DAFTAR PROFIL -->
+            <section id="viewProfile" class="hidden flex flex-col space-y-6">
+                <div class="text-center">
+                    <span class="text-5xl">🎒</span>
+                    <h2 class="text-2xl font-black text-slate-700 mt-2" id="profileTitle">Daftar Profil Baru</h2>
+                    <p class="text-slate-500 text-sm" id="profileDesc">Masukkan namamu untuk memulakan pengembaraan Matematik!</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-md border-2 border-slate-100">
+                    <label class="block text-slate-600 font-bold mb-2 text-sm" id="profileLabel">Nama Murid :</label>
+                    <input type="text" id="usernameInput" maxlength="15" placeholder="Tulis nama di sini..." class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-4 text-lg font-bold focus:outline-none focus:border-blue-400 text-center uppercase tracking-wide">
+                </div>
+                <button onclick="saveProfile()" class="btn-bounce w-full bg-green-500 hover:bg-green-600 text-white font-black text-xl py-4 rounded-2xl shadow-xl shadow-green-200 border-b-4 border-green-700 cursor-pointer" id="btnSaveProfile">
+                    Simpan Profil
+                </button>
+                
+                <!-- Senarai Profil Sedia Ada -->
+                <div id="existingProfilesSection" class="hidden space-y-2 mt-4">
+                    <h3 class="text-xs font-black text-slate-400 uppercase tracking-wider" id="existingProfilesTitle">Atau Pilih Profil Sedia Ada:</h3>
+                    <div id="existingProfilesContainer" class="grid grid-cols-1 gap-2 max-h-40 overflow-y-auto pr-1"></div>
+                </div>
+            </section>
+
+            <!-- 3. PAPARAN UTAMA (MENU TOPIK) -->
+            <section id="viewMainMenu" class="hidden space-y-6">
+                <div class="flex justify-between items-start gap-2">
+                    <div>
+                        <h2 class="text-2xl font-black text-slate-700 flex flex-col" id="mainMenuTitle">Pilih Topik Belajar 🚀</h2>
+                        <p class="text-slate-500 text-xs" id="mainMenuDesc">Kumpul bintang untuk buka lencana hebat!</p>
+                    </div>
+                    <button onclick="openPerformanceRecords()" class="btn-bounce bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-2.5 px-3 rounded-xl shadow-md flex items-center gap-1 shrink-0 cursor-pointer" id="btnPerformanceRecords">
+                        📊 Rekod Prestasi
+                    </button>
+                </div>
+                
+                <!-- Grid Kad Topik - Sekatan max-h dan overflow telah dibuang supaya seluruh halaman boleh diskrol -->
+                <div id="topicsGrid" class="grid grid-cols-2 gap-4 p-1"></div>
+
+                <!-- Bahagian Pencapaian / Lencana -->
+                <div class="bg-white p-4 rounded-2xl shadow-inner border border-slate-100 mt-4">
+                    <h3 class="font-black text-sm text-slate-500 mb-2 uppercase tracking-wider" id="badgeHeading">🏆 Lencana Pencapaian</h3>
+                    <div id="badgesContainer" class="flex flex-wrap gap-2"></div>
+                </div>
+            </section>
+
+            <!-- 4. PAPARAN TOPIK (PRE-QUIZ) -->
+            <section id="viewTopicIntro" class="hidden flex flex-col items-center text-center space-y-6 py-6">
+                <div id="topicIntroIcon" class="text-8xl"></div>
+                <div>
+                    <h2 id="topicIntroTitle" class="text-3xl font-black text-slate-700">Topik</h2>
+                    <p id="topicIntroDetails" class="text-slate-500 font-bold mt-1">20 Soalan Menanti Anda</p>
+                </div>
+                <div class="bg-blue-50 border-2 border-blue-100 p-4 rounded-xl text-sm text-blue-700 font-medium" id="topicIntroHint">
+                    Jawab dengan betul untuk dapatkan markah penuh dan bintang! Pastikan nyawa anda tidak habis.
+                </div>
+                <div class="flex gap-3 w-full">
+                    <button onclick="navigateTo('viewMainMenu')" class="btn-bounce w-1/3 bg-slate-200 text-slate-700 font-bold py-4 rounded-2xl border-b-4 border-slate-400 cursor-pointer" id="btnIntroBack">
+                        Kembali
+                    </button>
+                    <button onclick="startQuiz()" class="btn-bounce w-2/3 bg-yellow-400 hover:bg-yellow-500 text-slate-900 font-black text-lg py-4 rounded-2xl shadow-xl border-b-4 border-yellow-600 cursor-pointer" id="btnIntroStart">
+                        Mula Menjawab 🎮
+                    </button>
+                </div>
+            </section>
+
+            <!-- 5. PAPARAN SOALAN (KUIZ) -->
+            <section id="viewQuiz" class="hidden flex flex-col space-y-4">
+                <div class="flex justify-between items-center text-sm font-bold text-slate-500">
+                    <span id="quizProgressText">Soalan 1 / 20</span>
+                    <span id="quizScoreText" class="text-blue-500">Markah: 0</span>
+                </div>
+                <div class="w-full bg-slate-200 h-3 rounded-full overflow-hidden">
+                    <div id="quizProgressBar" class="bg-emerald-400 h-full transition-all duration-300" style="width: 5%"></div>
+                </div>
+
+                <!-- Kotak Soalan -->
+                <div class="bg-gradient-to-br from-white to-slate-50 p-6 rounded-2xl shadow-md border-2 border-slate-100 min-h-[140px] flex flex-col items-center justify-center text-center mt-2 gap-1.5">
+                    <h3 id="questionTextPrimary" class="text-xl font-extrabold text-slate-700 leading-relaxed">Sila tunggu...</h3>
+                </div>
+
+                <div id="optionsContainer" class="flex flex-col space-y-3 pt-2"></div>
+
+                <div class="pt-4 border-t border-slate-200/60 mt-2">
+                    <button onclick="confirmExitQuiz()" class="btn-bounce w-full bg-slate-100 hover:bg-slate-200 text-slate-500 font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider border border-slate-200 shadow-sm flex items-center justify-center gap-2 cursor-pointer" id="btnExitQuiz">
+                        🏠 Keluar ke Menu Utama
+                    </button>
+                </div>
+            </section>
+
+            <!-- 6. TAMAT TOPIK (HASIL KUIZ) -->
+            <section id="viewResult" class="hidden flex flex-col items-center text-center space-y-6 py-6">
+                <div id="resultEmoji" class="text-7xl animate-bounce">🎉</div>
+                <h2 id="resultTitle" class="text-3xl font-black text-slate-700">Tahniah!</h2>
+                
+                <div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-slate-100 w-full space-y-4">
+                    <div class="text-5xl font-black text-blue-500" id="resultScore">100%</div>
+                    <div class="grid grid-cols-3 gap-2 text-center border-t border-slate-100 pt-4">
+                        <div class="bg-green-50 p-2 rounded-xl">
+                            <div class="text-[10px] font-bold text-green-600" id="resLblCorrect">Betul</div>
+                            <div class="text-lg font-black text-green-700" id="resultCorrect">0</div>
+                        </div>
+                        <div class="bg-red-50 p-2 rounded-xl">
+                            <div class="text-[10px] font-bold text-red-600" id="resLblWrong">Salah</div>
+                            <div class="text-lg font-black text-red-700" id="resultWrong">0</div>
+                        </div>
+                        <div class="bg-yellow-50 p-2 rounded-xl">
+                            <div class="text-[10px] font-bold text-yellow-600" id="resLblStars">Bintang</div>
+                            <div class="text-lg font-black text-yellow-700" id="resultStars">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-3 w-full">
+                    <button onclick="startQuiz()" class="btn-bounce w-full bg-blue-500 text-white font-black py-4 rounded-2xl shadow border-b-4 border-blue-700 cursor-pointer" id="btnResultRetry">
+                        🔄 Main Semula
+                    </button>
+                    <button onclick="navigateTo('viewMainMenu')" class="btn-bounce w-full bg-slate-200 text-slate-700 font-bold py-4 rounded-2xl border-b-4 border-slate-400 cursor-pointer" id="btnResultBack">
+                        🏠 Kembali ke Topik
+                    </button>
+                </div>
+            </section>
+
+            <!-- 7. PAPARAN REKOD PRESTASI -->
+            <section id="viewRecords" class="hidden flex flex-col space-y-4">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h2 class="text-2xl font-black text-slate-700" id="recordsTitle">📊 Rekod Prestasi</h2>
+                        <p class="text-slate-500 text-xs" id="recordsDesc">Senarai markah kuiz yang telah dijawab</p>
+                    </div>
+                    <button onclick="clearPerformanceRecords()" class="btn-bounce text-xs bg-red-50 text-red-600 font-bold py-1.5 px-2.5 rounded-lg border border-red-200 cursor-pointer" id="btnClearRecords">
+                        🗑️ Padam Rekod
+                    </button>
+                </div>
+
+                <div id="recordsListContainer" class="bg-white rounded-2xl p-4 shadow-inner border border-slate-100 max-h-[380px] overflow-y-auto space-y-3"></div>
+
+                <button onclick="navigateTo('viewMainMenu')" class="btn-bounce w-full bg-slate-200 text-slate-700 font-bold py-3.5 rounded-xl border-b-4 border-slate-400 cursor-pointer mt-2 text-center" id="btnRecordsMainMenu">
+                    🏠 Kembali ke Menu Utama
+                </button>
+            </section>
+
+        </main>
+
+        <!-- KOTAK MODAL TETAPAN -->
+        <div id="modalSettings" class="hidden absolute inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-5">
+            <div class="bg-white w-full max-w-sm rounded-3xl shadow-2xl p-6 space-y-6 transform transition-all scale-100">
+                <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                    <h3 class="text-xl font-black text-slate-700 flex items-center gap-2" id="settingsTitle">⚙️ Tetapan</h3>
+                    <button onclick="closeSettings()" class="text-slate-400 hover:text-slate-600 text-2xl font-bold focus:outline-none cursor-pointer">&times;</button>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center bg-slate-50 p-3 rounded-xl">
+                        <span class="font-bold text-slate-600" id="settingsSound">🔔 Kesan Bunyi</span>
+                        <button id="btnSoundToggle" onclick="toggleSound()" class="px-4 py-2 bg-green-500 text-white font-bold rounded-lg text-xs tracking-wide uppercase shadow btn-bounce cursor-pointer">HIDUP</button>
+                    </div>
+                    <button onclick="resetProgress()" class="w-full text-left bg-orange-50 hover:bg-orange-100 text-orange-700 font-bold p-3 rounded-xl text-sm flex items-center justify-between btn-bounce cursor-pointer">
+                        <span id="settingsReset">🔄 Set Semula Kemajuan Kuiz</span>
+                        <span>➔</span>
+                    </button>
+                    <button onclick="logoutProfile()" class="w-full text-left bg-red-50 hover:bg-red-100 text-red-700 font-bold p-3 rounded-xl text-sm flex items-center justify-between btn-bounce cursor-pointer">
+                        <span id="settingsDelete">🚪 Log Keluar Akaun</span>
+                        <span>➔</span>
+                    </button>
+                </div>
+
+                <div class="bg-slate-100 p-3 rounded-xl text-center text-[11px] text-slate-400 leading-relaxed" id="settingsBranding">
+                    <span class="font-bold text-slate-500">Bijak Math v2.0</span><br>
+                    Silibus KSSR Matematik Tahun 2 Kementerian Pendidikan Malaysia.<br>
+                    100% Fungsi Offline & Selamat Tanpa Iklan.
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER BRANDING -->
+        <footer class="text-center text-[10px] text-slate-400/80 font-bold uppercase tracking-wider pb-2" id="footerText">
+            Bijak Math Tahun 2 • KSSR Malaysia
+        </footer>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC & BANK SOALAN -->
+    <script>
+        let currentLang = 'ms'; // Bahasa default
+
+        const I18N_DICTIONARY = {
+            ms: {
+                welcomeTitle: "Bijak Math<br><span class='text-emerald-500 text-3xl'>Tahun 2</span>",
+                welcomeMascot: "Hai Kawan!",
+                btnWelcomeStart: "Mula Belajar",
+                profileTitle: "Daftar Profil Baru",
+                profileDesc: "Masukkan namamu untuk memulakan pengembaraan Matematik!",
+                profileLabel: "Nama Murid :",
+                usernameInputPlaceholder: "Tulis nama di sini...",
+                btnSaveProfile: "Simpan Profil",
+                existingProfilesTitle: "Atau Pilih Profil Sedia Ada:",
+                mainMenuTitle: "Pilih Topik Belajar 🚀",
+                mainMenuDesc: "Kumpul bintang untuk buka lencana hebat!",
+                btnPerformanceRecords: "📊 Rekod Prestasi",
+                badgeHeading: "🏆 Lencana Pencapaian",
+                badgeEmpty: "Selesaikan topik dengan markah 100% untuk kumpul lencana!",
+                questionsUnit: "Soalan",
+                topicIntroDetailsSuffix: "Soalan Latih Tubi",
+                topicIntroHint: "Jawab dengan betul untuk dapatkan markah penuh dan bintang! Pastikan nyawa anda tidak habis.",
+                btnIntroBack: "Kembali",
+                btnIntroStart: "Mula Menjawab 🎮",
+                quizProgressText: "Soalan",
+                quizScoreText: "Markah",
+                btnExitQuiz: "🏠 Keluar ke Menu Utama",
+                resultTitleSuccess: "Sempurna 100%!",
+                resultTitleNormal: "Tahniah! Selesai!",
+                resultTitleFail: "Cuba Lagi!",
+                resLblCorrect: "Betul",
+                resLblWrong: "Salah",
+                resLblStars: "Bintang",
+                btnResultRetry: "🔄 Main Semula",
+                btnResultBack: "🏠 Kembali ke Topik",
+                recordsTitle: "📊 Rekod Prestasi",
+                recordsDesc: "Senarai markah kuiz yang telah dijawab",
+                btnClearRecords: "🗑️ Padam Rekod",
+                btnRecordsMainMenu: "🏠 Kembali ke Menu Utama",
+                recordsEmpty: "Belum ada rekod jawapan. Sila pilih topik dan selesaikan kuiz dahulu!",
+                recordsScoreLabel: "Betul",
+                settingsTitle: "⚙️ Tetapan",
+                settingsSound: "🔔 Kesan Bunyi",
+                settingsSoundOn: "HIDUP",
+                settingsSoundOff: "MATI",
+                settingsReset: "🔄 Set Semula Kemajuan Kuiz",
+                settingsDelete: "🚪 Log Keluar Akaun",
+                footerText: "Bijak Math Tahun 2 • KSSR Malaysia",
+                alertNameEmpty: "Sila masukkan namamu terlebih dahulu! 😊",
+                alertExitQuiz: "Adakah anda pasti mahu berhenti menjawab dan kembali ke Menu Utama?",
+                alertClearRecords: "Adakah anda pasti mahu memadam semua sejarah rekod prestasi ini?",
+                alertResetProgress: "Adakah anda pasti mahu mengosongkan semua kutipan lencana, bintang dan rekod prestasi kembali ke 0?",
+                alertLogoutProfile: "Adakah anda pasti mahu log keluar? Profil anda tidak akan dipadam dan anda boleh log masuk semula pada bila-bila masa.",
+                brandingText: "<span class='font-bold text-slate-500'>Bijak Math v2.0</span><br>Silibus KSSR Matematik Tahun 2 Kementerian Pendidikan Malaysia.<br>100% Fungsi Offline & Selamat Tanpa Iklan."
+            },
+            en: {
+                welcomeTitle: "Smart Math<br><span class='text-emerald-500 text-3xl'>Grade 2</span>",
+                welcomeMascot: "Hello Friend!",
+                btnWelcomeStart: "Start Learning",
+                profileTitle: "Register New Profile",
+                profileDesc: "Enter your name to start your Mathematics adventure!",
+                profileLabel: "Student Name :",
+                usernameInputPlaceholder: "Type name here...",
+                btnSaveProfile: "Save Profile",
+                existingProfilesTitle: "Or Choose Existing Profile:",
+                mainMenuTitle: "Choose Study Topic 🚀",
+                mainMenuDesc: "Collect stars to unlock awesome badges!",
+                btnPerformanceRecords: "📊 Performance Records",
+                badgeHeading: "🏆 Achievement Badges",
+                badgeEmpty: "Complete a topic with 100% score to collect badges!",
+                questionsUnit: "Questions",
+                topicIntroDetailsSuffix: "Practice Questions",
+                topicIntroHint: "Answer correctly to get full marks and stars! Make sure you don't run out of lives.",
+                btnIntroBack: "Back",
+                btnIntroStart: "Start Quiz 🎮",
+                quizProgressText: "Question",
+                quizScoreText: "Score",
+                btnExitQuiz: "🏠 Exit to Main Menu",
+                resultTitleSuccess: "Perfect 100%!",
+                resultTitleNormal: "Congratulations! Done!",
+                resultTitleFail: "Try Again!",
+                resLblCorrect: "Correct",
+                resLblWrong: "Wrong",
+                resLblStars: "Stars",
+                btnResultRetry: "🔄 Replay",
+                btnResultBack: "🏠 Back to Topics",
+                recordsTitle: "📊 Performance Records",
+                recordsDesc: "List of quiz scores answered",
+                btnClearRecords: "🗑️ Clear Records",
+                btnRecordsMainMenu: "🏠 Back to Main Menu",
+                recordsEmpty: "No records yet. Please pick a topic and complete a quiz first!",
+                recordsScoreLabel: "Correct",
+                settingsTitle: "⚙️ Settings",
+                settingsSound: "🔔 Sound Effects",
+                settingsSoundOn: "ON",
+                settingsSoundOff: "OFF",
+                settingsReset: "🔄 Reset Quiz Progress",
+                settingsDelete: "🚪 Log Out Account",
+                footerText: "Smart Math Grade 2 • Cambridge & KSSR Aligned",
+                alertNameEmpty: "Please enter your name first! 😊",
+                alertExitQuiz: "Are you sure you want to stop and return to the Main Menu?",
+                alertClearRecords: "Are you sure you want to delete all performance records history?",
+                alertResetProgress: "Are you sure you want to clear all collected badges, stars, and records back to 0?",
+                alertLogoutProfile: "Are you sure you want to log out? Your profile won't be deleted and you can log back in anytime.",
+                brandingText: "<span class='font-bold text-slate-500'>Smart Math v2.0</span><br>Aligned with primary math curriculums.<br>100% Offline Functional & Safe Ads-Free."
+            }
+        };
+
+        const BANK_SOALAN = {
+            nombor_bulat: {
+                title: { ms: "Nombor Bulat", en: "Whole Numbers" }, icon: "🔢", 
+                badge: { ms: "🔢 Raja Nombor", en: "🔢 Number King" },
+                questions: [
+                    { q: { ms: "Apakah nombor selepas 398?", en: "What is the number after 398?" }, a: ["397", "399", "400", "401"], c: "399" },
+                    { q: { ms: "Apakah nombor sebelum 620?", en: "What is the number before 620?" }, a: ["618", "619", "621", "622"], c: "619" },
+                    { q: { ms: "Tujuh ratus empat puluh lima ditulis dalam angka ialah", en: "Seven hundred and forty-five written in numerals is" }, a: ["754", "745", "705", "475"], c: "745" },
+                    { q: { ms: "908 ditulis dalam perkataan ialah", en: "908 written in words is" }, a: { ms: ["Sembilan ratus lapan", "Sembilan ratus lapan puluh", "Lapan ratus sembilan", "Sembilan puluh lapan"], en: ["Nine hundred and eight", "Nine hundred and eighty", "Eight hundred and nine", "Ninety-eight"] }, c: { ms: "Sembilan ratus lapan", en: "Nine hundred and eight" } },
+                    { q: { ms: "Apakah nilai tempat bagi digit 5 dalam nombor 652?", en: "What is the place value of digit 5 in the number 652?" }, a: { ms: ["Sa", "Puluh", "Ratus", "Ribu"], en: ["Ones", "Tens", "Hundreds", "Thousands"] }, c: { ms: "Puluh", en: "Tens" } },
+                    { q: { ms: "Apakah nilai digit bagi digit 7 dalam nombor 731?", en: "What is the digit value of digit 7 in the number 731?" }, a: ["7", "70", "700", "701"], c: "700" },
+                    { q: { ms: "Cerakinan nilai digit yang betul bagi 483 ialah", en: "The correct digit value partitioning for 483 is" }, a: ["400 + 80 + 3", "40 + 80 + 3", "400 + 8 + 3", "4 + 80 + 3"], c: "400 + 80 + 3" },
+                    { q: { ms: "Yang manakah nombor paling besar?", en: "Which number is the largest?" }, a: ["567", "576", "657", "675"], c: "675" },
+                    { q: { ms: "Susunan nombor secara menaik yang betul ialah", en: "The correct ascending order of numbers is" }, a: ["482, 428, 824, 248", "248, 428, 482, 824", "824, 482, 428, 248", "428, 248, 482, 824"], c: "248, 428, 482, 824" },
+                    { q: { ms: "Susunan nombor secara menurun yang betul ialah", en: "The correct descending order of numbers is" }, a: ["309, 390, 903, 930", "930, 903, 390, 309", "903, 930, 390, 309", "390, 309, 930, 903"], c: "930, 903, 390, 309" },
+                    { q: { ms: "Bundarkan 468 kepada ratus terdekat.", en: "Round off 468 to the nearest hundred." }, a: ["400", "450", "500", "470"], c: "500" },
+                    { q: { ms: "Bundarkan 823 kepada ratus terdekat.", en: "Round off 823 to the nearest hundred." }, a: ["800", "820", "900", "830"], c: "800" },
+                    { q: { ms: "Apakah nombor yang hilang?<br><br>250, 260, 270, ___, 290", en: "What is the missing number?<br><br>250, 260, 270, ___, 290" }, a: ["275", "280", "285", "300"], c: "280" },
+                    { q: { ms: "Lengkapkan pola nombor.<br><br>615, 620, 625, ___, 635", en: "Complete the number pattern.<br><br>615, 620, 625, ___, 635" }, a: ["626", "628", "630", "640"], c: "630" },
+                    { q: { ms: "Yang manakah lebih kecil?", en: "Which one is smaller?" }, a: ["719", "791", "697", "769"], c: "697" },
+                    { q: { ms: "Antara berikut, yang manakah mempunyai 8 ratus?", en: "Which of the following has 8 hundreds?" }, a: ["689", "798", "845", "782"], c: "845" },
+                    { q: { ms: "Berapakah bilangan ratus dalam nombor 936?", en: "How many hundreds are there in the number 936?" }, a: ["3", "6", "9", "36"], c: "9" },
+                    { q: { ms: "Pilih pernyataan yang betul.", en: "Choose the correct statement." }, a: ["582 > 625", "746 < 674", "908 > 890", "399 > 493"], c: "908 > 890" },
+                    { q: { ms: "Apakah nombor yang terbentuk daripada 5 ratus, 2 puluh dan 8 sa?", en: "What number is formed from 5 hundreds, 2 tens and 8 ones?" }, a: ["258", "528", "582", "852"], c: "528" },
+                    { q: { ms: "Pilih nombor yang berada di antara 699 dan 701.", en: "Choose the number that lies between 699 and 701." }, a: ["698", "700", "702", "710"], c: "700" }
+                ]
+            },
+            tambah: {
+                title: { ms: "Tambah", en: "Addition" }, icon: "➕", 
+                badge: { ms: "➕ Pakar Tambah", en: "➕ Addition Expert" },
+                questions: [
+                    { q: "245 + 123 =", a: ["358", "368", "378", "388"], c: "368" },
+                    { q: "317 + 82 =", a: ["389", "399", "409", "419"], c: "399" },
+                    { q: "156 + 204 =", a: ["350", "360", "370", "380"], c: "360" },
+                    { q: "428 + 171 =", a: ["589", "599", "609", "619"], c: "599" },
+                    { q: "503 + 96 =", a: ["589", "599", "609", "699"], c: "599" },
+                    { q: "390 + 210 =", a: ["500", "590", "600", "610"], c: "600" },
+                    { q: "468 + 231 =", a: ["689", "699", "709", "719"], c: "699" },
+                    { q: "145 + 345 =", a: ["480", "490", "500", "510"], c: "490" },
+                    { q: "299 + 201 =", a: ["490", "500", "510", "520"], c: "500" },
+                    { q: "134 + 265 =", a: ["389", "399", "409", "419"], c: "399" },
+                    { q: { ms: "Amir mempunyai 235 biji guli. Ayah membeli lagi 124 biji guli. Berapakah jumlah guli Amir?", en: "Amir has 235 marbles. Father buys 124 more marbles. What is the total number of Amir's marbles?" }, a: ["349", "359", "369", "379"], c: "359" },
+                    { q: { ms: "Sebuah perpustakaan mempunyai 412 buah buku cerita. Sebanyak 187 buah buku baharu diterima. Berapakah jumlah buku cerita sekarang?", en: "A library has 412 storybooks. 187 new books are received. What is the total number of storybooks now?" }, a: ["589", "599", "609", "619"], c: "599" },
+                    { q: "273 + ___ = 500", a: ["217", "227", "237", "247"], c: "227" },
+                    { q: "___ + 156 = 400", a: ["234", "244", "254", "264"], c: "244" },
+                    { q: "125 + 175 + 100 =", a: ["390", "400", "410", "420"], c: "400" },
+                    { q: "218 + 142 + 40 =", a: ["390", "400", "410", "420"], c: "400" },
+                    { q: { ms: "Berapakah hasil tambah 364 dan 235?", en: "What is the sum of 364 and 235?" }, a: ["589", "599", "609", "619"], c: "599" },
+                    { q: { ms: "Siti mengumpul 128 pelekat pada bulan Januari dan 236 pelekat pada bulan Februari. Berapakah jumlah pelekat yang dikumpul?", en: "Siti collected 128 stickers in January and 236 stickers in February. What is the total number of stickers collected?" }, a: ["354", "364", "374", "384"], c: "364" },
+                    { q: { ms: "Pilih ayat matematik yang betul.", en: "Choose the correct number sentence." }, a: ["256 + 143 = 389", "256 + 143 = 399", "256 + 143 = 409", "256 + 143 = 419"], c: "399" },
+                    { q: { ms: "Jumlah bagi 187 dan 313 ialah", en: "The total of 187 and 313 is" }, a: ["490", "495", "500", "510"], c: "500" }
+                ]
+            },
+            tolak: {
+                title: { ms: "Tolak", en: "Subtraction" }, icon: "➖", 
+                badge: { ms: "➖ Wira Tolak", en: "➖ Subtraction Hero" },
+                questions: [
+                    { q: "568 − 234 =", a: ["324", "334", "344", "354"], c: "334" },
+                    { q: "745 − 123 =", a: ["612", "622", "632", "642"], c: "622" },
+                    { q: "900 − 275 =", a: ["615", "625", "635", "645"], c: "625" },
+                    { q: "681 − 250 =", a: ["421", "431", "441", "451"], c: "431" },
+                    { q: "500 − 189 =", a: ["301", "311", "321", "331"], c: "311" },
+                    { q: "437 − 126 =", a: ["301", "311", "321", "331"], c: "311" },
+                    { q: "852 − 341 =", a: ["501", "511", "521", "531"], c: "511" },
+                    { q: "760 − 420 =", a: ["330", "340", "350", "360"], c: "340" },
+                    { q: "999 − 456 =", a: ["533", "543", "553", "563"], c: "543" },
+                    { q: "615 − 208 =", a: ["397", "407", "417", "427"], c: "407" },
+                    { q: "824 − ____ = 501", a: ["313", "323", "333", "343"], c: "323" },
+                    { q: "____ − 148 = 352", a: ["490", "500", "510", "520"], c: "500" },
+                    { q: { ms: "Sofia mempunyai 685 pelekat. Dia memberikan 243 pelekat kepada adiknya. Berapakah baki pelekat Sofia?", en: "Sofia has 685 stickers. She gives 243 stickers to her sibling. What is the balance of Sofia's stickers?" }, a: ["432", "442", "452", "462"], c: "442" },
+                    { q: { ms: "Sebuah kedai mempunyai 800 biji telur. Sebanyak 275 biji telur telah dijual. Berapakah baki telur?", en: "A shop has 800 eggs. 275 eggs were sold. What is the balance of the eggs?" }, a: ["515", "525", "535", "545"], c: "525" },
+                    { q: { ms: "Seorang murid membaca 356 muka surat daripada sebuah buku yang mempunyai 500 muka surat. Berapakah muka surat yang belum dibaca?", en: "A student read 356 pages of a book that has 500 pages. How many pages are left unread?" }, a: ["134", "144", "154", "164"], c: "144" },
+                    { q: { ms: "Berapakah beza antara 742 dan 318?", en: "What is the difference between 742 and 318?" }, a: ["414", "424", "434", "444"], c: "424" },
+                    { q: { ms: "Pilih ayat matematik yang betul.", en: "Choose the correct number sentence." }, a: ["684 − 152 = 532", "684 − 152 = 522", "684 − 152 = 542", "684 − 152 = 552"], c: "532" },
+                    { q: "700 − 399 =", a: ["291", "301", "311", "321"], c: "301" },
+                    { q: "456 − 156 =", a: ["290", "300", "310", "320"], c: "300" },
+                    { q: { ms: "Farid mempunyai RM950. Dia membeli sebuah basikal berharga RM468. Berapakah baki wang Farid?", en: "Farid has RM950. He buys a bicycle worth RM468. What is Farid's remaining money?" }, a: ["RM472", "RM482", "RM492", "RM502"], c: "RM482" }
+                ]
+            },
+            darab: {
+                title: { ms: "Darab", en: "Multiplication" }, icon: "✖️", 
+                badge: { ms: "✖️ Sifu Darab", en: "✖️ Multiplication Master" },
+                questions: [
+                    { q: "2 × 7 =", a: ["12", "14", "16", "18"], c: "14" },
+                    { q: "3 × 8 =", a: ["21", "22", "24", "27"], c: "24" },
+                    { q: "4 × 9 =", a: ["32", "34", "36", "38"], c: "36" },
+                    { q: "5 × 6 =", a: ["25", "28", "30", "35"], c: "30" },
+                    { q: "7 × 7 =", a: ["42", "48", "49", "56"], c: "49" },
+                    { q: "8 × 4 =", a: ["28", "30", "32", "36"], c: "32" },
+                    { q: "9 × 5 =", a: ["40", "45", "50", "55"], c: "45" },
+                    { q: "10 × 8 =", a: ["70", "75", "80", "90"], c: "80" },
+                    { q: "6 × 3 =", a: ["16", "18", "20", "24"], c: "18" },
+                    { q: "9 × 9 =", a: ["72", "79", "81", "90"], c: "81" },
+                    { q: { ms: "Seorang petani mempunyai 4 bakul. Setiap bakul mengandungi 8 biji epal. Berapakah jumlah epal semuanya?", en: "A farmer has 4 baskets. Each basket contains 8 apples. How many apples are there in total?" }, a: ["28", "30", "32", "36"], c: "32" },
+                    { q: { ms: "Ada 6 pasu bunga. Setiap pasu mempunyai 5 kuntum bunga. Berapakah jumlah bunga semuanya?", en: "There are 6 flower pots. Each pot has 5 flowers. How many flowers are there in total?" }, a: ["25", "30", "35", "40"], c: "30" },
+                    { q: { ms: "Seorang guru menyusun 9 baris kerusi. Setiap baris mempunyai 4 kerusi. Berapakah jumlah kerusi?", en: "A teacher arranged 9 rows of chairs. Each row has 4 chairs. What is the total number of chairs?" }, a: ["32", "34", "36", "38"], c: "36" },
+                    { q: { ms: "Dalam sebuah kotak terdapat 7 bungkus pensel. Setiap bungkus mengandungi 6 batang pensel. Berapakah jumlah pensel?", en: "In a box, there are 7 packs of pencils. Each pack contains 6 pencils. What is the total number of pencils?" }, a: ["40", "42", "44", "48"], c: "42" },
+                    { q: { ms: "Pilih ayat matematik yang betul.", en: "Choose the correct number sentence." }, a: ["8 × 7 = 54", "8 × 7 = 56", "8 × 7 = 58", "8 × 7 = 64"], c: "56" },
+                    { q: "5 × ___ = 45", a: ["7", "8", "9", "10"], c: "9" },
+                    { q: "___ × 6 = 24", a: ["2", "3", "4", "5"], c: "4" },
+                    { q: { ms: "Hasil darab bagi 3 dan 10 ialah", en: "The product of 3 and 10 is" }, a: ["20", "25", "30", "33"], c: "30" },
+                    { q: { ms: "Siti mempunyai 8 paket gula-gula. Setiap paket mengandungi 9 biji gula-gula. Berapakah jumlah gula-gula Siti?", en: "Siti has 8 packets of candies. Each packet contains 9 candies. What is the total number of Siti's candies?" }, a: ["64", "70", "72", "81"], c: "72" },
+                    { q: { ms: "Sebuah bas membawa 5 baris penumpang. Setiap baris mempunyai 7 orang penumpang. Berapakah jumlah penumpang?", en: "A bus carries 5 rows of passengers. Each row has 7 passengers. What is the total number of passengers?" }, a: ["30", "35", "40", "42"], c: "35" }
+                ]
+            },
+            bahagi: {
+                title: { ms: "Bahagi", en: "Division" }, icon: "➗", 
+                badge: { ms: "➗ Master Bahagi", en: "➗ Division Master" },
+                questions: [
+                    { q: "12 ÷ 2 =", a: ["5", "6", "7", "8"], c: "6" },
+                    { q: "18 ÷ 3 =", a: ["5", "6", "7", "8"], c: "6" },
+                    { q: "20 ÷ 5 =", a: ["3", "4", "5", "6"], c: "4" },
+                    { q: "24 ÷ 4 =", a: ["5", "6", "7", "8"], c: "6" },
+                    { q: "35 ÷ 7 =", a: ["4", "5", "6", "7"], c: "5" },
+                    { q: "40 ÷ 8 =", a: ["4", "5", "6", "8"], c: "5" },
+                    { q: "54 ÷ 6 =", a: ["8", "9", "10", "11"], c: "9" },
+                    { q: "63 ÷ 9 =", a: ["6", "7", "8", "9"], c: "7" },
+                    { q: "56 ÷ 7 =", a: ["6", "7", "8", "9"], c: "8" },
+                    { q: "90 ÷ 10 =", a: ["8", "9", "10", "11"], c: "9" },
+                    { q: "48 ÷ ___ = 6", a: ["6", "7", "8", "9"], c: "8" },
+                    { q: "___ ÷ 5 = 7", a: ["30", "35", "40", "45"], c: "35" },
+                    { q: { ms: "Ibu mempunyai 36 biji oren. Oren itu dibahagikan sama rata kepada 6 orang anak. Berapakah bilangan oren yang diterima oleh setiap anak?", en: "Mother has 36 oranges. The oranges are divided equally among 6 children. How many oranges does each child receive?" }, a: ["5", "6", "7", "8"], c: "6" },
+                    { q: { ms: "Seorang guru mempunyai 45 batang pensel. Pensel itu dimasukkan sama banyak ke dalam 9 bekas. Berapakah bilangan pensel dalam setiap bekas?", en: "A teacher has 45 pencils. The pencils are placed equally into 9 containers. How many pencils are in each container?" }, a: ["4", "5", "6", "7"], c: "5" },
+                    { q: { ms: "Sebuah kedai mempunyai 32 biji bola. Bola itu disusun sama banyak ke dalam 4 kotak. Berapakah bilangan bola dalam setiap kotak?", en: "A shop has 32 balls. The balls are arranged equally into 4 boxes. How many balls are in each box?" }, a: ["6", "7", "8", "9"], c: "8" },
+                    { q: { ms: "Ahmad mempunyai 28 keping kad. Dia memberikan kad itu sama banyak kepada 7 orang kawannya. Berapakah keping kad yang diterima oleh setiap kawan?", en: "Ahmad has 28 cards. He gives the cards equally to 7 friends. How many cards does each friend receive?" }, a: ["3", "4", "5", "6"], c: "4" },
+                    { q: { ms: "Pilih ayat matematik yang betul.", en: "Choose the correct number sentence." }, a: ["42 ÷ 6 = 6", "42 ÷ 6 = 7", "42 ÷ 6 = 8", "42 ÷ 6 = 9"], c: "7" },
+                    { q: { ms: "Berapakah hasil bahagi bagi 72 ÷ 8?", en: "What is the quotient of 72 ÷ 8?" }, a: ["7", "8", "9", "10"], c: "9" },
+                    { q: { ms: "64 biji gula-gula dibahagikan sama rata kepada 8 orang murid. Setiap murid mendapat", en: "64 candies are shared equally among 8 students. Each student gets" }, a: { ms: ["6 biji", "7 biji", "8 biji", "9 biji"], en: ["6 pieces", "7 pieces", "8 pieces", "9 pieces"] }, c: { ms: "8 biji", en: "8 pieces" } },
+                    { q: { ms: "Seorang petani memetik 49 biji mangga. Dia memasukkan 7 biji mangga ke dalam setiap bakul. Berapakah bilangan bakul yang diperlukan?", en: "A farmer picked 49 mangoes. He put 7 mangoes into each basket. How many baskets are needed?" }, a: ["5", "6", "7", "8"], c: "7" }
+                ]
+            },
+            pecahan: {
+                title: { ms: "Pecahan", en: "Fractions" }, icon: "🍰", 
+                badge: { ms: "🍰 Wira Pecahan", en: "🍰 Fraction Hero" },
+                questions: [
+                    { q: { ms: "Apakah nama bagi pecahan 1/2?", en: "What is the name of the fraction 1/2?" }, a: { ms: ["Satu per tiga", "Satu per dua", "Dua per satu", "Satu per empat"], en: ["One-third", "One-half", "Two-over-one", "One-quarter"] }, c: { ms: "Satu per dua", en: "One-half" } },
+                    { q: { ms: "Apakah nama bagi pecahan 1/4?", en: "What is the name of the fraction 1/4?" }, a: { ms: ["Satu per lima", "Dua per empat", "Satu per empat", "Empat per satu"], en: ["One-fifth", "Two-quarters", "One-quarter", "Four-over-one"] }, c: { ms: "Satu per empat", en: "One-quarter" } },
+                    { q: { ms: "Apakah nama bagi pecahan 1/3?", en: "What is the name of the fraction 1/3?" }, a: { ms: ["Satu per tiga", "Tiga per satu", "Satu per enam", "Tiga per tiga"], en: ["One-third", "Three-over-one", "One-sixth", "Three-thirds"] }, c: { ms: "Satu per tiga", en: "One-third" } },
+                    { q: { ms: "Rajah dibahagikan kepada 5 bahagian yang sama besar. Sebanyak 2 bahagian diwarnakan. Apakah pecahan bahagian yang diwarnakan?", en: "A diagram is divided into 5 equal parts. 2 parts are shaded. What is the fraction of the shaded parts?" }, a: ["2/3", "2/4", "2/5", "5/2"], c: "2/5" },
+                    { q: { ms: "Sebiji pizza dipotong kepada 8 bahagian sama besar. Amir makan 3 bahagian. Apakah pecahan pizza yang dimakan Amir?", en: "A pizza is cut into 8 equal parts. Amir eats 3 parts. What is the fraction of the pizza eaten by Amir?" }, a: ["3/6", "3/7", "3/8", "8/3"], c: "3/8" },
+                    { q: { ms: "Antara berikut, yang manakah menunjukkan satu per enam?", en: "Which of the following shows one-sixth?" }, a: ["1/5", "1/6", "6/1", "2/6"], c: "1/6" },
+                    { q: { ms: "Pecahan manakah yang lebih besar?", en: "Which fraction is larger?" }, a: ["1/5", "1/4", "1/3", "1/2"], c: "1/2" },
+                    { q: { ms: "Pecahan manakah yang lebih kecil?", en: "Which fraction is smaller?" }, a: ["1/2", "1/3", "1/4", "1/5"], c: "1/5" },
+                    { q: { ms: "3/6 ialah ______ daripada 5/6.", en: "3/6 is ______ than 5/6." }, a: { ms: ["lebih besar", "sama dengan", "lebih kecil", "dua kali ganda"], en: ["larger", "equal to", "smaller", "twice"] }, c: { ms: "lebih kecil", en: "smaller" } },
+                    { q: { ms: "4/4 mewakili", en: "4/4 represents" }, a: { ms: ["Separuh", "Satu per empat", "Satu penuh", "Empat penuh"], en: ["Half", "One-quarter", "One whole", "Four wholes"] }, c: { ms: "Satu penuh", en: "One whole" } },
+                    { q: { ms: "Siti membahagikan sebatang coklat kepada 4 bahagian sama besar. Dia makan 1 bahagian. Berapakah pecahan coklat yang dimakan?", en: "Siti divides a chocolate bar into 4 equal parts. She eats 1 part. What is the fraction of chocolate eaten?" }, a: ["1/2", "1/3", "1/4", "2/4"], c: "1/4" },
+                    { q: { ms: "Sebiji tembikai dipotong kepada 6 bahagian sama besar. Ali makan 2 bahagian. Apakah pecahan tembikai yang dimakan?", en: "A watermelon is cut into 6 equal parts. Ali eats 2 parts. What is the fraction of watermelon eaten?" }, a: ["2/4", "2/5", "2/6", "6/2"], c: "2/6" },
+                    { q: { ms: "Pilih pecahan yang betul bagi lima per lapan.", en: "Choose the correct fraction for five-eighths." }, a: ["5/6", "5/7", "5/8", "8/5"], c: "5/8" },
+                    { q: { ms: "Pilih pecahan yang betul bagi dua per tujuh.", en: "Choose the correct fraction for two-sevenths." }, a: ["2/5", "2/6", "2/7", "7/2"], c: "2/7" },
+                    { q: { ms: "Apakah pengangka bagi pecahan 4/9?", en: "What is the numerator of the fraction 4/9?" }, a: ["4", "9", "13", "5"], c: "4" },
+                    { q: { ms: "Apakah penyebut bagi pecahan 3/8?", en: "What is the denominator of the fraction 3/8?" }, a: ["3", "5", "8", "11"], c: "8" },
+                    { q: { ms: "Antara berikut, yang manakah ialah tiga per lima?", en: "Which of the following is three-fifths?" }, a: ["3/4", "3/5", "5/3", "5/5"], c: "3/5" },
+                    { q: { ms: "Kuih dipotong kepada 10 bahagian sama besar. 7 bahagian masih tinggal. Apakah pecahan kuih yang masih tinggal?", en: "A cake is cut into 10 equal parts. 7 parts are left. What is the fraction of cake left?" }, a: ["3/10", "7/10", "10/7", "7/7"], c: "7/10" },
+                    { q: { ms: "Pilih pernyataan yang betul.", en: "Choose the correct statement." }, a: { ms: ["1/4 lebih besar daripada 1/2", "1/3 lebih besar daripada 1/2", "1/2 lebih besar daripada 1/4", "1/5 lebih besar daripada 1/3"], en: ["1/4 is larger than 1/2", "1/3 is larger than 1/2", "1/2 is larger than 1/4", "1/5 is larger than 1/3"] }, c: { ms: "1/2 lebih besar daripada 1/4", en: "1/2 is larger than 1/4" } },
+                    { q: { ms: "Sebuah kek dipotong kepada 9 bahagian sama besar. Nina mengambil 5 bahagian. Apakah pecahan kek yang diambil oleh Nina?", en: "A cake is cut into 9 equal parts. Nina takes 5 parts. What is the fraction of cake taken by Nina?" }, a: ["5/7", "5/8", "5/9", "9/5"], c: "5/9" }
+                ]
+            },
+            perpuluhan: {
+                title: { ms: "Perpuluhan", en: "Decimals" }, icon: "🔢", 
+                badge: { ms: "🎯 Pakar Perpuluhan", en: "🎯 Decimals Expert" },
+                questions: [
+                    { q: { ms: "Apakah nama bagi nombor perpuluhan 0.1?", en: "What is the name of the decimal number 0.1?" }, a: { ms: ["Safar perpuluhan satu", "Satu perpuluhan sifar", "Satu per sepuluh", "Sifar satu"], en: ["Zero point one", "One point zero", "One-tenth", "Zero one"] }, c: { ms: "Sifar perpuluhan satu", en: "Zero point one" } },
+                    { q: { ms: "Tukarkan 3/10 kepada perpuluhan.", en: "Convert 3/10 to decimals." }, a: ["0.2", "0.3", "0.4", "3.0"], c: "0.3" },
+                    { q: { ms: "Tukarkan 7/10 kepada perpuluhan.", en: "Convert 7/10 to decimals." }, a: ["0.5", "0.6", "0.7", "0.8"], c: "0.7" },
+                    { q: { ms: "Apakah nombor perpuluhan selepas 0.4?", en: "What is the decimal number after 0.4?" }, a: ["0.3", "0.5", "0.6", "0.7"], c: "0.5" },
+                    { q: { ms: "Apakah nombor perpuluhan sebelum 0.8?", en: "What is the decimal number before 0.8?" }, a: ["0.6", "0.7", "0.9", "1.0"], c: "0.7" },
+                    { q: { ms: "Antara berikut, yang manakah paling kecil?", en: "Which of the following is the smallest?" }, a: ["0.5", "0.2", "0.7", "0.9"], c: "0.2" },
+                    { q: { ms: "Antara berikut, yang manakah paling besar?", en: "Which of the following is the largest?" }, a: ["0.3", "0.6", "0.8", "0.9"], c: "0.9" },
+                    { q: { ms: "Pilih nombor perpuluhan yang berada di antara 0.4 dan 0.6.", en: "Choose the decimal number that lies between 0.4 and 0.6." }, a: ["0.3", "0.5", "0.7", "0.8"], c: "0.5" },
+                    { q: { ms: "Manakah yang sama dengan 5/10?", en: "Which is equal to 5/10?" }, a: ["0.4", "0.5", "0.6", "0.7"], c: "0.5" },
+                    { q: { ms: "Manakah yang sama dengan 9/10?", en: "Which is equal to 9/10?" }, a: ["0.7", "0.8", "0.9", "1.0"], c: "0.9" },
+                    { q: { ms: "Lengkapkan pola nombor berikut:<br><br>0.2, 0.3, 0.4, _____, 0.6", en: "Complete the following number pattern:<br><br>0.2, 0.3, 0.4, _____, 0.6" }, a: ["0.1", "0.5", "0.7", "0.8"], c: "0.5" },
+                    { q: { ms: "Pilih pernyataan yang betul.", en: "Choose the correct statement." }, a: { ms: ["0.8 lebih kecil daripada 0.6", "0.5 lebih besar daripada 0.9", "0.7 lebih besar daripada 0.4", "0.2 lebih besar daripada 0.3"], en: ["0.8 is smaller than 0.6", "0.5 is larger than 0.9", "0.7 is larger than 0.4", "0.2 is larger than 0.3"] }, c: { ms: "0.7 lebih besar daripada 0.4", en: "0.7 is larger than 0.4" } },
+                    { q: { ms: "Antara berikut, yang manakah lebih kecil daripada 0.5?", en: "Which of the following is smaller than 0.5?" }, a: ["0.6", "0.7", "0.4", "0.8"], c: "0.4" },
+                    { q: { ms: "Antara berikut, yang manakah lebih besar daripada 0.7?", en: "Which of the following is larger than 0.7?" }, a: ["0.5", "0.6", "0.8", "0.4"], c: "0.8" },
+                    { q: { ms: "Tukarkan 1/10 kepada perpuluhan.", en: "Convert 1/10 to decimals." }, a: ["0.0", "0.1", "1.0", "0.2"], c: "0.1" },
+                    { q: { ms: "Tukarkan 8/10 kepada perpuluhan.", en: "Convert 8/10 to decimals." }, a: ["0.6", "0.7", "0.8", "0.9"], c: "0.8" },
+                    { q: { ms: "Pilih nombor perpuluhan yang betul bagi enam per sepuluh.", en: "Choose the correct decimal number for six-tenths." }, a: ["0.5", "0.6", "0.7", "0.8"], c: "0.6" },
+                    { q: { ms: "Lengkapkan nombor berikut:<br><br>0.9, _____, 0.7", en: "Complete the following:<br><br>0.9, _____, 0.7" }, a: ["0.5", "0.6", "0.8", "1.0"], c: "0.8" },
+                    { q: { ms: "Apakah nombor perpuluhan yang berada di antara 0.1 dan 0.3?", en: "What is the decimal number that lies between 0.1 and 0.3?" }, a: ["0.0", "0.2", "0.4", "0.5"], c: "0.2" },
+                    { q: { ms: "Susunan nombor secara menaik yang betul ialah", en: "The correct ascending order of numbers is" }, a: ["0.8, 0.5, 0.2, 0.1", "0.1, 0.2, 0.5, 0.8", "0.5, 0.1, 0.8, 0.2", "0.2, 0.8, 0.1, 0.5"], c: "0.1, 0.2, 0.5, 0.8" }
+                ]
+            },
+            wang: {
+                title: { ms: "Wang", en: "Money" }, icon: "💰", 
+                badge: { ms: "💰 Jutawan Kecil", en: "💰 Little Millionaire" },
+                questions: [
+                    { q: { ms: "Wang kertas manakah bernilai RM1?", en: "Which banknote is worth RM1?" }, a: ["RM1", "RM5", "RM10", "RM20"], c: "RM1" },
+                    { q: { ms: "Wang kertas manakah bernilai paling tinggi?", en: "Which banknote has the highest value?" }, a: ["RM5", "RM10", "RM20", "RM50"], c: "RM50" },
+                    { q: { ms: "Berapakah nilai wang bagi RM10 + RM5?", en: "What is the total value of RM10 + RM5?" }, a: ["RM10", "RM15", "RM20", "RM25"], c: "RM15" },
+                    { q: { ms: "Berapakah jumlah wang RM20 + RM10 + RM5?", en: "What is the sum of RM20 + RM10 + RM5?" }, a: ["RM30", "RM35", "RM40", "RM45"], c: "RM35" },
+                    { q: { ms: "Berapakah jumlah wang RM50 + RM20?", en: "What is the sum of RM50 + RM20?" }, a: ["RM60", "RM70", "RM80", "RM90"], c: "RM70" },
+                    { q: { ms: "Ali mempunyai RM35. Dia menerima lagi RM25. Berapakah jumlah wang Ali?", en: "Ali has RM35. He receives another RM25. How much money does Ali have in total?" }, a: ["RM50", "RM55", "RM60", "RM65"], c: "RM60" },
+                    { q: { ms: "Siti mempunyai RM80. Dia membeli sebuah beg berharga RM35. Berapakah baki wang Siti?", en: "Siti has RM80. She buys a bag worth RM35. What is the remaining balance of Siti's money?" }, a: ["RM35", "RM40", "RM45", "RM50"], c: "RM45" },
+                    { q: { ms: "Berapakah jumlah wang RM15 + RM18?", en: "What is the total of RM15 + RM18?" }, a: ["RM31", "RM32", "RM33", "RM34"], c: "RM33" },
+                    { q: { ms: "Harga sebuah buku ialah RM24. Ahmad membayar dengan RM50. Berapakah baki wang yang diterima?", en: "The price of a book is RM24. Ahmad pays with RM50. How much change does he receive?" }, a: ["RM24", "RM25", "RM26", "RM27"], c: "RM26" },
+                    { q: { ms: "Ibu membeli susu berharga RM12 dan roti berharga RM8. Berapakah jumlah yang perlu dibayar?", en: "Mother buys milk for RM12 and bread for RM8. What is the total amount to be paid?" }, a: ["RM18", "RM19", "RM20", "RM21"], c: "RM20" },
+                    { q: { ms: "Berapakah jumlah wang RM30 + RM45?", en: "What is the total of RM30 + RM45?" }, a: ["RM65", "RM70", "RM75", "RM80"], c: "RM75" },
+                    { q: { ms: "Farah mempunyai RM90. Dia membelanjakan RM28. Berapakah baki wang Farah?", en: "Farah has RM90. She spends RM28. What is the balance of Farah's money?" }, a: ["RM60", "RM61", "RM62", "RM63"], c: "RM62" },
+                    { q: { ms: "Berapakah jumlah wang RM25 + RM25?", en: "What is the total of RM25 + RM25?" }, a: ["RM45", "RM50", "RM55", "RM60"], c: "RM50" },
+                    { q: { ms: "Seorang peniaga memperoleh RM48. Dia memperoleh lagi RM27 pada waktu petang. Berapakah jumlah wang yang diperoleh?", en: "A merchant earns RM48. He earns another RM27 in the afternoon. What is the total amount earned?" }, a: ["RM65", "RM70", "RM75", "RM80"], c: "RM75" },
+                    { q: { ms: "Harga sebatang pensel ialah RM4. Berapakah harga bagi 5 batang pensel?", en: "The price of a pencil is RM4. What is the price of 5 pencils?" }, a: ["RM16", "RM18", "RM20", "RM22"], c: "RM20" },
+                    { q: { ms: "RM36 dibahagikan sama rata kepada 6 orang murid. Setiap murid mendapat", en: "RM36 is shared equally among 6 students. Each student gets" }, a: ["RM5", "RM6", "RM7", "RM8"], c: "RM6" },
+                    { q: { ms: "Amir mempunyai RM100. Dia membeli kasut berharga RM65. Berapakah baki wang Amir?", en: "Amir has RM100. He buys shoes for RM65. What is Amir's change?" }, a: ["RM25", "RM30", "RM35", "RM40"], c: "RM35" },
+                    { q: { ms: "Berapakah jumlah wang RM40 + RM35 + RM15?", en: "What is the total value of RM40 + RM35 + RM15?" }, a: ["RM80", "RM85", "RM90", "RM95"], c: "RM90" },
+                    { q: { ms: "Kakak membeli sehelai baju berharga RM45 dan sepasang stokin berharga RM12. Berapakah jumlah yang dibayar?", en: "Sister buys a shirt for RM45 and a pair of socks for RM12. What is the total amount paid?" }, a: ["RM55", "RM56", "RM57", "RM58"], c: "RM57" },
+                    { q: { ms: "Seorang murid mempunyai RM60. Dia membeli sebuah buku berharga RM18 and sebuah kotak pensel berharga RM22. Berapakah baki wangnya?", en: "A student has RM60. He buys a book for RM18 and a pencil case for RM22. What is his change?" }, a: ["RM18", "RM20", "RM22", "RM24"], c: "RM20" }
+                ]
+            },
+            masa_waktu: {
+                title: { ms: "Masa & Waktu", en: "Time" }, icon: "🕒", 
+                badge: { ms: "🕒 Jaguh Masa", en: "🕒 Time Champion" },
+                questions: [
+                    { q: { ms: "1 jam bersamaan dengan", en: "1 hour is equal to" }, a: { ms: ["30 minit", "45 minit", "60 minit", "100 minit"], en: ["30 minutes", "45 minutes", "60 minutes", "100 minutes"] }, c: { ms: "60 minit", en: "60 minutes" } },
+                    { q: { ms: "30 minit bersamaan dengan", en: "30 minutes is equal to" }, a: { ms: ["Setengah jam", "Satu jam", "Suku jam", "Dua jam"], en: ["Half an hour", "One hour", "A quarter hour", "Two hours"] }, c: { ms: "Setengah jam", en: "Half an hour" } },
+                    { q: { ms: "15 minit bersamaan dengan", en: "15 minutes is equal to" }, a: { ms: ["Setengah jam", "Suku jam", "Satu jam", "Dua jam"], en: ["Half an hour", "A quarter hour", "One hour", "Two hours"] }, c: { ms: "Suku jam", en: "A quarter hour" } },
+                    { q: { ms: "Jika sekarang pukul 3:00 petang, 1 jam kemudian ialah", en: "If it is 3:00 PM now, 1 hour later will be" }, a: ["2:00 petang / PM", "3:30 petang / PM", "4:00 petang / PM", "5:00 petang / PM"], c: "4:00 petang / PM" },
+                    { q: { ms: "Jika sekarang pukul 8:00 pagi, 30 minit kemudian ialah", en: "If it is 8:00 AM now, 30 minutes later will be" }, a: ["8:15 pagi / AM", "8:30 pagi / AM", "8:45 pagi / AM", "9:00 pagi / AM"], c: "8:30 pagi / AM" },
+                    { q: { ms: "Jika sekarang pukul 5:45 petang, 15 minit kemudian ialah", en: "If it is 5:45 PM now, 15 minutes later will be" }, a: ["5:50 petang / PM", "6:00 petang / PM", "6:15 petang / PM", "6:30 petang / PM"], c: "6:00 petang / PM" },
+                    { q: { ms: "Jika sekarang pukul 10:20 pagi, 20 minit kemudian ialah", en: "If it is 10:20 AM now, 20 minutes later will be" }, a: ["10:30 pagi / AM", "10:35 pagi / AM", "10:40 pagi / AM", "10:50 pagi / AM"], c: "10:40 pagi / AM" },
+                    { q: { ms: "Jika sekarang pukul 7:30 malam, 30 minit kemudian ialah", en: "If it is 7:30 PM now, 30 minutes later will be" }, a: ["7:45 malam / PM", "8:00 malam / PM", "8:15 malam / PM", "8:30 malam / PM"], c: "8:00 malam / PM" },
+                    { q: { ms: "Jam menunjukkan pukul 9:00 malam. Apakah waktu itu dalam angka?", en: "The clock shows 9:00 PM. What is the time in numerals?" }, a: ["9:00", "9:30", "10:00", "8:00"], c: "9:00" },
+                    { q: { ms: "Sekolah bermula pada pukul 7:30 pagi. Ali tiba 10 minit lebih awal. Pukul berapakah Ali tiba?", en: "School starts at 7:30 AM. Ali arrives 10 minutes earlier. What time does Ali arrive?" }, a: ["7:10 pagi / AM", "7:15 pagi / AM", "7:20 pagi / AM", "7:40 pagi / AM"], c: "7:20 pagi / AM" },
+                    { q: { ms: "Kelas Matematik bermula pada pukul 10:00 pagi dan tamat 1 jam kemudian. Pukul berapakah kelas tamat?", en: "Mathematics class starts at 10:00 AM and ends 1 hour later. What time does the class end?" }, a: { ms: ["10:30 pagi", "11:00 pagi", "11:30 pagi", "12:00 tengah hari"], en: ["10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM"] }, c: { ms: "11:00 pagi", en: "11:00 AM" } },
+                    { q: { ms: "Ibu mula memasak pada pukul 6:15 petang. Masakan siap selepas 30 minit. Pukul berapakah masakan siap?", en: "Mother starts cooking at 6:15 PM. The food is ready after 30 minutes. What time is the cooking done?" }, a: ["6:30 petang / PM", "6:40 petang / PM", "6:45 petang / PM", "7:00 malam / PM"], c: "6:45 petang / PM" },
+                    { q: { ms: "Permainan bermula pada pukul 4:20 petang dan tamat 20 minit kemudian. Pukul berapakah permainan tamat?", en: "The game starts at 4:20 PM and ends 20 minutes later. What time does the game end?" }, a: ["4:30 petang / PM", "4:40 petang / PM", "4:50 petang / PM", "5:00 petang / PM"], c: "4:40 petang / PM" },
+                    { q: { ms: "Berapakah bilangan minit dalam 2 jam?", en: "How many minutes are there in 2 hours?" }, a: { ms: ["60 minit", "90 minit", "120 minit", "180 minit"], en: ["60 minutes", "90 minutes", "120 minutes", "180 minutes"] }, c: { ms: "120 minit", en: "120 minutes" } },
+                    { q: { ms: "Berapakah bilangan minit dalam 1 jam 30 minit?", en: "How many minutes are there in 1 hour 30 minutes?" }, a: { ms: ["80 minit", "90 minit", "100 minit", "120 minit"], en: ["80 minutes", "90 minutes", "100 minutes", "120 minutes"] }, c: { ms: "90 minit", en: "90 minutes" } },
+                    { q: { ms: "Jika sekarang pukul 11:50 pagi, 10 minit kemudian ialah", en: "If it is 11:50 AM now, 10 minutes later will be" }, a: { ms: ["11:55 pagi", "12:00 tengah hari", "12:10 tengah hari", "12:20 tengah hari"], en: ["11:55 AM", "12:00 PM", "12:10 PM", "12:20 PM"] }, c: { ms: "12:00 tengah hari", en: "12:00 PM" } },
+                    { q: { ms: "Jika sekarang pukul 2:45 petang, 15 minit kemudian ialah", en: "If it is 2:45 PM now, 15 minutes later will be" }, a: ["2:50 petang / PM", "3:00 petang / PM", "3:15 petang / PM", "3:30 petang / PM"], c: "3:00 petang / PM" },
+                    { q: { ms: "Satu rancangan televisyen bermula pada pukul 8:30 malam dan berlangsung selama 1 jam. Pukul berapakah rancangan itu tamat?", en: "A television show starts at 8:30 PM and lasts for 1 hour. What time does the show end?" }, a: ["9:00 malam / PM", "9:15 malam / PM", "9:30 malam / PM", "10:00 malam / PM"], c: "9:30 malam / PM" },
+                    { q: { ms: "Ayah bertolak ke tempat kerja pada pukul 7:15 pagi. Perjalanan mengambil masa 45 minit. Pukul berapakah ayah tiba?", en: "Father leaves for work at 7:15 AM. The journey takes 45 minutes. What time does father arrive?" }, a: ["7:45 pagi / AM", "8:00 pagi / AM", "8:15 pagi / AM", "8:30 pagi / AM"], c: "8:00 pagi / AM" },
+                    { q: { ms: "Berapakah bilangan minit dalam 3 jam?", en: "How many minutes are there in 3 hours?" }, a: { ms: ["120 minit", "150 minit", "180 minit", "240 minit"], en: ["120 minutes", "150 minutes", "180 minutes", "240 minutes"] }, c: { ms: "180 minit", en: "180 minutes" } }
+                ]
+            },
+            ukuran_sukatan: {
+                title: { ms: "Ukuran & Sukatan", en: "Measurement" }, icon: "📏", 
+                badge: { ms: "📏 Pakar Ukur", en: "📏 Measurement Expert" },
+                questions: [
+                    { q: { ms: "Apakah unit yang sesuai untuk mengukur panjang sebatang pensel?", en: "Which unit is suitable to measure the length of a pencil?" }, a: ["kg", "cm", "mℓ", "g"], c: "cm" },
+                    { q: { ms: "Apakah unit yang paling sesuai untuk mengukur panjang sebuah padang?", en: "Which unit is most suitable to measure the length of a field?" }, a: ["cm", "g", "m", "mℓ"], c: "m" },
+                    { q: { ms: "Sebatang pembaris mempunyai panjang 30 ____.", en: "A ruler has a length of 30 ____." }, a: ["kg", "mℓ", "cm", "g"], c: "cm" },
+                    { q: { ms: "Yang manakah lebih panjang?", en: "Which one is longer?" }, a: ["50 cm", "1 m", "80 cm", "90 cm"], c: "1 m" },
+                    { q: { ms: "Apakah unit yang sesuai untuk mengukur jisim sebiji epal?", en: "Which unit is suitable to measure the mass of an apple?" }, a: ["g", "kg", "cm", "mℓ"], c: "g" },
+                    { q: { ms: "Apakah unit yang sesuai untuk mengukur jisim seorang murid?", en: "Which unit is suitable to measure the mass of a student?" }, a: ["g", "kg", "cm", "mℓ"], c: "kg" },
+                    { q: { ms: "Jisim sekampit beras biasanya diukur dalam", en: "The mass of a bag of rice is usually measured in" }, a: ["cm", "m", "g", "kg"], c: "kg" },
+                    { q: { ms: "Yang manakah lebih berat?", en: "Which one is heavier?" }, a: ["500 g", "1 kg", "200 g", "750 g"], c: "1 kg" },
+                    { q: { ms: "Apakah unit yang sesuai untuk mengukur isipadu air di dalam botol minuman?", en: "Which unit is suitable to measure the volume of water in a water bottle?" }, a: ["cm", "kg", "mℓ", "g"], c: "mℓ" },
+                    { q: { ms: "Apakah unit yang sesuai untuk mengukur air di dalam tangki besar?", en: "Which unit is suitable to measure water in a large tank?" }, a: ["mℓ", "ℓ", "g", "cm"], c: "ℓ" },
+                    { q: { ms: "Sebotol air mineral mengandungi 600 ____.", en: "A bottle of mineral water contains 600 ____." }, a: ["kg", "cm", "mℓ", "g"], c: "mℓ" },
+                    { q: { ms: "Sebaldi air biasanya diukur dalam unit", en: "A bucket of water is usually measured in" }, a: ["cm", "g", "ℓ", "kg"], c: "ℓ" },
+                    { q: { ms: "Pilih pasangan unit yang betul.", en: "Choose the correct pair of units." }, a: { ms: ["Panjang – kg", "Jisim – cm", "Isipadu – ℓ", "Jisim – mℓ"], en: ["Length – kg", "Mass – cm", "Volume – ℓ", "Mass – mℓ"] }, c: { ms: "Isipadu – ℓ", en: "Volume – ℓ" } },
+                    { q: { ms: "Yang manakah sesuai diukur menggunakan sentimeter (cm)?", en: "Which item is suitable to be measured using centimeters (cm)?" }, a: { ms: ["Panjang meja", "Jisim beg sekolah", "Air dalam baldi", "Berat sebiji tembikai"], en: ["Length of a table", "Mass of a school bag", "Water in a bucket", "Weight of a watermelon"] }, c: { ms: "Panjang meja", en: "Length of a table" } },
+                    { q: { ms: "Yang manakah sesuai diukur menggunakan gram (g)?", en: "Which item is suitable to be measured using grams (g)?" }, a: { ms: ["Jisim sebatang pensel", "Panjang tali", "Air di dalam kolam", "Tinggi pokok"], en: ["Mass of a pencil", "Length of a rope", "Water in a pond", "Height of a tree"] }, c: { ms: "Jisim sebatang pensel", en: "Mass of a pencil" } },
+                    { q: { ms: "Yang manakah sesuai diukur menggunakan kilogram (kg)?", en: "Which item is suitable to be measured using kilograms (kg)?" }, a: { ms: ["Jisim seekor kucing", "Panjang pembaris", "Air di dalam gelas", "Panjang buku"], en: ["Mass of a cat", "Length of a ruler", "Water in a glass", "Length of a book"] }, c: { ms: "Jisim seekor kucing", en: "Mass of a cat" } },
+                    { q: { ms: "Yang manakah sesuai diukur menggunakan liter (ℓ)?", en: "Which item is suitable to be measured using liters (ℓ)?" }, a: { ms: ["Air di dalam akuarium", "Panjang pensel", "Jisim epal", "Tinggi murid"], en: ["Water in an aquarium", "Length of a pencil", "Mass of an apple", "Height of a student"] }, c: { ms: "Air di dalam akuarium", en: "Water in an aquarium" } },
+                    { q: { ms: "Pilih pernyataan yang betul.", en: "Choose the correct statement." }, a: { ms: ["Jisim diukur dalam cm.", "Panjang diukur dalam kg.", "Isipadu cecair diukur dalam mℓ atau ℓ.", "Panjang diukur dalam g."], en: ["Mass is measured in cm.", "Length is measured in kg.", "Volume of liquid is measured in mℓ or ℓ.", "Length is measured in g."] }, c: { ms: "Isipadu cecair diukur dalam mℓ atau ℓ.", en: "Volume of liquid is measured in mℓ or ℓ." }, },
+                    { q: { ms: "Antara berikut, yang manakah mempunyai jisim paling ringan?", en: "Which of the following has the lightest mass?" }, a: { ms: ["Sebiji guli", "Sebuah meja", "Sebuah peti sejuk", "Sebuah motosikal"], en: ["A marble", "A table", "A refrigerator", "A motorcycle"] }, c: { ms: "Sebiji guli", en: "A marble" } },
+                    { q: { ms: "Antara berikut, yang manakah mempunyai isipadu paling banyak?", en: "Which of the following has the largest volume?" }, a: { ms: ["Secawan air", "Sebotol air", "Sebaldi air", "Sesudu air"], en: ["A cup of water", "A bottle of water", "A bucket of water", "A spoon of water"] }, c: { ms: "Sebaldi air", en: "A bucket of water" } }
+                ]
+            }
+        };
+
+        // --- SISTEM AUDIO SINTETIK ---
+        const AudioFX = {
+            ctx: null, enabled: true,
+            init() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); },
+            play(type) {
+                if (!this.enabled) return;
+                this.init();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.connect(gain); gain.connect(this.ctx.destination);
+                if (type === 'pop') {
+                    osc.type = 'sine'; osc.frequency.setValueAtTime(300, now); osc.frequency.exponentialRampToValueAtTime(100, now + 0.1);
+                    gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0, now + 0.1);
+                    osc.start(now); osc.stop(now + 0.1);
+                } else if (type === 'ding') {
+                    osc.type = 'triangle'; osc.frequency.setValueAtTime(523.25, now); osc.frequency.setValueAtTime(659.25, now + 0.08);
+                    gain.gain.setValueAtTime(0.4, now); gain.gain.linearRampToValueAtTime(0, now + 0.25);
+                    osc.start(now); osc.stop(now + 0.25);
+                } else if (type === 'buzz') {
+                    osc.type = 'sawtooth'; osc.frequency.setValueAtTime(180, now); osc.frequency.linearRampToValueAtTime(120, now + 0.25);
+                    gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0, now + 0.25);
+                    osc.start(now); osc.stop(now + 0.25);
+                } else if (type === 'victory') {
+                    [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+                        const o = this.ctx.createOscillator(); const g = this.ctx.createGain();
+                        o.connect(g); g.connect(this.ctx.destination); o.type = 'sine';
+                        o.frequency.setValueAtTime(freq, now + (idx * 0.12)); g.gain.setValueAtTime(0.3, now + (idx * 0.12));
+                        g.gain.linearRampToValueAtTime(0, now + (idx * 0.12) + 0.3); o.start(now + (idx * 0.12)); o.stop(now + (idx * 0.12) + 0.3);
+                    });
+                }
+            }
+        };
+
+        // --- STATE APLIKASI ---
+        let userProfile = { name: "", stars: 0, badges: [] };
+        let allProfiles = {};
+        let performanceRecords = []; 
+
+        let quizState = {
+            currentTopicId: "", currentQuestionIndex: 0, score: 0,
+            correctCount: 0, wrongCount: 0, starsEarned: 0, lives: 3, isAnswering: false
+        };
+
+        const TOPIC_COLORS = [
+            'from-blue-400 to-blue-500 text-white', 'from-emerald-400 to-emerald-500 text-white',
+            'from-amber-400 to-amber-500 text-slate-800', 'from-cyan-400 to-cyan-500 text-white',
+            'from-purple-400 to-purple-500 text-white', 'from-rose-400 to-rose-500 text-white',
+            'from-indigo-400 to-indigo-500 text-white', 'from-teal-400 to-teal-500 text-white',
+            'from-orange-400 to-orange-500 text-white'
+        ];
+
+        window.onload = function() {
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.btn-bounce')) { AudioFX.play('pop'); }
+            });
+            
+            // Ambil tetapan bahasa terdahulu jika ada
+            const savedLang = localStorage.getItem('bijak_math_lang');
+            if (savedLang) { currentLang = savedLang; }
+            
+            loadLocalData();
+            applyLanguageUI();
+        };
+
+        function toggleLanguage() {
+            currentLang = (currentLang === 'ms') ? 'en' : 'ms';
+            localStorage.setItem('bijak_math_lang', currentLang);
+            applyLanguageUI();
+            
+            // Kemas kini komponen dinamik yang sedang dipaparkan
+            buildMainMenuTopics();
+            renderBadges();
+            if (!document.getElementById('viewTopicIntro').classList.contains('hidden')) {
+                selectTopic(quizState.currentTopicId);
+            }
+            if (!document.getElementById('viewQuiz').classList.contains('hidden')) {
+                // Sentiasa kemas kini teks soalan mengikut bahasa semasa kuiz berlangsung
+                const topic = BANK_SOALAN[quizState.currentTopicId];
+                const totalQuestions = topic.questions.length;
+                const currentQuestion = topic.questions[quizState.currentQuestionIndex];
+                document.getElementById('quizProgressText').innerText = `${I18N_DICTIONARY[currentLang].quizProgressText} ${quizState.currentQuestionIndex + 1} / ${totalQuestions}`;
+                document.getElementById('quizScoreText').innerText = `${I18N_DICTIONARY[currentLang].quizScoreText}: ${quizState.score}`;
+                document.getElementById('questionTextPrimary').innerHTML = typeof currentQuestion.q === 'object' ? currentQuestion.q[currentLang] : currentQuestion.q;
+            }
+            if (!document.getElementById('viewRecords').classList.contains('hidden')) {
+                openPerformanceRecords();
+            }
+        }
+
+        function applyLanguageUI() {
+            const currentI18N = I18N_DICTIONARY[currentLang];
+            
+            // Kemas kini teks statik dalam HTML
+            document.getElementById('welcomeTitle').innerHTML = currentI18N.welcomeTitle;
+            document.getElementById('welcomeMascot').innerText = currentI18N.welcomeMascot;
+            document.getElementById('btnWelcomeStart').innerText = currentI18N.btnWelcomeStart;
+            
+            document.getElementById('profileTitle').innerText = currentI18N.profileTitle;
+            document.getElementById('profileDesc').innerText = currentI18N.profileDesc;
+            document.getElementById('profileLabel').innerText = currentI18N.profileLabel;
+            document.getElementById('usernameInput').placeholder = currentI18N.usernameInputPlaceholder;
+            document.getElementById('btnSaveProfile').innerText = currentI18N.btnSaveProfile;
+            document.getElementById('existingProfilesTitle').innerText = currentI18N.existingProfilesTitle;
+            
+            document.getElementById('mainMenuTitle').innerText = currentI18N.mainMenuTitle;
+            document.getElementById('mainMenuDesc').innerText = currentI18N.mainMenuDesc;
+            document.getElementById('btnPerformanceRecords').innerText = currentI18N.btnPerformanceRecords;
+            document.getElementById('badgeHeading').innerText = currentI18N.badgeHeading;
+            
+            document.getElementById('btnIntroBack').innerText = currentI18N.btnIntroBack;
+            document.getElementById('btnIntroStart').innerText = currentI18N.btnIntroStart;
+            document.getElementById('topicIntroHint').innerText = currentI18N.topicIntroHint;
+            
+            document.getElementById('btnExitQuiz').innerText = currentI18N.btnExitQuiz;
+            
+            document.getElementById('resLblCorrect').innerText = currentI18N.resLblCorrect;
+            document.getElementById('resLblWrong').innerText = currentI18N.resLblWrong;
+            document.getElementById('resLblStars').innerText = currentI18N.resLblStars;
+            document.getElementById('btnResultRetry').innerText = currentI18N.btnResultRetry;
+            document.getElementById('btnResultBack').innerText = currentI18N.btnResultBack;
+            
+            document.getElementById('recordsTitle').innerText = currentI18N.recordsTitle;
+            document.getElementById('recordsDesc').innerText = currentI18N.recordsDesc;
+            document.getElementById('btnClearRecords').innerText = currentI18N.btnClearRecords;
+            document.getElementById('btnRecordsMainMenu').innerText = currentI18N.btnRecordsMainMenu;
+            
+            document.getElementById('settingsTitle').innerText = currentI18N.settingsTitle;
+            document.getElementById('settingsSound').innerText = currentI18N.settingsSound;
+            document.getElementById('settingsReset').innerText = currentI18N.settingsReset;
+            document.getElementById('settingsDelete').innerText = currentI18N.settingsDelete;
+            document.getElementById('settingsBranding').innerHTML = currentI18N.brandingText;
+            
+            document.getElementById('footerText').innerText = currentI18N.footerText;
+            
+            // Kemas kini teks pada butang penukaran bahasa
+            const btnText = currentLang === 'ms' ? '🌐 EN' : '🌐 MY';
+            document.getElementById('btnLangToggle').innerText = btnText;
+            document.getElementById('btnWelcomeLangToggle').innerText = btnText;
+
+            updateSoundButtonUI();
+        }
+
+        function navigateTo(viewId) {
+            ['viewWelcome', 'viewProfile', 'viewMainMenu', 'viewTopicIntro', 'viewQuiz', 'viewResult', 'viewRecords'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(viewId).classList.remove('hidden');
+
+            const header = document.getElementById('appHeader');
+            if (viewId === 'viewWelcome' || viewId === 'viewProfile') {
+                header.classList.add('hidden');
+                if(viewId === 'viewProfile') { renderExistingProfilesList(); }
+            } else {
+                header.classList.remove('hidden');
+                updateHeaderUI();
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function loadLocalData() {
+            const savedActiveName = localStorage.getItem('bijak_math_active_profile_v2');
+            const savedProfilesList = localStorage.getItem('bijak_math_profiles_list_v2');
+            const savedSound = localStorage.getItem('bijak_math_sound');
+
+            if (savedSound !== null) {
+                AudioFX.enabled = (savedSound === 'true');
+                updateSoundButtonUI();
+            }
+
+            if (savedProfilesList) {
+                allProfiles = JSON.parse(savedProfilesList);
+            }
+
+            if (savedActiveName && allProfiles[savedActiveName]) {
+                userProfile = allProfiles[savedActiveName];
+                performanceRecords = userProfile.records || [];
+                buildMainMenuTopics();
+                renderBadges();
+                navigateTo('viewMainMenu');
+            } else {
+                navigateTo('viewWelcome');
+            }
+        }
+
+        function renderExistingProfilesList() {
+            const container = document.getElementById('existingProfilesContainer');
+            const section = document.getElementById('existingProfilesSection');
+            container.innerHTML = '';
+            
+            const keys = Object.keys(allProfiles);
+            if(keys.length === 0) {
+                section.classList.add('hidden');
+                return;
+            }
+            
+            section.classList.remove('hidden');
+            keys.forEach(name => {
+                const p = allProfiles[name];
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left bg-slate-50 border-2 border-slate-200/80 p-3 rounded-xl font-bold flex justify-between items-center hover:bg-blue-50 hover:border-blue-300 transition-colors cursor-pointer text-sm btn-bounce";
+                btn.onclick = () => switchProfile(name);
+                btn.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <span class="text-xl">👤</span>
+                        <span class="text-slate-700 font-black truncate max-w-[150px]">${name}</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs text-amber-500 bg-white px-2 py-1 rounded-lg border border-slate-100 shadow-sm">
+                        <span>⭐ <span class="font-black text-slate-700">${p.stars}</span></span>
+                        <span class="text-slate-300">|</span>
+                        <span>🏆 <span class="font-black text-slate-700">${p.badges.length}</span></span>
+                    </div>
+                `;
+                container.appendChild(btn);
+            });
+        }
+
+        function saveProfile() {
+            const input = document.getElementById('usernameInput');
+            const name = input.value.trim().toUpperCase();
+            if (!name) { alert(I18N_DICTIONARY[currentLang].alertNameEmpty); return; }
+            
+            if (!allProfiles[name]) {
+                allProfiles[name] = { name: name, stars: 0, badges: [], records: [] };
+            }
+            
+            localStorage.setItem('bijak_math_profiles_list_v2', JSON.stringify(allProfiles));
+            switchProfile(name);
+            input.value = '';
+        }
+
+        function switchProfile(name) {
+            userProfile = allProfiles[name];
+            performanceRecords = userProfile.records || [];
+            localStorage.setItem('bijak_math_active_profile_v2', name);
+            
+            buildMainMenuTopics();
+            renderBadges();
+            navigateTo('viewMainMenu');
+        }
+
+        function updateHeaderUI() {
+            document.getElementById('headerName').innerText = userProfile.name;
+            document.getElementById('headerStars').innerText = userProfile.stars;
+            renderLives();
+        }
+
+        function renderLives() {
+            const container = document.getElementById('livesContainer');
+            container.innerHTML = '';
+            for (let i = 0; i < 3; i++) {
+                const heart = document.createElement('span');
+                heart.innerText = i < quizState.lives ? '❤️' : '🖤';
+                container.appendChild(heart);
+            }
+        }
+
+        function buildMainMenuTopics() {
+            const grid = document.getElementById('topicsGrid');
+            grid.innerHTML = '';
+            Object.keys(BANK_SOALAN).forEach((key, index) => {
+                const topic = BANK_SOALAN[key];
+                const colorClass = TOPIC_COLORS[index % TOPIC_COLORS.length];
+                const card = document.createElement('button');
+                card.className = `btn-bounce bg-gradient-to-br ${colorClass} p-4 rounded-2xl shadow-md text-left flex flex-col justify-between h-32 border-b-4 border-black/10 cursor-pointer transform hover:scale-[1.02] transition-transform`;
+                card.onclick = () => selectTopic(key);
+                
+                const titleText = typeof topic.title === 'object' ? topic.title[currentLang] : topic.title;
+                
+                card.innerHTML = `<div class="text-3xl">${topic.icon}</div><div><div class="font-black text-sm leading-tight uppercase">${titleText}</div><div class="text-[10px] opacity-90 font-bold mt-1">${topic.questions.length} ${I18N_DICTIONARY[currentLang].questionsUnit}</div></div>`;
+                grid.appendChild(card);
+            });
+        }
+
+        function renderBadges() {
+            const container = document.getElementById('badgesContainer');
+            container.innerHTML = '';
+            if (userProfile.badges.length === 0) {
+                container.innerHTML = `<span class="text-xs text-slate-400 italic">${I18N_DICTIONARY[currentLang].badgeEmpty}</span>`;
+                return;
+            }
+            userProfile.badges.forEach(badgeText => {
+                const badge = document.createElement('span');
+                badge.className = "bg-yellow-100 border border-yellow-300 text-yellow-800 font-black text-[11px] px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1";
+                badge.innerHTML = badgeText;
+                container.appendChild(badge);
+            });
+        }
+
+        function selectTopic(topicId) {
+            quizState.currentTopicId = topicId;
+            const topic = BANK_SOALAN[topicId];
+            const titleText = typeof topic.title === 'object' ? topic.title[currentLang] : topic.title;
+            
+            document.getElementById('topicIntroIcon').innerText = topic.icon;
+            document.getElementById('topicIntroTitle').innerText = titleText;
+            document.getElementById('topicIntroDetails').innerText = `${topic.questions.length} ${I18N_DICTIONARY[currentLang].topicIntroDetailsSuffix}`;
+            navigateTo('viewTopicIntro');
+        }
+
+        function startQuiz() {
+            quizState.currentQuestionIndex = 0;
+            quizState.score = 0; quizState.correctCount = 0; quizState.wrongCount = 0; quizState.starsEarned = 0;
+            quizState.lives = 3; quizState.isAnswering = false;
+            navigateTo('viewQuiz');
+            showQuestion();
+        }
+
+        function confirmExitQuiz() {
+            if (confirm(I18N_DICTIONARY[currentLang].alertExitQuiz)) {
+                navigateTo('viewMainMenu');
+            }
+        }
+
+        function showQuestion() {
+            quizState.isAnswering = false;
+            renderLives();
+            const topic = BANK_SOALAN[quizState.currentTopicId];
+            const totalQuestions = topic.questions.length;
+            
+            if (quizState.lives <= 0 || quizState.currentQuestionIndex >= totalQuestions) {
+                endQuiz();
+                return;
+            }
+
+            document.getElementById('quizProgressText').innerText = `${I18N_DICTIONARY[currentLang].quizProgressText} ${quizState.currentQuestionIndex + 1} / ${totalQuestions}`;
+            document.getElementById('quizScoreText').innerText = `${I18N_DICTIONARY[currentLang].quizScoreText}: ${quizState.score}`;
+            
+            const pct = ((quizState.currentQuestionIndex) / totalQuestions) * 100;
+            document.getElementById('quizProgressBar').style.width = `${pct}%`;
+
+            const currentQuestion = topic.questions[quizState.currentQuestionIndex];
+            
+            // Sokong soalan dwi bahasa
+            const questionString = typeof currentQuestion.q === 'object' ? currentQuestion.q[currentLang] : currentQuestion.q;
+            document.getElementById('questionTextPrimary').innerHTML = questionString;
+
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            // Sokong pilihan jawapan dwi bahasa jika berjenis objek
+            let rawOptions = currentQuestion.a;
+            if (typeof rawOptions === 'object' && !Array.isArray(rawOptions)) {
+                rawOptions = rawOptions[currentLang];
+            }
+            
+            let correctAnswer = currentQuestion.c;
+            if (typeof correctAnswer === 'object') {
+                correctAnswer = correctAnswer[currentLang];
+            }
+
+            rawOptions.forEach((option) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left bg-white text-slate-700 font-bold p-4 rounded-xl border-2 border-slate-200/80 shadow-sm hover:border-blue-400 transition-colors btn-bounce cursor-pointer flex justify-between items-center text-base";
+                btn.onclick = () => checkAnswer(btn, option, correctAnswer);
+                btn.innerHTML = `<span>${option}</span><span class='opt-status text-lg'></span>`;
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedButton, selectedValue, correctValue) {
+            if (quizState.isAnswering) return;
+            quizState.isAnswering = true;
+
+            const buttons = document.getElementById('optionsContainer').getElementsByTagName('button');
+            
+            if (selectedValue === correctValue) {
+                AudioFX.play('ding');
+                selectedButton.classList.remove('bg-white', 'border-slate-200/80');
+                selectedButton.classList.add('bg-green-50', 'border-green-400', 'text-green-700');
+                selectedButton.querySelector('.opt-status').innerText = '✅';
+                quizState.score += 5;
+                quizState.correctCount++;
+            } else {
+                AudioFX.play('buzz');
+                selectedButton.classList.remove('bg-white', 'border-slate-200/80');
+                selectedButton.classList.add('bg-red-50', 'border-red-400', 'text-red-700', 'animate-shake');
+                selectedButton.querySelector('.opt-status').innerText = '❌';
+                quizState.wrongCount++;
+                quizState.lives--;
+
+                // Paparkan simbol mentol pada jawapan yang betul sahaja apabila pengguna menjawab salah
+                for (let btn of buttons) {
+                    if (btn.innerText.trim().startsWith(correctValue)) {
+                        btn.classList.remove('bg-white', 'border-slate-200/80');
+                        btn.classList.add('bg-green-50/50', 'border-green-400', 'text-green-700');
+                        btn.querySelector('.opt-status').innerText = '💡';
+                    }
+                }
+            }
+
+            setTimeout(() => {
+                quizState.currentQuestionIndex++;
+                showQuestion();
+            }, 1800);
+        }
+
+        function endQuiz() {
+            const topic = BANK_SOALAN[quizState.currentTopicId];
+            const finalPercent = Math.round((quizState.correctCount / topic.questions.length) * 100);
+            const currentI18N = I18N_DICTIONARY[currentLang];
+            
+            const badgeText = typeof topic.badge === 'object' ? topic.badge[currentLang] : topic.badge;
+
+            if (finalPercent === 100) {
+                quizState.starsEarned = 3;
+                document.getElementById('resultTitle').innerText = currentI18N.resultTitleSuccess;
+                document.getElementById('resultEmoji').innerText = "🏆";
+                AudioFX.play('victory');
+                triggerConfetti();
+                
+                if (!userProfile.badges.includes(badgeText)) {
+                    userProfile.badges.push(badgeText);
+                }
+            } else if (finalPercent >= 50) {
+                quizState.starsEarned = 2;
+                document.getElementById('resultTitle').innerText = currentI18N.resultTitleNormal;
+                document.getElementById('resultEmoji').innerText = "🎉";
+                AudioFX.play('victory');
+            } else {
+                quizState.starsEarned = 0;
+                document.getElementById('resultTitle').innerText = currentI18N.resultTitleFail;
+                document.getElementById('resultEmoji').innerText = "💪";
+            }
+
+            userProfile.stars += quizState.starsEarned;
+            
+            const timestamp = new Date().toLocaleString();
+            const topicTitleMapped = typeof topic.title === 'object' ? topic.title : { ms: topic.title, en: topic.title };
+            
+            const record = {
+                topicTitle: topicTitleMapped, // simpan struktur bahasa objek untuk dipetakan nanti
+                score: finalPercent,
+                correct: quizState.correctCount,
+                total: topic.questions.length,
+                time: timestamp
+            };
+            performanceRecords.unshift(record);
+            userProfile.records = performanceRecords;
+
+            allProfiles[userProfile.name] = userProfile;
+            localStorage.setItem('bijak_math_profiles_list_v2', JSON.stringify(allProfiles));
+
+            document.getElementById('resultScore').innerText = `${finalPercent}%`;
+            document.getElementById('resultCorrect').innerText = quizState.correctCount;
+            document.getElementById('resultWrong').innerText = quizState.wrongCount;
+            document.getElementById('resultStars').innerText = `+${quizState.starsEarned}`;
+
+            updateHeaderUI();
+            navigateTo('viewResult');
+        }
+
+        function triggerConfetti() {
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        }
+
+        function openPerformanceRecords() {
+            navigateTo('viewRecords');
+            const container = document.getElementById('recordsListContainer');
+            container.innerHTML = '';
+
+            if (performanceRecords.length === 0) {
+                container.innerHTML = `<div class="text-center py-8 text-slate-400 font-medium text-sm">${I18N_DICTIONARY[currentLang].recordsEmpty}</div>`;
+                return;
+            }
+
+            performanceRecords.forEach(rec => {
+                const item = document.createElement('div');
+                item.className = "bg-slate-50 p-3 rounded-xl border border-slate-100 flex justify-between items-center text-xs";
+                
+                // Urus pemetaan nama tajuk mengikut bahasa semasa
+                let displayTitle = rec.topicTitle;
+                if (typeof displayTitle === 'object') {
+                    displayTitle = displayTitle[currentLang] || displayTitle['ms'];
+                }
+
+                item.innerHTML = `
+                    <div>
+                        <div class="font-black text-slate-700 text-sm uppercase">${displayTitle}</div>
+                        <div class="text-slate-400 font-bold mt-0.5">${rec.time}</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-base font-black ${rec.score === 100 ? 'text-emerald-500' : rec.score >= 50 ? 'text-blue-500' : 'text-orange-500'}">${rec.score}%</div>
+                        <div class="text-[10px] text-slate-400 font-bold">${I18N_DICTIONARY[currentLang].recordsScoreLabel}: ${rec.correct}/${rec.total}</div>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function clearPerformanceRecords() {
+            if (confirm(I18N_DICTIONARY[currentLang].alertClearRecords)) {
+                performanceRecords = [];
+                userProfile.records = [];
+                allProfiles[userProfile.name] = userProfile;
+                localStorage.setItem('bijak_math_profiles_list_v2', JSON.stringify(allProfiles));
+                openPerformanceRecords();
+            }
+        }
+
+        function openSettings() { document.getElementById('modalSettings').classList.remove('hidden'); }
+        function closeSettings() { document.getElementById('modalSettings').classList.add('hidden'); }
+
+        function toggleSound() {
+            AudioFX.enabled = !AudioFX.enabled;
+            localStorage.setItem('bijak_math_sound', AudioFX.enabled);
+            updateSoundButtonUI();
+        }
+
+        function updateSoundButtonUI() {
+            const btn = document.getElementById('btnSoundToggle');
+            if(!btn) return;
+            const currentI18N = I18N_DICTIONARY[currentLang];
+            if (AudioFX.enabled) {
+                btn.innerText = currentI18N.settingsSoundOn;
+                btn.className = "px-4 py-2 bg-green-500 text-white font-bold rounded-lg text-xs tracking-wide uppercase shadow btn-bounce cursor-pointer";
+            } else {
+                btn.innerText = currentI18N.settingsSoundOff;
+                btn.className = "px-4 py-2 bg-slate-400 text-white font-bold rounded-lg text-xs tracking-wide uppercase shadow btn-bounce cursor-pointer";
+            }
+        }
+
+        function resetProgress() {
+            if (confirm(I18N_DICTIONARY[currentLang].alertResetProgress)) {
+                userProfile.stars = 0;
+                userProfile.badges = [];
+                userProfile.records = [];
+                performanceRecords = [];
+                allProfiles[userProfile.name] = userProfile;
+                localStorage.setItem('bijak_math_profiles_list_v2', JSON.stringify(allProfiles));
+                closeSettings();
+                buildMainMenuTopics();
+                renderBadges();
+                updateHeaderUI();
+            }
+        }
+
+        function logoutProfile() {
+            if (confirm(I18N_DICTIONARY[currentLang].alertLogoutProfile)) {
+                localStorage.removeItem('bijak_math_active_profile_v2');
+                closeSettings();
+                navigateTo('viewWelcome');
+            }
+        }
+    </script>
+</body>
+</html>
