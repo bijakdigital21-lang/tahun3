@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bijak Math Tahun 3 / Smart Math Grade 3</title>
+    <title>Bijak Math Tahun 3</title>
     <!-- Tailwind CSS untuk Rekabentuk Moden & Responsif -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- Google Fonts - Nunito (Mudah dibaca & Mesra Kanak-kanak) -->
@@ -40,7 +40,7 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-start overflow-x-hidden antialiased text-slate-800">
 
-    <!-- APP CONTAINER - Ditukar kepada h-auto untuk membolehkan skrol keseluruhan halaman -->
+    <!-- APP CONTAINER -->
     <div class="max-w-md w-full mx-auto bg-white/80 backdrop-blur-md min-h-screen h-auto shadow-2xl flex flex-col relative pb-6 border-x border-white/40">
         
         <!-- HEADER / STATUS BAR -->
@@ -64,9 +64,6 @@
                 </div>
                 <!-- Butang Kawalan -->
                 <div class="flex items-center space-x-2">
-                    <button onclick="toggleLanguage()" class="btn-bounce bg-white/20 hover:bg-white/30 font-black text-xs px-2.5 py-1.5 rounded-xl border border-white/30 cursor-pointer" id="btnLangToggle" title="Tukar Bahasa / Change Language">
-                        🌐 EN
-                    </button>
                     <button onclick="openSettings()" class="btn-bounce text-xl p-1 focus:outline-none cursor-pointer" title="Tetapan">
                         ⚙️
                     </button>
@@ -82,11 +79,6 @@
 
             <!-- 1. PAPARAN PERMULAAN -->
             <section id="viewWelcome" class="flex flex-col items-center text-center space-y-8 py-8">
-                <div class="relative w-full flex justify-end px-2 -mt-4">
-                    <button onclick="toggleLanguage()" class="btn-bounce bg-blue-500 text-white font-black text-xs px-3 py-1.5 rounded-xl border-b-2 border-blue-700 cursor-pointer shadow-md" id="btnWelcomeLangToggle">
-                        🌐 EN
-                    </button>
-                </div>
                 <div class="space-y-2">
                     <div class="text-7xl drop-shadow-md animate-bounce inline-block">✏️🔢</div>
                     <h1 class="text-4xl font-extrabold text-blue-600 tracking-wide drop-shadow" id="welcomeTitle">Bijak Math<br><span class="text-emerald-500 text-3xl">Tahun 3</span></h1>
@@ -135,7 +127,7 @@
                     </button>
                 </div>
                 
-                <!-- Grid Kad Topik - Sekatan max-h dan overflow telah dibuang supaya seluruh halaman boleh diskrol -->
+                <!-- Grid Kad Topik -->
                 <div id="topicsGrid" class="grid grid-cols-2 gap-4 p-1"></div>
 
                 <!-- Bahagian Pencapaian / Lencana -->
@@ -198,15 +190,15 @@
                     <div class="text-5xl font-black text-blue-500" id="resultScore">100%</div>
                     <div class="grid grid-cols-3 gap-2 text-center border-t border-slate-100 pt-4">
                         <div class="bg-green-50 p-2 rounded-xl">
-                            <div class="text-[10px] font-bold text-green-600" id="resLblCorrect">Betul</div>
+                            <div class="text-[10px] font-bold text-green-600">Betul</div>
                             <div class="text-lg font-black text-green-700" id="resultCorrect">0</div>
                         </div>
                         <div class="bg-red-50 p-2 rounded-xl">
-                            <div class="text-[10px] font-bold text-red-600" id="resLblWrong">Salah</div>
+                            <div class="text-[10px] font-bold text-red-600">Salah</div>
                             <div class="text-lg font-black text-red-700" id="resultWrong">0</div>
                         </div>
                         <div class="bg-yellow-50 p-2 rounded-xl">
-                            <div class="text-[10px] font-bold text-yellow-600" id="resLblStars">Bintang</div>
+                            <div class="text-[10px] font-bold text-yellow-600">Bintang</div>
                             <div class="text-lg font-black text-yellow-700" id="resultStars">0</div>
                         </div>
                     </div>
@@ -226,17 +218,17 @@
             <section id="viewRecords" class="hidden flex flex-col space-y-4">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h2 class="text-2xl font-black text-slate-700" id="recordsTitle">📊 Rekod Prestasi</h2>
-                        <p class="text-slate-500 text-xs" id="recordsDesc">Senarai markah kuiz yang telah dijawab</p>
+                        <h2 class="text-2xl font-black text-slate-700">📊 Rekod Prestasi</h2>
+                        <p class="text-slate-500 text-xs">Senarai markah kuiz yang telah dijawab</p>
                     </div>
-                    <button onclick="clearPerformanceRecords()" class="btn-bounce text-xs bg-red-50 text-red-600 font-bold py-1.5 px-2.5 rounded-lg border border-red-200 cursor-pointer" id="btnClearRecords">
+                    <button onclick="clearPerformanceRecords()" class="btn-bounce text-xs bg-red-50 text-red-600 font-bold py-1.5 px-2.5 rounded-lg border border-red-200 cursor-pointer">
                         🗑️ Padam Rekod
                     </button>
                 </div>
 
                 <div id="recordsListContainer" class="bg-white rounded-2xl p-4 shadow-inner border border-slate-100 max-h-[380px] overflow-y-auto space-y-3"></div>
 
-                <button onclick="navigateTo('viewMainMenu')" class="btn-bounce w-full bg-slate-200 text-slate-700 font-bold py-3.5 rounded-xl border-b-4 border-slate-400 cursor-pointer mt-2 text-center" id="btnRecordsMainMenu">
+                <button onclick="navigateTo('viewMainMenu')" class="btn-bounce w-full bg-slate-200 text-slate-700 font-bold py-3.5 rounded-xl border-b-4 border-slate-400 cursor-pointer mt-2 text-center">
                     🏠 Kembali ke Menu Utama
                 </button>
             </section>
@@ -247,26 +239,26 @@
         <div id="modalSettings" class="hidden absolute inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-5">
             <div class="bg-white w-full max-w-sm rounded-3xl shadow-2xl p-6 space-y-6 transform transition-all scale-100">
                 <div class="flex justify-between items-center border-b border-slate-100 pb-3">
-                    <h3 class="text-xl font-black text-slate-700 flex items-center gap-2" id="settingsTitle">⚙️ Tetapan</h3>
+                    <h3 class="text-xl font-black text-slate-700 flex items-center gap-2">⚙️ Tetapan</h3>
                     <button onclick="closeSettings()" class="text-slate-400 hover:text-slate-600 text-2xl font-bold focus:outline-none cursor-pointer">&times;</button>
                 </div>
 
                 <div class="space-y-4">
                     <div class="flex justify-between items-center bg-slate-50 p-3 rounded-xl">
-                        <span class="font-bold text-slate-600" id="settingsSound">🔔 Kesan Bunyi</span>
+                        <span class="font-bold text-slate-600">🔔 Kesan Bunyi</span>
                         <button id="btnSoundToggle" onclick="toggleSound()" class="px-4 py-2 bg-green-500 text-white font-bold rounded-lg text-xs tracking-wide uppercase shadow btn-bounce cursor-pointer">HIDUP</button>
                     </div>
                     <button onclick="resetProgress()" class="w-full text-left bg-orange-50 hover:bg-orange-100 text-orange-700 font-bold p-3 rounded-xl text-sm flex items-center justify-between btn-bounce cursor-pointer">
-                        <span id="settingsReset">🔄 Set Semula Kemajuan Kuiz</span>
+                        <span>🔄 Set Semula Kemajuan Kuiz</span>
                         <span>➔</span>
                     </button>
                     <button onclick="logoutProfile()" class="w-full text-left bg-red-50 hover:bg-red-100 text-red-700 font-bold p-3 rounded-xl text-sm flex items-center justify-between btn-bounce cursor-pointer">
-                        <span id="settingsDelete">🚪 Log Keluar Akaun</span>
+                        <span>🚪 Log Keluar Akaun</span>
                         <span>➔</span>
                     </button>
                 </div>
 
-                <div class="bg-slate-100 p-3 rounded-xl text-center text-[11px] text-slate-400 leading-relaxed" id="settingsBranding">
+                <div class="bg-slate-100 p-3 rounded-xl text-center text-[11px] text-slate-400 leading-relaxed">
                     <span class="font-bold text-slate-500">Bijak Math v3.0</span><br>
                     Silibus KSSR Matematik Tahun 3 Kementerian Pendidikan Malaysia.<br>
                     100% Fungsi Offline & Selamat Tanpa Iklan.
@@ -275,124 +267,16 @@
         </div>
 
         <!-- FOOTER BRANDING -->
-        <footer class="text-center text-[10px] text-slate-400/80 font-bold uppercase tracking-wider pb-2" id="footerText">
+        <footer class="text-center text-[10px] text-slate-400/80 font-bold uppercase tracking-wider pb-2">
             Bijak Math Tahun 3 • KSSR Malaysia
         </footer>
     </div>
 
     <!-- JAVASCRIPT LOGIC & BANK SOALAN -->
     <script>
-        let currentLang = 'ms'; // Bahasa default
-
-        const I18N_DICTIONARY = {
-            ms: {
-                welcomeTitle: "Bijak Math<br><span class='text-emerald-500 text-3xl'>Tahun 3</span>",
-                welcomeMascot: "Hai Kawan!",
-                btnWelcomeStart: "Mula Belajar",
-                profileTitle: "Daftar Profil Baru",
-                profileDesc: "Masukkan namamu untuk memulakan pengembaraan Matematik!",
-                profileLabel: "Nama Murid :",
-                usernameInputPlaceholder: "Tulis nama di sini...",
-                btnSaveProfile: "Simpan Profil",
-                existingProfilesTitle: "Atau Pilih Profil Sedia Ada:",
-                mainMenuTitle: "Pilih Topik Belajar 🚀",
-                mainMenuDesc: "Kumpul bintang untuk buka lencana hebat!",
-                btnPerformanceRecords: "📊 Rekod Prestasi",
-                badgeHeading: "🏆 Lencana Pencapaian",
-                badgeEmpty: "Selesaikan topik dengan markah 100% untuk kumpul lencana!",
-                questionsUnit: "Soalan",
-                topicIntroDetailsSuffix: "Soalan Latih Tubi",
-                topicIntroHint: "Jawab dengan betul untuk dapatkan markah penuh dan bintang! Pastikan nyawa anda tidak habis.",
-                btnIntroBack: "Kembali",
-                btnIntroStart: "Mula Menjawab 🎮",
-                quizProgressText: "Soalan",
-                quizScoreText: "Markah",
-                btnExitQuiz: "🏠 Keluar ke Menu Utama",
-                resultTitleSuccess: "Sempurna 100%!",
-                resultTitleNormal: "Tahniah! Selesai!",
-                resultTitleFail: "Cuba Lagi!",
-                resLblCorrect: "Betul",
-                resLblWrong: "Salah",
-                resLblStars: "Bintang",
-                btnResultRetry: "🔄 Main Semula",
-                btnResultBack: "🏠 Kembali ke Topik",
-                recordsTitle: "📊 Rekod Prestasi",
-                recordsDesc: "Senarai markah kuiz yang telah dijawab",
-                btnClearRecords: "🗑️ Padam Rekod",
-                btnRecordsMainMenu: "🏠 Kembali ke Menu Utama",
-                recordsEmpty: "Belum ada rekod jawapan. Sila pilih topik dan selesaikan kuiz dahulu!",
-                recordsScoreLabel: "Betul",
-                settingsTitle: "⚙️ Tetapan",
-                settingsSound: "🔔 Kesan Bunyi",
-                settingsSoundOn: "HIDUP",
-                settingsSoundOff: "MATI",
-                settingsReset: "🔄 Set Semula Kemajuan Kuiz",
-                settingsDelete: "🚪 Log Keluar Akaun",
-                footerText: "Bijak Math Tahun 3 • KSSR Malaysia",
-                alertNameEmpty: "Sila masukkan namamu terlebih dahulu! 😊",
-                alertExitQuiz: "Adakah anda pasti mahu berhenti menjawab dan kembali ke Menu Utama?",
-                alertClearRecords: "Adakah anda pasti mahu memadam semua sejarah rekod prestasi ini?",
-                alertResetProgress: "Adakah anda pasti mahu mengosongkan semua kutipan lencana, bintang dan rekod prestasi kembali ke 0?",
-                alertLogoutProfile: "Adakah anda pasti mahu log keluar? Profil anda tidak akan dipadam dan anda boleh log masuk semula pada bila-bila masa.",
-                brandingText: "<span class='font-bold text-slate-500'>Bijak Math v3.0</span><br>Silibus KSSR Matematik Tahun 3 Kementerian Pendidikan Malaysia.<br>100% Fungsi Offline & Selamat Tanpa Iklan."
-            },
-            en: {
-                welcomeTitle: "Smart Math<br><span class='text-emerald-500 text-3xl'>Grade 3</span>",
-                welcomeMascot: "Hello Friend!",
-                btnWelcomeStart: "Start Learning",
-                profileTitle: "Register New Profile",
-                profileDesc: "Enter your name to start your Mathematics adventure!",
-                profileLabel: "Student Name :",
-                usernameInputPlaceholder: "Type name here...",
-                btnSaveProfile: "Save Profile",
-                existingProfilesTitle: "Or Choose Existing Profile:",
-                mainMenuTitle: "Choose Study Topic 🚀",
-                mainMenuDesc: "Collect stars to unlock awesome badges!",
-                btnPerformanceRecords: "📊 Performance Records",
-                badgeHeading: "🏆 Achievement Badges",
-                badgeEmpty: "Complete a topic with 100% score to collect badges!",
-                questionsUnit: "Questions",
-                topicIntroDetailsSuffix: "Practice Questions",
-                topicIntroHint: "Answer correctly to get full marks and stars! Make sure you don't run out of lives.",
-                btnIntroBack: "Back",
-                btnIntroStart: "Start Quiz 🎮",
-                quizProgressText: "Question",
-                quizScoreText: "Score",
-                btnExitQuiz: "🏠 Exit to Main Menu",
-                resultTitleSuccess: "Perfect 100%!",
-                resultTitleNormal: "Congratulations! Done!",
-                resultTitleFail: "Try Again!",
-                resLblCorrect: "Correct",
-                resLblWrong: "Wrong",
-                resLblStars: "Stars",
-                btnResultRetry: "🔄 Replay",
-                btnResultBack: "🏠 Back to Topics",
-                recordsTitle: "📊 Performance Records",
-                recordsDesc: "List of quiz scores answered",
-                btnClearRecords: "🗑️ Clear Records",
-                btnRecordsMainMenu: "🏠 Back to Main Menu",
-                recordsEmpty: "No records yet. Please pick a topic and complete a quiz first!",
-                recordsScoreLabel: "Correct",
-                settingsTitle: "⚙️ Settings",
-                settingsSound: "🔔 Sound Effects",
-                settingsSoundOn: "ON",
-                settingsSoundOff: "OFF",
-                settingsReset: "🔄 Reset Quiz Progress",
-                settingsDelete: "🚪 Log Out Account",
-                footerText: "Smart Math Grade 3 • Cambridge & KSSR Aligned",
-                alertNameEmpty: "Please enter your name first! 😊",
-                alertExitQuiz: "Are you sure you want to stop and return to the Main Menu?",
-                alertClearRecords: "Are you sure you want to delete all performance records history?",
-                alertResetProgress: "Are you sure you want to clear all collected badges, stars, and records back to 0?",
-                alertLogoutProfile: "Are you sure you want to log out? Your profile won't be deleted and you can log back in anytime.",
-                brandingText: "<span class='font-bold text-slate-500'>Smart Math v3.0</span><br>Aligned with primary math curriculums.<br>100% Offline Functional & Safe Ads-Free."
-            }
-        };
-
         const BANK_SOALAN = {
             nombor_bulat: {
-                title: { ms: "NOMBOR BULAT", en: "WHOLE NUMBERS" }, icon: "🔢", 
-                badge: { ms: "🔢 Raja Nombor", en: "🔢 Number King" },
+                title: "NOMBOR BULAT", icon: "🔢", badge: "🔢 Raja Nombor",
                 questions: [
                     { q: "Apakah nombor selepas 4 599?", a: ["4 598", "4 600", "4 601", "4 610"], c: "4 600" },
                     { q: "Apakah nombor sebelum 7 201?", a: ["7 199", "7 200", "7 202", "7 210"], c: "7 200" },
@@ -417,8 +301,7 @@
                 ]
             },
             tambah: {
-                title: { ms: "TAMBAH", en: "ADDITION" }, icon: "➕", 
-                badge: { ms: "➕ Pakar Tambah", en: "➕ Addition Expert" },
+                title: "TAMBAH", icon: "➕", badge: "➕ Pakar Tambah",
                 questions: [
                     { q: "Berapakah hasil bagi 2 345 + 1 432?", a: ["3 677", "3 777", "3 877", "3 977"], c: "3 777" },
                     { q: "4 216 + 2 103 =", a: ["6 219", "6 309", "6 319", "6 329"], c: "6 319" },
@@ -443,8 +326,7 @@
                 ]
             },
             tolak: {
-                title: { ms: "TOLAK", en: "SUBTRACTION" }, icon: "➖", 
-                badge: { ms: "➖ Wira Tolak", en: "➖ Subtraction Hero" },
+                title: "TOLAK", icon: "➖", badge: "➖ Wira Tolak",
                 questions: [
                     { q: "Berapakah hasil bagi 6 542 − 2 131?", a: ["4 311", "4 411", "4 511", "4 611"], c: "4 411" },
                     { q: "7 850 − 2 340 =", a: ["5 410", "5 510", "5 610", "5 710"], c: "5 510" },
@@ -469,8 +351,7 @@
                 ]
             },
             darab: {
-                title: { ms: "DARAB", en: "MULTIPLICATION" }, icon: "✖️", 
-                badge: { ms: "✖️ Sifu Darab", en: "✖️ Multiplication Master" },
+                title: "DARAB", icon: "✖️", badge: "✖️ Sifu Darab",
                 questions: [
                     { q: "Berapakah hasil bagi 234 × 2?", a: ["448", "458", "468", "478"], c: "468" },
                     { q: "125 × 4 =", a: ["400", "500", "520", "540"], c: "500" },
@@ -495,8 +376,7 @@
                 ]
             },
             bahagi: {
-                title: { ms: "BAHAGI", en: "DIVISION" }, icon: "➗", 
-                badge: { ms: "➗ Master Bahagi", en: "➗ Division Master" },
+                title: "BAHAGI", icon: "➗", badge: "➗ Master Bahagi",
                 questions: [
                     { q: "Berapakah hasil bagi 24 ÷ 6?", a: ["3", "4", "5", "6"], c: "4" },
                     { q: "36 ÷ 4 =", a: ["8", "9", "10", "12"], c: "9" },
@@ -521,8 +401,7 @@
                 ]
             },
             pecahan: {
-                title: { ms: "PECAHAN", en: "FRACTIONS" }, icon: "🍰", 
-                badge: { ms: "🍰 Wira Pecahan", en: "🍰 Fraction Hero" },
+                title: "PECAHAN", icon: "🍰", badge: "🍰 Wira Pecahan",
                 questions: [
                     { q: "Manakah yang menunjukkan satu per dua?", a: ["1/3", "1/2", "2/3", "2/4"], c: "1/2" },
                     { q: "Apakah pengangka bagi pecahan 3/5?", a: ["3", "5", "8", "2"], c: "3" },
@@ -547,8 +426,7 @@
                 ]
             },
             perpuluhan: {
-                title: { ms: "PERPULUHAN", en: "DECIMALS" }, icon: "🔢", 
-                badge: { ms: "🎯 Pakar Perpuluhan", en: "🎯 Decimals Expert" },
+                title: "PERPULUHAN", icon: "🔢", badge: "🎯 Pakar Perpuluhan",
                 questions: [
                     { q: "Apakah nombor perpuluhan bagi tujuh perpuluhan lima?", a: ["7.05", "7.5", "75.0", "0.75"], c: "7.5" },
                     { q: "Bagaimanakah nombor 3.8 ditulis dalam perkataan?", a: ["Tiga lapan", "Tiga perpuluhan lapan", "Tiga puluh lapan", "Tiga ratus lapan"], c: "Tiga perpuluhan lapan" },
@@ -573,8 +451,7 @@
                 ]
             },
             peratus: {
-                title: { ms: "PERATUS", en: "PERCENTAGE" }, icon: "📊", 
-                badge: { ms: "📊 Wira Peratus", en: "📊 Percentage Hero" },
+                title: "PERATUS", icon: "📊", badge: "📊 Wira Peratus",
                 questions: [
                     { q: "Apakah maksud 25%?", a: ["25 daripada 10", "25 daripada 100", "100 daripada 25", "50 daripada 100"], c: "25 daripada 100" },
                     { q: "Bagaimanakah 40% ditulis dalam perkataan?", a: ["Empat puluh peratus", "Empat peratus", "Empat ratus peratus", "Empat puluh"], c: "Empat puluh peratus" },
@@ -599,8 +476,7 @@
                 ]
             },
             wang: {
-                title: { ms: "WANG", en: "MONEY" }, icon: "💰", 
-                badge: { ms: "💰 Jutawan Kecil", en: "💰 Little Millionaire" },
+                title: "WANG", icon: "💰", badge: "💰 Jutawan Kecil",
                 questions: [
                     { q: "Apakah nilai bagi 100 sen?", a: ["RM0.10", "RM0.50", "RM1.00", "RM10.00"], c: "RM1.00" },
                     { q: "RM12.50 + RM5.20 =", a: ["RM17.50", "RM17.60", "RM17.70", "RM17.80"], c: "RM17.70" },
@@ -625,8 +501,7 @@
                 ]
             },
             masa_waktu: {
-                title: { ms: "MASA & WAKTU", en: "TIME" }, icon: "🕒", 
-                badge: { ms: "🕒 Kapten Masa", en: "🕒 Time Captain" },
+                title: "MASA & WAKTU", icon: "🕒", badge: "🕒 Kapten Masa",
                 questions: [
                     { q: "Terdapat 60 minit dalam…", a: ["30 minit", "1 jam", "2 jam", "1 hari"], c: "1 jam" },
                     { q: "Berapakah jumlah jam dalam 1 hari?", a: ["12 jam", "18 jam", "24 jam", "30 jam"], c: "24 jam" },
@@ -651,8 +526,7 @@
                 ]
             },
             ukuran_sukatan: {
-                title: { ms: "UKURAN & SUKATAN", en: "MEASUREMENT" }, icon: "📏", 
-                badge: { ms: "📏 Jaguh Ukur", en: "📏 Measurement Champion" },
+                title: "UKURAN & SUKATAN", icon: "📏", badge: "📏 Jaguh Ukur",
                 questions: [
                     { q: "Apakah unit yang paling sesuai untuk mengukur panjang sebatang pensel?", a: ["Kilometer (km)", "Meter (m)", "Sentimeter (cm)", "Liter (L)"], c: "Sentimeter (cm)" },
                     { q: "1 meter bersamaan dengan…", a: ["10 cm", "100 cm", "1 000 cm", "10 m"], c: "100 cm" },
@@ -677,8 +551,7 @@
                 ]
             },
             jisim: {
-                title: { ms: "JISIM", en: "MASS" }, icon: "⚖️", 
-                badge: { ms: "⚖️ Wira Jisim", en: "⚖️ Mass Hero" },
+                title: "JISIM", icon: "⚖️", badge: "⚖️ Wira Jisim",
                 questions: [
                     { q: "Apakah unit yang paling sesuai untuk mengukur jisim sebiji epal?", a: ["Kilometer (km)", "Gram (g)", "Liter (L)", "Meter (m)"], c: "Gram (g)" },
                     { q: "1 kilogram (kg) bersamaan dengan…", a: ["10 g", "100 g", "1 000 g", "10 000 g"], c: "1 000 g" },
@@ -703,6 +576,7 @@
                 ]
             }
         };
+
         // --- SISTEM AUDIO SINTETIK ---
         const AudioFX = {
             ctx: null, enabled: true,
@@ -760,92 +634,8 @@
             document.addEventListener('click', function(e) {
                 if (e.target.closest('.btn-bounce')) { AudioFX.play('pop'); }
             });
-            
-            // Ambil tetapan bahasa terdahulu jika ada
-            const savedLang = localStorage.getItem('bijak_math_lang');
-            if (savedLang) { currentLang = savedLang; }
-            
             loadLocalData();
-            applyLanguageUI();
         };
-
-        function toggleLanguage() {
-            currentLang = (currentLang === 'ms') ? 'en' : 'ms';
-            localStorage.setItem('bijak_math_lang', currentLang);
-            applyLanguageUI();
-            
-            // Kemas kini komponen dinamik yang sedang dipaparkan
-            buildMainMenuTopics();
-            renderBadges();
-            if (!document.getElementById('viewTopicIntro').classList.contains('hidden')) {
-                selectTopic(quizState.currentTopicId);
-            }
-            if (!document.getElementById('viewQuiz').classList.contains('hidden')) {
-                // Sentiasa kemas kini teks soalan mengikut bahasa semasa kuiz berlangsung
-                const topic = BANK_SOALAN[quizState.currentTopicId];
-                const totalQuestions = topic.questions.length;
-                const currentQuestion = topic.questions[quizState.currentQuestionIndex];
-                document.getElementById('quizProgressText').innerText = `${I18N_DICTIONARY[currentLang].quizProgressText} ${quizState.currentQuestionIndex + 1} / ${totalQuestions}`;
-                document.getElementById('quizScoreText').innerText = `${I18N_DICTIONARY[currentLang].quizScoreText}: ${quizState.score}`;
-                document.getElementById('questionTextPrimary').innerHTML = typeof currentQuestion.q === 'object' ? currentQuestion.q[currentLang] : currentQuestion.q;
-            }
-            if (!document.getElementById('viewRecords').classList.contains('hidden')) {
-                openPerformanceRecords();
-            }
-        }
-
-        function applyLanguageUI() {
-            const currentI18N = I18N_DICTIONARY[currentLang];
-            
-            // Kemas kini teks statik dalam HTML
-            document.getElementById('welcomeTitle').innerHTML = currentI18N.welcomeTitle;
-            document.getElementById('welcomeMascot').innerText = currentI18N.welcomeMascot;
-            document.getElementById('btnWelcomeStart').innerText = currentI18N.btnWelcomeStart;
-            
-            document.getElementById('profileTitle').innerText = currentI18N.profileTitle;
-            document.getElementById('profileDesc').innerText = currentI18N.profileDesc;
-            document.getElementById('profileLabel').innerText = currentI18N.profileLabel;
-            document.getElementById('usernameInput').placeholder = currentI18N.usernameInputPlaceholder;
-            document.getElementById('btnSaveProfile').innerText = currentI18N.btnSaveProfile;
-            document.getElementById('existingProfilesTitle').innerText = currentI18N.existingProfilesTitle;
-            
-            document.getElementById('mainMenuTitle').innerText = currentI18N.mainMenuTitle;
-            document.getElementById('mainMenuDesc').innerText = currentI18N.mainMenuDesc;
-            document.getElementById('btnPerformanceRecords').innerText = currentI18N.btnPerformanceRecords;
-            document.getElementById('badgeHeading').innerText = currentI18N.badgeHeading;
-            
-            document.getElementById('btnIntroBack').innerText = currentI18N.btnIntroBack;
-            document.getElementById('btnIntroStart').innerText = currentI18N.btnIntroStart;
-            document.getElementById('topicIntroHint').innerText = currentI18N.topicIntroHint;
-            
-            document.getElementById('btnExitQuiz').innerText = currentI18N.btnExitQuiz;
-            
-            document.getElementById('resLblCorrect').innerText = currentI18N.resLblCorrect;
-            document.getElementById('resLblWrong').innerText = currentI18N.resLblWrong;
-            document.getElementById('resLblStars').innerText = currentI18N.resLblStars;
-            document.getElementById('btnResultRetry').innerText = currentI18N.btnResultRetry;
-            document.getElementById('btnResultBack').innerText = currentI18N.btnResultBack;
-            
-            document.getElementById('recordsTitle').innerText = currentI18N.recordsTitle;
-            document.getElementById('recordsDesc').innerText = currentI18N.recordsDesc;
-            document.getElementById('btnClearRecords').innerText = currentI18N.btnClearRecords;
-            document.getElementById('btnRecordsMainMenu').innerText = currentI18N.btnRecordsMainMenu;
-            
-            document.getElementById('settingsTitle').innerText = currentI18N.settingsTitle;
-            document.getElementById('settingsSound').innerText = currentI18N.settingsSound;
-            document.getElementById('settingsReset').innerText = currentI18N.settingsReset;
-            document.getElementById('settingsDelete').innerText = currentI18N.settingsDelete;
-            document.getElementById('settingsBranding').innerHTML = currentI18N.brandingText;
-            
-            document.getElementById('footerText').innerText = currentI18N.footerText;
-            
-            // Kemas kini teks pada butang penukaran bahasa
-            const btnText = currentLang === 'ms' ? '🌐 EN' : '🌐 MY';
-            document.getElementById('btnLangToggle').innerText = btnText;
-            document.getElementById('btnWelcomeLangToggle').innerText = btnText;
-
-            updateSoundButtonUI();
-        }
 
         function navigateTo(viewId) {
             ['viewWelcome', 'viewProfile', 'viewMainMenu', 'viewTopicIntro', 'viewQuiz', 'viewResult', 'viewRecords'].forEach(id => {
@@ -924,7 +714,7 @@
         function saveProfile() {
             const input = document.getElementById('usernameInput');
             const name = input.value.trim().toUpperCase();
-            if (!name) { alert(I18N_DICTIONARY[currentLang].alertNameEmpty); return; }
+            if (!name) { alert("Sila masukkan namamu terlebih dahulu! 😊"); return; }
             
             if (!allProfiles[name]) {
                 allProfiles[name] = { name: name, stars: 0, badges: [], records: [] };
@@ -971,9 +761,7 @@
                 card.className = `btn-bounce bg-gradient-to-br ${colorClass} p-4 rounded-2xl shadow-md text-left flex flex-col justify-between h-32 border-b-4 border-black/10 cursor-pointer transform hover:scale-[1.02] transition-transform`;
                 card.onclick = () => selectTopic(key);
                 
-                const titleText = typeof topic.title === 'object' ? topic.title[currentLang] : topic.title;
-                
-                card.innerHTML = `<div class="text-3xl">${topic.icon}</div><div><div class="font-black text-sm leading-tight uppercase">${titleText}</div><div class="text-[10px] opacity-90 font-bold mt-1">${topic.questions.length} ${I18N_DICTIONARY[currentLang].questionsUnit}</div></div>`;
+                card.innerHTML = `<div class="text-3xl">${topic.icon}</div><div><div class="font-black text-sm leading-tight uppercase">${topic.title}</div><div class="text-[10px] opacity-90 font-bold mt-1">${topic.questions.length} Soalan</div></div>`;
                 grid.appendChild(card);
             });
         }
@@ -982,7 +770,7 @@
             const container = document.getElementById('badgesContainer');
             container.innerHTML = '';
             if (userProfile.badges.length === 0) {
-                container.innerHTML = `<span class="text-xs text-slate-400 italic">${I18N_DICTIONARY[currentLang].badgeEmpty}</span>`;
+                container.innerHTML = `<span class="text-xs text-slate-400 italic">Selesaikan topik dengan markah 100% untuk kumpul lencana!</span>`;
                 return;
             }
             userProfile.badges.forEach(badgeText => {
@@ -996,11 +784,10 @@
         function selectTopic(topicId) {
             quizState.currentTopicId = topicId;
             const topic = BANK_SOALAN[topicId];
-            const titleText = typeof topic.title === 'object' ? topic.title[currentLang] : topic.title;
             
             document.getElementById('topicIntroIcon').innerText = topic.icon;
-            document.getElementById('topicIntroTitle').innerText = titleText;
-            document.getElementById('topicIntroDetails').innerText = `${topic.questions.length} ${I18N_DICTIONARY[currentLang].topicIntroDetailsSuffix}`;
+            document.getElementById('topicIntroTitle').innerText = topic.title;
+            document.getElementById('topicIntroDetails').innerText = `${topic.questions.length} Soalan Latih Tubi`;
             navigateTo('viewTopicIntro');
         }
 
@@ -1013,7 +800,7 @@
         }
 
         function confirmExitQuiz() {
-            if (confirm(I18N_DICTIONARY[currentLang].alertExitQuiz)) {
+            if (confirm("Adakah anda pasti mahu berhenti menjawab dan kembali ke Menu Utama?")) {
                 navigateTo('viewMainMenu');
             }
         }
@@ -1029,36 +816,22 @@
                 return;
             }
 
-            document.getElementById('quizProgressText').innerText = `${I18N_DICTIONARY[currentLang].quizProgressText} ${quizState.currentQuestionIndex + 1} / ${totalQuestions}`;
-            document.getElementById('quizScoreText').innerText = `${I18N_DICTIONARY[currentLang].quizScoreText}: ${quizState.score}`;
+            document.getElementById('quizProgressText').innerText = `Soalan ${quizState.currentQuestionIndex + 1} / ${totalQuestions}`;
+            document.getElementById('quizScoreText').innerText = `Markah: ${quizState.score}`;
             
             const pct = ((quizState.currentQuestionIndex) / totalQuestions) * 100;
             document.getElementById('quizProgressBar').style.width = `${pct}%`;
 
             const currentQuestion = topic.questions[quizState.currentQuestionIndex];
-            
-            // Sokong soalan dwi bahasa
-            const questionString = typeof currentQuestion.q === 'object' ? currentQuestion.q[currentLang] : currentQuestion.q;
-            document.getElementById('questionTextPrimary').innerHTML = questionString;
+            document.getElementById('questionTextPrimary').innerHTML = currentQuestion.q;
 
             const optionsContainer = document.getElementById('optionsContainer');
             optionsContainer.innerHTML = '';
             
-            // Sokong pilihan jawapan dwi bahasa jika berjenis objek
-            let rawOptions = currentQuestion.a;
-            if (typeof rawOptions === 'object' && !Array.isArray(rawOptions)) {
-                rawOptions = rawOptions[currentLang];
-            }
-            
-            let correctAnswer = currentQuestion.c;
-            if (typeof correctAnswer === 'object') {
-                correctAnswer = correctAnswer[currentLang];
-            }
-
-            rawOptions.forEach((option) => {
+            currentQuestion.a.forEach((option) => {
                 const btn = document.createElement('button');
                 btn.className = "w-full text-left bg-white text-slate-700 font-bold p-4 rounded-xl border-2 border-slate-200/80 shadow-sm hover:border-blue-400 transition-colors btn-bounce cursor-pointer flex justify-between items-center text-base";
-                btn.onclick = () => checkAnswer(btn, option, correctAnswer);
+                btn.onclick = () => checkAnswer(btn, option, currentQuestion.c);
                 btn.innerHTML = `<span>${option}</span><span class='opt-status text-lg'></span>`;
                 optionsContainer.appendChild(btn);
             });
@@ -1085,7 +858,6 @@
                 quizState.wrongCount++;
                 quizState.lives--;
 
-                // Paparkan simbol mentol pada jawapan yang betul sahaja apabila pengguna menjawab salah
                 for (let btn of buttons) {
                     if (btn.innerText.trim().startsWith(correctValue)) {
                         btn.classList.remove('bg-white', 'border-slate-200/80');
@@ -1104,38 +876,33 @@
         function endQuiz() {
             const topic = BANK_SOALAN[quizState.currentTopicId];
             const finalPercent = Math.round((quizState.correctCount / topic.questions.length) * 100);
-            const currentI18N = I18N_DICTIONARY[currentLang];
-            
-            const badgeText = typeof topic.badge === 'object' ? topic.badge[currentLang] : topic.badge;
 
             if (finalPercent === 100) {
                 quizState.starsEarned = 3;
-                document.getElementById('resultTitle').innerText = currentI18N.resultTitleSuccess;
+                document.getElementById('resultTitle').innerText = "Sempurna 100%!";
                 document.getElementById('resultEmoji').innerText = "🏆";
                 AudioFX.play('victory');
                 triggerConfetti();
                 
-                if (!userProfile.badges.includes(badgeText)) {
-                    userProfile.badges.push(badgeText);
+                if (!userProfile.badges.includes(topic.badge)) {
+                    userProfile.badges.push(topic.badge);
                 }
             } else if (finalPercent >= 50) {
                 quizState.starsEarned = 2;
-                document.getElementById('resultTitle').innerText = currentI18N.resultTitleNormal;
+                document.getElementById('resultTitle').innerText = "Tahniah! Selesai!";
                 document.getElementById('resultEmoji').innerText = "🎉";
                 AudioFX.play('victory');
             } else {
                 quizState.starsEarned = 0;
-                document.getElementById('resultTitle').innerText = currentI18N.resultTitleFail;
+                document.getElementById('resultTitle').innerText = "Cuba Lagi!";
                 document.getElementById('resultEmoji').innerText = "💪";
             }
 
             userProfile.stars += quizState.starsEarned;
             
             const timestamp = new Date().toLocaleString();
-            const topicTitleMapped = typeof topic.title === 'object' ? topic.title : { ms: topic.title, en: topic.title };
-            
             const record = {
-                topicTitle: topicTitleMapped, // simpan struktur bahasa objek untuk dipetakan nanti
+                topicTitle: topic.title,
                 score: finalPercent,
                 correct: quizState.correctCount,
                 total: topic.questions.length,
@@ -1166,28 +933,22 @@
             container.innerHTML = '';
 
             if (performanceRecords.length === 0) {
-                container.innerHTML = `<div class="text-center py-8 text-slate-400 font-medium text-sm">${I18N_DICTIONARY[currentLang].recordsEmpty}</div>`;
+                container.innerHTML = `<div class="text-center py-8 text-slate-400 font-medium text-sm">Belum ada rekod jawapan. Sila pilih topik dan selesaikan kuiz dahulu!</div>`;
                 return;
             }
 
             performanceRecords.forEach(rec => {
                 const item = document.createElement('div');
                 item.className = "bg-slate-50 p-3 rounded-xl border border-slate-100 flex justify-between items-center text-xs";
-                
-                // Urus pemetaan nama tajuk mengikut bahasa semasa
-                let displayTitle = rec.topicTitle;
-                if (typeof displayTitle === 'object') {
-                    displayTitle = displayTitle[currentLang] || displayTitle['ms'];
-                }
 
                 item.innerHTML = `
                     <div>
-                        <div class="font-black text-slate-700 text-sm uppercase">${displayTitle}</div>
+                        <div class="font-black text-slate-700 text-sm uppercase">${rec.topicTitle}</div>
                         <div class="text-slate-400 font-bold mt-0.5">${rec.time}</div>
                     </div>
                     <div class="text-right">
                         <div class="text-base font-black ${rec.score === 100 ? 'text-emerald-500' : rec.score >= 50 ? 'text-blue-500' : 'text-orange-500'}">${rec.score}%</div>
-                        <div class="text-[10px] text-slate-400 font-bold">${I18N_DICTIONARY[currentLang].recordsScoreLabel}: ${rec.correct}/${rec.total}</div>
+                        <div class="text-[10px] text-slate-400 font-bold">Betul: ${rec.correct}/${rec.total}</div>
                     </div>
                 `;
                 container.appendChild(item);
@@ -1195,7 +956,7 @@
         }
 
         function clearPerformanceRecords() {
-            if (confirm(I18N_DICTIONARY[currentLang].alertClearRecords)) {
+            if (confirm("Adakah anda pasti mahu memadam semua sejarah rekod prestasi ini?")) {
                 performanceRecords = [];
                 userProfile.records = [];
                 allProfiles[userProfile.name] = userProfile;
@@ -1216,18 +977,17 @@
         function updateSoundButtonUI() {
             const btn = document.getElementById('btnSoundToggle');
             if(!btn) return;
-            const currentI18N = I18N_DICTIONARY[currentLang];
             if (AudioFX.enabled) {
-                btn.innerText = currentI18N.settingsSoundOn;
+                btn.innerText = "HIDUP";
                 btn.className = "px-4 py-2 bg-green-500 text-white font-bold rounded-lg text-xs tracking-wide uppercase shadow btn-bounce cursor-pointer";
             } else {
-                btn.innerText = currentI18N.settingsSoundOff;
+                btn.innerText = "MATI";
                 btn.className = "px-4 py-2 bg-slate-400 text-white font-bold rounded-lg text-xs tracking-wide uppercase shadow btn-bounce cursor-pointer";
             }
         }
 
         function resetProgress() {
-            if (confirm(I18N_DICTIONARY[currentLang].alertResetProgress)) {
+            if (confirm("Adakah anda pasti mahu mengosongkan semua kutipan lencana, bintang dan rekod prestasi kembali ke 0?")) {
                 userProfile.stars = 0;
                 userProfile.badges = [];
                 userProfile.records = [];
@@ -1242,7 +1002,7 @@
         }
 
         function logoutProfile() {
-            if (confirm(I18N_DICTIONARY[currentLang].alertLogoutProfile)) {
+            if (confirm("Adakah anda pasti mahu log keluar? Profil anda tidak akan dipadam dan anda boleh log masuk semula pada bila-bila masa.")) {
                 localStorage.removeItem('bijak_math_active_profile_v2');
                 closeSettings();
                 navigateTo('viewWelcome');
