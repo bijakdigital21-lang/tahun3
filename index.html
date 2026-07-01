@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bijak Math Tahun 3 / Smart Math Grade 3</title>
+    <title>Bijak Math Tahun 3</title>
     <!-- Tailwind CSS untuk Rekabentuk Moden & Responsif -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- Google Fonts - Nunito (Mudah dibaca & Mesra Kanak-kanak) -->
@@ -64,9 +64,6 @@
                 </div>
                 <!-- Butang Kawalan -->
                 <div class="flex items-center space-x-2">
-                    <button onclick="toggleLanguage()" class="btn-bounce bg-white/20 hover:bg-white/30 font-black text-xs px-2.5 py-1.5 rounded-xl border border-white/30 cursor-pointer" id="btnLangToggle" title="Tukar Bahasa / Change Language">
-                        🌐 EN
-                    </button>
                     <button onclick="openSettings()" class="btn-bounce text-xl p-1 focus:outline-none cursor-pointer" title="Tetapan">
                         ⚙️
                     </button>
@@ -82,11 +79,6 @@
 
             <!-- 1. PAPARAN PERMULAAN -->
             <section id="viewWelcome" class="flex flex-col items-center text-center space-y-8 py-8">
-                <div class="relative w-full flex justify-end px-2 -mt-4">
-                    <button onclick="toggleLanguage()" class="btn-bounce bg-blue-500 text-white font-black text-xs px-3 py-1.5 rounded-xl border-b-2 border-blue-700 cursor-pointer shadow-md" id="btnWelcomeLangToggle">
-                        🌐 EN
-                    </button>
-                </div>
                 <div class="space-y-2">
                     <div class="text-7xl drop-shadow-md animate-bounce inline-block">✏️🔢</div>
                     <h1 class="text-4xl font-extrabold text-blue-600 tracking-wide drop-shadow" id="welcomeTitle">Bijak Math<br><span class="text-emerald-500 text-3xl">Tahun 3</span></h1>
@@ -198,15 +190,15 @@
                     <div class="text-5xl font-black text-blue-500" id="resultScore">100%</div>
                     <div class="grid grid-cols-3 gap-2 text-center border-t border-slate-100 pt-4">
                         <div class="bg-green-50 p-2 rounded-xl">
-                            <div class="text-[10px] font-bold text-green-600" id="resLblCorrect">Betul</div>
+                            <div class="text-[10px] font-bold text-green-600">Betul</div>
                             <div class="text-lg font-black text-green-700" id="resultCorrect">0</div>
                         </div>
                         <div class="bg-red-50 p-2 rounded-xl">
-                            <div class="text-[10px] font-bold text-red-600" id="resLblWrong">Salah</div>
+                            <div class="text-[10px] font-bold text-red-600">Salah</div>
                             <div class="text-lg font-black text-red-700" id="resultWrong">0</div>
                         </div>
                         <div class="bg-yellow-50 p-2 rounded-xl">
-                            <div class="text-[10px] font-bold text-yellow-600" id="resLblStars">Bintang</div>
+                            <div class="text-[10px] font-bold text-yellow-600">Bintang</div>
                             <div class="text-lg font-black text-yellow-700" id="resultStars">0</div>
                         </div>
                     </div>
@@ -226,17 +218,17 @@
             <section id="viewRecords" class="hidden flex flex-col space-y-4">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h2 class="text-2xl font-black text-slate-700" id="recordsTitle">📊 Rekod Prestasi</h2>
-                        <p class="text-slate-500 text-xs" id="recordsDesc">Senarai markah kuiz yang telah dijawab</p>
+                        <h2 class="text-2xl font-black text-slate-700">📊 Rekod Prestasi</h2>
+                        <p class="text-slate-500 text-xs">Senarai markah kuiz yang telah dijawab</p>
                     </div>
-                    <button onclick="clearPerformanceRecords()" class="btn-bounce text-xs bg-red-50 text-red-600 font-bold py-1.5 px-2.5 rounded-lg border border-red-200 cursor-pointer" id="btnClearRecords">
+                    <button onclick="clearPerformanceRecords()" class="btn-bounce text-xs bg-red-50 text-red-600 font-bold py-1.5 px-2.5 rounded-lg border border-red-200 cursor-pointer">
                         🗑️ Padam Rekod
                     </button>
                 </div>
 
                 <div id="recordsListContainer" class="bg-white rounded-2xl p-4 shadow-inner border border-slate-100 max-h-[380px] overflow-y-auto space-y-3"></div>
 
-                <button onclick="navigateTo('viewMainMenu')" class="btn-bounce w-full bg-slate-200 text-slate-700 font-bold py-3.5 rounded-xl border-b-4 border-slate-400 cursor-pointer mt-2 text-center" id="btnRecordsMainMenu">
+                <button onclick="navigateTo('viewMainMenu')" class="btn-bounce w-full bg-slate-200 text-slate-700 font-bold py-3.5 rounded-xl border-b-4 border-slate-400 cursor-pointer mt-2 text-center">
                     🏠 Kembali ke Menu Utama
                 </button>
             </section>
@@ -247,26 +239,26 @@
         <div id="modalSettings" class="hidden absolute inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-5">
             <div class="bg-white w-full max-w-sm rounded-3xl shadow-2xl p-6 space-y-6 transform transition-all scale-100">
                 <div class="flex justify-between items-center border-b border-slate-100 pb-3">
-                    <h3 class="text-xl font-black text-slate-700 flex items-center gap-2" id="settingsTitle">⚙️ Tetapan</h3>
+                    <h3 class="text-xl font-black text-slate-700 flex items-center gap-2">⚙️ Tetapan</h3>
                     <button onclick="closeSettings()" class="text-slate-400 hover:text-slate-600 text-2xl font-bold focus:outline-none cursor-pointer">&times;</button>
                 </div>
 
                 <div class="space-y-4">
                     <div class="flex justify-between items-center bg-slate-50 p-3 rounded-xl">
-                        <span class="font-bold text-slate-600" id="settingsSound">🔔 Kesan Bunyi</span>
+                        <span class="font-bold text-slate-600">🔔 Kesan Bunyi</span>
                         <button id="btnSoundToggle" onclick="toggleSound()" class="px-4 py-2 bg-green-500 text-white font-bold rounded-lg text-xs tracking-wide uppercase shadow btn-bounce cursor-pointer">HIDUP</button>
                     </div>
                     <button onclick="resetProgress()" class="w-full text-left bg-orange-50 hover:bg-orange-100 text-orange-700 font-bold p-3 rounded-xl text-sm flex items-center justify-between btn-bounce cursor-pointer">
-                        <span id="settingsReset">🔄 Set Semula Kemajuan Kuiz</span>
+                        <span>🔄 Set Semula Kemajuan Kuiz</span>
                         <span>➔</span>
                     </button>
                     <button onclick="logoutProfile()" class="w-full text-left bg-red-50 hover:bg-red-100 text-red-700 font-bold p-3 rounded-xl text-sm flex items-center justify-between btn-bounce cursor-pointer">
-                        <span id="settingsDelete">🚪 Log Keluar Akaun</span>
+                        <span>🚪 Log Keluar Akaun</span>
                         <span>➔</span>
                     </button>
                 </div>
 
-                <div class="bg-slate-100 p-3 rounded-xl text-center text-[11px] text-slate-400 leading-relaxed" id="settingsBranding">
+                <div class="bg-slate-100 p-3 rounded-xl text-center text-[11px] text-slate-400 leading-relaxed">
                     <span class="font-bold text-slate-500">Bijak Math v3.0</span><br>
                     Silibus KSSR Matematik Tahun 3 Kementerian Pendidikan Malaysia.<br>
                     100% Fungsi Offline & Selamat Tanpa Iklan.
@@ -275,124 +267,16 @@
         </div>
 
         <!-- FOOTER BRANDING -->
-        <footer class="text-center text-[10px] text-slate-400/80 font-bold uppercase tracking-wider pb-2" id="footerText">
+        <footer class="text-center text-[10px] text-slate-400/80 font-bold uppercase tracking-wider pb-2">
             Bijak Math Tahun 3 • KSSR Malaysia
         </footer>
     </div>
 
     <!-- JAVASCRIPT LOGIC & BANK SOALAN -->
     <script>
-        let currentLang = 'ms'; 
-
-        const I18N_DICTIONARY = {
-            ms: {
-                welcomeTitle: "Bijak Math<br><span class='text-emerald-500 text-3xl'>Tahun 3</span>",
-                welcomeMascot: "Hai Kawan!",
-                btnWelcomeStart: "Mula Belajar",
-                profileTitle: "Daftar Profil Baru",
-                profileDesc: "Masukkan namamu untuk memulakan pengembaraan Matematik!",
-                profileLabel: "Nama Murid :",
-                usernameInputPlaceholder: "Tulis nama di sini...",
-                btnSaveProfile: "Simpan Profil",
-                existingProfilesTitle: "Atau Pilih Profil Sedia Ada:",
-                mainMenuTitle: "Pilih Topik Belajar 🚀",
-                mainMenuDesc: "Kumpul bintang untuk buka lencana hebat!",
-                btnPerformanceRecords: "📊 Rekod Prestasi",
-                badgeHeading: "🏆 Lencana Pencapaian",
-                badgeEmpty: "Selesaikan topik dengan markah 100% untuk kumpul lencana!",
-                questionsUnit: "Soalan",
-                topicIntroDetailsSuffix: "Soalan Latih Tubi",
-                topicIntroHint: "Jawab dengan betul untuk dapatkan markah penuh dan bintang! Pastikan nyawa anda tidak habis.",
-                btnIntroBack: "Kembali",
-                btnIntroStart: "Mula Menjawab 🎮",
-                quizProgressText: "Soalan",
-                quizScoreText: "Markah",
-                btnExitQuiz: "🏠 Keluar ke Menu Utama",
-                resultTitleSuccess: "Sempurna 100%!",
-                resultTitleNormal: "Tahniah! Selesai!",
-                resultTitleFail: "Cuba Lagi!",
-                resLblCorrect: "Betul",
-                resLblWrong: "Salah",
-                resLblStars: "Bintang",
-                btnResultRetry: "🔄 Main Semula",
-                btnResultBack: "🏠 Kembali ke Topik",
-                recordsTitle: "📊 Rekod Prestasi",
-                recordsDesc: "Senarai markah kuiz yang telah dijawab",
-                btnClearRecords: "🗑️ Padam Rekod",
-                btnRecordsMainMenu: "🏠 Kembali ke Menu Utama",
-                recordsEmpty: "Belum ada rekod jawapan. Sila pilih topik dan selesaikan kuiz dahulu!",
-                recordsScoreLabel: "Betul",
-                settingsTitle: "⚙️ Tetapan",
-                settingsSound: "🔔 Kesan Bunyi",
-                settingsSoundOn: "HIDUP",
-                settingsSoundOff: "MATI",
-                settingsReset: "🔄 Set Semula Kemajuan Kuiz",
-                settingsDelete: "🚪 Log Keluar Akaun",
-                footerText: "Bijak Math Tahun 3 • KSSR Malaysia",
-                alertNameEmpty: "Sila masukkan namamu terlebih dahulu! 😊",
-                alertExitQuiz: "Adakah anda pasti mahu berhenti menjawab dan kembali ke Menu Utama?",
-                alertClearRecords: "Adakah anda pasti mahu memadam semua sejarah rekod prestasi ini?",
-                alertResetProgress: "Adakah anda pasti mahu mengosongkan semua kutipan lencana, bintang dan rekod prestasi kembali ke 0?",
-                alertLogoutProfile: "Adakah anda pasti mahu log keluar? Profil anda tidak akan dipadam dan anda boleh log masuk semula pada bila-bila masa.",
-                brandingText: "<span class='font-bold text-slate-500'>Bijak Math v3.0</span><br>Silibus KSSR Matematik Tahun 3 Kementerian Pendidikan Malaysia.<br>100% Fungsi Offline & Selamat Tanpa Iklan."
-            },
-            en: {
-                welcomeTitle: "Smart Math<br><span class='text-emerald-500 text-3xl'>Grade 3</span>",
-                welcomeMascot: "Hello Friend!",
-                btnWelcomeStart: "Start Learning",
-                profileTitle: "Register New Profile",
-                profileDesc: "Enter your name to start your Mathematics adventure!",
-                profileLabel: "Student Name :",
-                usernameInputPlaceholder: "Type name here...",
-                btnSaveProfile: "Save Profile",
-                existingProfilesTitle: "Or Choose Existing Profile:",
-                mainMenuTitle: "Choose Study Topic 🚀",
-                mainMenuDesc: "Collect stars to unlock awesome badges!",
-                btnPerformanceRecords: "📊 Performance Records",
-                badgeHeading: "🏆 Achievement Badges",
-                badgeEmpty: "Complete a topic with 100% score to collect badges!",
-                questionsUnit: "Questions",
-                topicIntroDetailsSuffix: "Practice Questions",
-                topicIntroHint: "Answer correctly to get full marks and stars! Make sure you don't run out of lives.",
-                btnIntroBack: "Back",
-                btnIntroStart: "Start Quiz 🎮",
-                quizProgressText: "Question",
-                quizScoreText: "Score",
-                btnExitQuiz: "🏠 Exit to Main Menu",
-                resultTitleSuccess: "Perfect 100%!",
-                resultTitleNormal: "Congratulations! Done!",
-                resultTitleFail: "Try Again!",
-                resLblCorrect: "Correct",
-                resLblWrong: "Wrong",
-                resLblStars: "Stars",
-                btnResultRetry: "🔄 Replay",
-                btnResultBack: "🏠 Back to Topics",
-                recordsTitle: "📊 Performance Records",
-                recordsDesc: "List of quiz scores answered",
-                btnClearRecords: "🗑️ Clear Records",
-                btnRecordsMainMenu: "🏠 Back to Main Menu",
-                recordsEmpty: "No records yet. Please pick a topic and complete a quiz first!",
-                recordsScoreLabel: "Correct",
-                settingsTitle: "⚙️ Settings",
-                settingsSound: "🔔 Sound Effects",
-                settingsSoundOn: "ON",
-                settingsSoundOff: "OFF",
-                settingsReset: "🔄 Reset Quiz Progress",
-                settingsDelete: "🚪 Log Out Account",
-                footerText: "Smart Math Grade 3 • Cambridge & KSSR Aligned",
-                alertNameEmpty: "Please enter your name first! 😊",
-                alertExitQuiz: "Are you sure you want to stop and return to the Main Menu?",
-                alertClearRecords: "Are you sure you want to delete all performance records history?",
-                alertResetProgress: "Are you sure you want to clear all collected badges, stars, and records back to 0?",
-                alertLogoutProfile: "Are you sure you want to log out? Your profile won't be deleted and you can log back in anytime.",
-                brandingText: "<span class='font-bold text-slate-500'>Smart Math v3.0</span><br>Aligned with primary math curriculums.<br>100% Offline Functional & Safe Ads-Free."
-            }
-        };
-
         const BANK_SOALAN = {
             nombor_bulat: {
-                title: { ms: "NOMBOR BULAT", en: "WHOLE NUMBERS" }, icon: "🔢", 
-                badge: { ms: "🔢 Raja Nombor", en: "🔢 Number King" },
+                title: "NOMBOR BULAT", icon: "🔢", badge: "🔢 Raja Nombor",
                 questions: [
                     { q: "Apakah nombor selepas 4 599?", a: ["4 598", "4 600", "4 601", "4 610"], c: "4 600" },
                     { q: "Apakah nombor sebelum 7 201?", a: ["7 199", "7 200", "7 202", "7 210"], c: "7 200" },
@@ -404,7 +288,7 @@
                     { q: "Apakah nombor bagi “Enam ribu lapan puluh dua”?", a: ["6 082", "6 802", "6 820", "6 028"], c: "6 082" },
                     { q: "Cerakinkan nombor 7 426.", a: ["7 000 + 400 + 20 + 6", "700 + 400 + 20 + 6", "7 000 + 420 + 6", "7 400 + 26"], c: "7 000 + 400 + 20 + 6" },
                     { q: "Antara berikut, yang manakah nombor genap?", a: ["4 325", "5 811", "6 478", "7 223"], c: "6 478" },
-                    { q: "Apakah pola nombor berikut?<br><br>2 500, 2 600, 2 700, _____自", a: ["2 750", "2 800", "2 900", "2 650"], c: "2 800" },
+                    { q: "Apakah pola nombor berikut?<br><br>2 500, 2 600, 2 700, _____", a: ["2 750", "2 800", "2 900", "2 650"], c: "2 800" },
                     { q: "Bundarkan 6 274 kepada puluh yang terdekat.", a: ["6 270", "6 280", "6 200", "6 300"], c: "6 270" },
                     { q: "Bundarkan 5 651 kepada ratus yang terdekat.", a: ["5 600", "5 700", "5 650", "5 500"], c: "5 700" },
                     { q: "Bundarkan 8 499 kepada ribu yang terdekat.", a: ["8 000", "8 500", "9 000", "7 000"], c: "8 000" },
@@ -417,8 +301,7 @@
                 ]
             },
             tambah: {
-                title: { ms: "TAMBAH", en: "ADDITION" }, icon: "➕", 
-                badge: { ms: "➕ Pakar Tambah", en: "➕ Addition Expert" },
+                title: "TAMBAH", icon: "➕", badge: "➕ Pakar Tambah",
                 questions: [
                     { q: "Berapakah hasil bagi 2 345 + 1 432?", a: ["3 677", "3 777", "3 877", "3 977"], c: "3 777" },
                     { q: "4 216 + 2 103 =", a: ["6 219", "6 309", "6 319", "6 329"], c: "6 319" },
@@ -443,8 +326,7 @@
                 ]
             },
             tolak: {
-                title: { ms: "TOLAK", en: "SUBTRACTION" }, icon: "➖", 
-                badge: { ms: "➖ Wira Tolak", en: "➖ Subtraction Hero" },
+                title: "TOLAK", icon: "➖", badge: "➖ Wira Tolak",
                 questions: [
                     { q: "Berapakah hasil bagi 6 542 − 2 131?", a: ["4 311", "4 411", "4 511", "4 611"], c: "4 411" },
                     { q: "7 850 − 2 340 =", a: ["5 410", "5 510", "5 610", "5 710"], c: "5 510" },
@@ -469,8 +351,7 @@
                 ]
             },
             darab: {
-                title: { ms: "DARAB", en: "MULTIPLICATION" }, icon: "✖️", 
-                badge: { ms: "✖️ Sifu Darab", en: "✖️ Multiplication Master" },
+                title: "DARAB", icon: "✖️", badge: "✖️ Sifu Darab",
                 questions: [
                     { q: "Berapakah hasil bagi 234 × 2?", a: ["448", "458", "468", "478"], c: "468" },
                     { q: "125 × 4 =", a: ["400", "500", "520", "540"], c: "500" },
@@ -495,8 +376,7 @@
                 ]
             },
             bahagi: {
-                title: { ms: "BAHAGI", en: "DIVISION" }, icon: "➗", 
-                badge: { ms: "➗ Master Bahagi", en: "➗ Division Master" },
+                title: "BAHAGI", icon: "➗", badge: "➗ Master Bahagi",
                 questions: [
                     { q: "Berapakah hasil bagi 24 ÷ 6?", a: ["3", "4", "5", "6"], c: "4" },
                     { q: "36 ÷ 4 =", a: ["8", "9", "10", "12"], c: "9" },
@@ -521,8 +401,7 @@
                 ]
             },
             pecahan: {
-                title: { ms: "PECAHAN", en: "FRACTIONS" }, icon: "🍰", 
-                badge: { ms: "🍰 Wira Pecahan", en: "🍰 Fraction Hero" },
+                title: "PECAHAN", icon: "🍰", badge: "🍰 Wira Pecahan",
                 questions: [
                     { q: "Manakah yang menunjukkan satu per dua?", a: ["1/3", "1/2", "2/3", "2/4"], c: "1/2" },
                     { q: "Apakah pengangka bagi pecahan 3/5?", a: ["3", "5", "8", "2"], c: "3" },
@@ -547,8 +426,7 @@
                 ]
             },
             perpuluhan: {
-                title: { ms: "PERPULUHAN", en: "DECIMALS" }, icon: "🔢", 
-                badge: { ms: "🎯 Pakar Perpuluhan", en: "🎯 Decimals Expert" },
+                title: "PERPULUHAN", icon: "🔢", badge: "🎯 Pakar Perpuluhan",
                 questions: [
                     { q: "Apakah nombor perpuluhan bagi tujuh perpuluhan lima?", a: ["7.05", "7.5", "75.0", "0.75"], c: "7.5" },
                     { q: "Bagaimanakah nombor 3.8 ditulis dalam perkataan?", a: ["Tiga lapan", "Tiga perpuluhan lapan", "Tiga puluh lapan", "Tiga ratus lapan"], c: "Tiga perpuluhan lapan" },
@@ -573,8 +451,7 @@
                 ]
             },
             peratus: {
-                title: { ms: "PERATUS", en: "PERCENTAGE" }, icon: "٪", 
-                badge: { ms: "💯 Wira Peratus", en: "💯 Percentage Hero" },
+                title: "PERATUS", icon: "📊", badge: "📊 Wira Peratus",
                 questions: [
                     { q: "Apakah maksud 25%?", a: ["25 daripada 10", "25 daripada 100", "100 daripada 25", "50 daripada 100"], c: "25 daripada 100" },
                     { q: "Bagaimanakah 40% ditulis dalam perkataan?", a: ["Empat puluh peratus", "Empat peratus", "Empat ratus peratus", "Empat puluh"], c: "Empat puluh peratus" },
@@ -599,8 +476,7 @@
                 ]
             },
             wang: {
-                title: { ms: "WANG", en: "MONEY" }, icon: "💵", 
-                badge: { ms: "💰 Jutawan Kecil", en: "💰 Little Millionaire" },
+                title: "WANG", icon: "💰", badge: "💰 Jutawan Kecil",
                 questions: [
                     { q: "Apakah nilai bagi 100 sen?", a: ["RM0.10", "RM0.50", "RM1.00", "RM10.00"], c: "RM1.00" },
                     { q: "RM12.50 + RM5.20 =", a: ["RM17.50", "RM17.60", "RM17.70", "RM17.80"], c: "RM17.70" },
@@ -609,7 +485,7 @@
                     { q: "Berapakah nilai RM6.80 dalam sen?", a: ["68 sen", "608 sen", "680 sen", "6 800 sen"], c: "680 sen" },
                     { q: "Harga sebuah buku ialah RM15.90. Ali membayar dengan RM20.00. Berapakah baki wang Ali?", a: ["RM3.10", "RM4.00", "RM4.10", "RM5.10"], c: "RM4.10" },
                     { q: "Harga sebatang pensel ialah RM2.50. Berapakah harga 4 batang pensel?", a: ["RM8.00", "RM9.00", "RM10.00", "RM12.00"], c: "RM10.00" },
-                    { q: "Siti membeli sebiji kek berharga RM18.50 dan sekotak susu berharga RM6.20. Berapakah jumlah yang perlu dibayar?", a: ["RM23.70", "RM24.70", "RM25.70", "RM26.70"], c: "RM24.70" },
+                    { q: "Siti membeli sebiji kek berharga RM18.50 and sekotak susu berharga RM6.20. Berapakah jumlah yang perlu dibayar?", a: ["RM23.70", "RM24.70", "RM25.70", "RM26.70"], c: "RM24.70" },
                     { q: "RM50.00 − RM23.80 =", a: ["RM25.20", "RM26.20", "RM27.20", "RM28.20"], c: "RM26.20" },
                     { q: "Harga sehelai baju ialah RM35.00. Jika Amir membeli 2 helai, berapakah jumlah yang perlu dibayar?", a: ["RM60.00", "RM65.00", "RM70.00", "RM75.00"], c: "RM70.00" },
                     { q: "Ibu mempunyai RM100.00. Dia membeli barang berharga RM67.30. Berapakah baki wang ibu?", a: ["RM31.70", "RM32.70", "RM33.70", "RM34.70"], c: "RM32.70" },
@@ -621,12 +497,11 @@
                     { q: "Seorang murid membeli 3 batang pembaris yang berharga RM2.00 setiap satu. Berapakah jumlah yang perlu dibayar?", a: ["RM4.00", "RM5.00", "RM6.00", "RM7.00"], c: "RM6.00" },
                     { q: "Berapakah jumlah wang bagi RM25.50 + RM14.50?", a: ["RM38.00", "RM39.00", "RM40.00", "RM41.00"], c: "RM40.00" },
                     { q: "Harga sebuah bola ialah RM28.60. Ahmad membayar dengan RM50.00. Berapakah baki wang yang diterima?", a: ["RM20.40", "RM21.40", "RM22.40", "RM23.40"], c: "RM21.40" },
-                    { q: "Seorang peniaga memperoleh RM125.50 pada waktu pagi dan RM214.50 pada waktu petang. Berapakah jumlah jualan pada hari itu?", a: ["RM330.00", "RM335.00", "RM340.00", "RM345.00"], c: "RM340.00" }
+                    { q: "Seorang peniaga memperoleh RM125.50 pada waktu pagi and RM214.50 pada waktu petang. Berapakah jumlah jualan pada hari itu?", a: ["RM330.00", "RM335.00", "RM340.00", "RM345.00"], c: "RM340.00" }
                 ]
             },
             masa_waktu: {
-                title: { ms: "MASA & WAKTU", en: "TIME" }, icon: "⏰", 
-                badge: { ms: "⏰ Jaguh Masa", en: "⏰ Time Champion" },
+                title: "MASA & WAKTU", icon: "🕒", badge: "🕒 Kapten Masa",
                 questions: [
                     { q: "Terdapat 60 minit dalam…", a: ["30 minit", "1 jam", "2 jam", "1 hari"], c: "1 jam" },
                     { q: "Berapakah jumlah jam dalam 1 hari?", a: ["12 jam", "18 jam", "24 jam", "30 jam"], c: "24 jam" },
@@ -634,12 +509,12 @@
                     { q: "Berapakah jumlah bulan dalam 1 tahun?", a: ["10", "11", "12", "13"], c: "12" },
                     { q: "2 jam = ______ minit", a: ["60", "90", "120", "180"], c: "120" },
                     { q: "180 minit = ______ jam", a: ["2 jam", "3 jam", "4 jam", "5 jam"], c: "3 jam" },
-                    { q: "Pukul 3:30 petang dalam format 24 jam yang disyorkan ialah…", a: ["13:30", "15:30", "14:30", "16:30"], c: "15:30" },
+                    { q: "Pukul 3:30 petang dalam format 24 jam ditulis sebagai…", a: ["13:30", "15:30", "14:30", "16:30"], c: "15:30" },
                     { q: "Pukul 9:45 malam dalam format 24 jam ialah…", a: ["19:45", "20:45", "21:45", "22:45"], c: "21:45" },
-                    { q: "Kelas Matematik bermula pada pukul 8:00 pagi dan tamat pada pukul 9:30 pagi. Berapakah tempoh kelas itu?", a: ["1 jam", "1 jam 15 minit", "1 jam 30 minit", "2 jam"], c: "1 jam 30 minit" },
-                    { q: "Sebuah filem bermula pada pukul 2:15 petang dan tamat pada pukul 4:15 petang. Berapakah tempohnya?", a: ["1 jam", "1 jam 30 minit", "2 jam", "2 jam 30 minit"], c: "2 jam" },
+                    { q: "Kelas Matematik bermula pada pukul 8:00 pagi and tamat pada pukul 9:30 pagi. Berapakah tempoh kelas itu?", a: ["1 jam", "1 jam 15 minit", "1 jam 30 minit", "2 jam"], c: "1 jam 30 minit" },
+                    { q: "Sebuah filem bermula pada pukul 2:15 petang and tamat pada pukul 4:15 petang. Berapakah tempohnya?", a: ["1 jam", "1 jam 30 minit", "2 jam", "2 jam 30 minit"], c: "2 jam" },
                     { q: "Ali mula belajar pada pukul 7:20 malam. Dia belajar selama 40 minit. Pukul berapakah dia selesai belajar?", a: ["7:50 malam", "8:00 malam", "8:10 malam", "8:20 malam"], c: "8:00 malam" },
-                    { q: "Aina tidur pada pukul 9:00 malam dan bangun pada pukul 6:00 pagi. Berapa lama Aina tidur?", a: ["8 jam", "9 jam", "10 jam", "11 jam"], c: "9 jam" },
+                    { q: "Aina tidur pada pukul 9:00 malam and bangun pada pukul 6:00 pagi. Berapa lama Aina tidur?", a: ["8 jam", "9 jam", "10 jam", "11 jam"], c: "9 jam" },
                     { q: "Berapakah jumlah hari dalam 2 minggu?", a: ["12 hari", "13 hari", "14 hari", "15 hari"], c: "14 hari" },
                     { q: "3 hari = ______ jam", a: ["48 jam", "60 jam", "72 jam", "96 jam"], c: "72 jam" },
                     { q: "90 minit =", a: ["1 jam", "1 jam 15 minit", "1 jam 30 minit", "2 jam"], c: "1 jam 30 minit" },
@@ -651,8 +526,7 @@
                 ]
             },
             ukuran_sukatan: {
-                title: { ms: "UKURAN & SUKATAN", en: "MEASUREMENT" }, icon: "📏", 
-                badge: { ms: "📏 Wira Ukuran", en: "📏 Measurement Hero" },
+                title: "UKURAN & SUKATAN", icon: "📏", badge: "📏 Jaguh Ukur",
                 questions: [
                     { q: "Apakah unit yang paling sesuai untuk mengukur panjang sebatang pensel?", a: ["Kilometer (km)", "Meter (m)", "Sentimeter (cm)", "Liter (L)"], c: "Sentimeter (cm)" },
                     { q: "1 meter bersamaan dengan…", a: ["10 cm", "100 cm", "1 000 cm", "10 m"], c: "100 cm" },
@@ -662,7 +536,7 @@
                     { q: "750 cm =", a: ["7 m 5 cm", "7 m 50 cm", "75 m", "70 m 5 cm"], c: "7 m 50 cm" },
                     { q: "Manakah yang paling panjang?", a: ["95 cm", "1 m", "90 cm", "80 cm"], c: "1 m" },
                     { q: "1 km bersamaan dengan…", a: ["10 m", "100 m", "1 000 m", "10 000 m"], c: "1 000 m" },
-                    { q: "Ali berjalan sejauh 2 km pada waktu pagi dan 3 km pada waktu petang. Berapakah jumlah jarak yang dilaluinya?", a: ["4 km", "5 km", "6 km", "7 km"], c: "5 km" },
+                    { q: "Ali berjalan sejauh 2 km pada waktu pagi and 3 km pada waktu petang. Berapakah jumlah jarak yang dilaluinya?", a: ["4 km", "5 km", "6 km", "7 km"], c: "5 km" },
                     { q: "Sebatang reben berukuran 120 cm dipotong sebanyak 35 cm. Berapakah baki panjang reben itu?", a: ["75 cm", "80 cm", "85 cm", "90 cm"], c: "85 cm" },
                     { q: "Sebuah papan mempunyai panjang 4 m. Berapakah panjangnya dalam sentimeter?", a: ["40 cm", "400 cm", "4 000 cm", "4000 m"], c: "400 cm" },
                     { q: "Manakah ukuran yang paling sesuai untuk panjang sebuah padang bola?", a: ["Sentimeter (cm)", "Meter (m)", "Milimeter (mm)", "Liter (L)"], c: "Meter (m)" },
@@ -672,13 +546,12 @@
                     { q: "Antara berikut, yang manakah paling pendek?", a: ["2 m", "180 cm", "190 cm", "195 cm"], c: "180 cm" },
                     { q: "Sebuah tali berukuran 5 m dipotong kepada 5 bahagian sama panjang. Berapakah panjang setiap bahagian?", a: ["50 cm", "80 cm", "1 m", "2 m"], c: "1 m" },
                     { q: "450 cm =", a: ["4 m 5 cm", "4 m 50 cm", "45 m", "5 m 40 cm"], c: "4 m 50 cm" },
-                    { q: "Seorang murid berlari sejauh 600 m pada waktu pagi dan 400 m pada waktu petang. Berapakah jumlah jarak lari murid itu?", a: ["800 m", "900 m", "1 000 m", "1 100 m"], c: "1 000 m" },
+                    { q: "Seorang murid berlari sejauh 600 m pada waktu pagi and 400 m pada waktu petang. Berapakah jumlah jarak lari murid itu?", a: ["800 m", "900 m", "1 000 m", "1 100 m"], c: "1 000 m" },
                     { q: "Sebuah jambatan mempunyai panjang 2 km. Berapakah panjang jambatan itu dalam meter?", a: ["20 m", "200 m", "2 000 m", "20 000 m"], c: "2 000 m" }
                 ]
             },
             jisim: {
-                title: { ms: "JISIM", en: "MASS" }, icon: "⚖️", 
-                badge: { ms: "⚖️ Jaguh Jisim", en: "⚖️ Mass Champion" },
+                title: "JISIM", icon: "⚖️", badge: "⚖️ Wira Jisim",
                 questions: [
                     { q: "Apakah unit yang paling sesuai untuk mengukur jisim sebiji epal?", a: ["Kilometer (km)", "Gram (g)", "Liter (L)", "Meter (m)"], c: "Gram (g)" },
                     { q: "1 kilogram (kg) bersamaan dengan…", a: ["10 g", "100 g", "1 000 g", "10 000 g"], c: "1 000 g" },
@@ -692,7 +565,7 @@
                     { q: "Manakah yang paling ringan?", a: ["500 g", "1 kg", "2 kg", "3 kg"], c: "500 g" },
                     { q: "Sebungkus gula mempunyai jisim 1 kg. Berapakah jisimnya dalam gram?", a: ["100 g", "500 g", "1 000 g", "10 000 g"], c: "1 000 g" },
                     { q: "Seorang peniaga mempunyai 4 kg beras. Dia menjual 1 kg 500 g. Berapakah baki beras?", a: ["2 kg 500 g", "2 kg", "3 kg", "3 kg 500 g"], c: "2 kg 500 g" },
-                    { q: "Ali membeli 2 kg epal dan 3 kg oren. Berapakah jumlah jisim buah-buahan itu?", a: ["4 kg", "5 kg", "6 kg", "7 kg"], c: "5 kg" },
+                    { q: "Ali membeli 2 kg epal and 3 kg oren. Berapakah jumlah jisim buah-buahan itu?", a: ["4 kg", "5 kg", "6 kg", "7 kg"], c: "5 kg" },
                     { q: "900 g + 600 g =", a: ["1 kg", "1 kg 200 g", "1 kg 500 g", "2 kg"], c: "1 kg 500 g" },
                     { q: "4 kg 200 g =", a: ["4 020 g", "4 200 g", "4 002 g", "42 000 g"], c: "4 200 g" },
                     { q: "Sebungkus tepung mempunyai jisim 750 g. Dua bungkus tepung mempunyai jumlah jisim…", a: ["1 kg", "1 kg 250 g", "1 kg 500 g", "2 kg"], c: "1 kg 500 g" },
@@ -704,581 +577,435 @@
             }
         };
 
-        // GLOBAL APP STATES
-        let currentProfile = null;
-        let activeTopicKey = null;
-        let quizQuestions = [];
-        let currentQuestionIndex = 0;
-        let quizScore = 0;
-        let quizCorrectCount = 0;
-        let quizWrongCount = 0;
-        let userLives = 3;
-        let soundEnabled = true;
+        // --- SISTEM AUDIO SINTETIK ---
+        const AudioFX = {
+            ctx: null, enabled: true,
+            init() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); },
+            play(type) {
+                if (!this.enabled) return;
+                this.init();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.connect(gain); gain.connect(this.ctx.destination);
+                if (type === 'pop') {
+                    osc.type = 'sine'; osc.frequency.setValueAtTime(300, now); osc.frequency.exponentialRampToValueAtTime(100, now + 0.1);
+                    gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0, now + 0.1);
+                    osc.start(now); osc.stop(now + 0.1);
+                } else if (type === 'ding') {
+                    osc.type = 'triangle'; osc.frequency.setValueAtTime(523.25, now); osc.frequency.setValueAtTime(659.25, now + 0.08);
+                    gain.gain.setValueAtTime(0.4, now); gain.gain.linearRampToValueAtTime(0, now + 0.25);
+                    osc.start(now); osc.stop(now + 0.25);
+                } else if (type === 'buzz') {
+                    osc.type = 'sawtooth'; osc.frequency.setValueAtTime(180, now); osc.frequency.linearRampToValueAtTime(120, now + 0.25);
+                    gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0, now + 0.25);
+                    osc.start(now); osc.stop(now + 0.25);
+                } else if (type === 'victory') {
+                    [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+                        const o = this.ctx.createOscillator(); const g = this.ctx.createGain();
+                        o.connect(g); g.connect(this.ctx.destination); o.type = 'sine';
+                        o.frequency.setValueAtTime(freq, now + (idx * 0.12)); g.gain.setValueAtTime(0.3, now + (idx * 0.12));
+                        g.gain.linearRampToValueAtTime(0, now + (idx * 0.12) + 0.3); o.start(now + (idx * 0.12)); o.stop(now + (idx * 0.12) + 0.3);
+                    });
+                }
+            }
+        };
 
-        // ON LAUNCH
-        window.addEventListener('DOMContentLoaded', () => {
-            initApp();
-        });
+        // --- STATE APLIKASI ---
+        let userProfile = { name: "", stars: 0, badges: [] };
+        let allProfiles = {};
+        let performanceRecords = []; 
 
-        function initApp() {
-            updateLanguageUI();
-            checkExistingProfiles();
-        }
+        let quizState = {
+            currentTopicId: "", currentQuestionIndex: 0, score: 0,
+            correctCount: 0, wrongCount: 0, starsEarned: 0, lives: 3, isAnswering: false
+        };
 
-        // NAVIGATION ENGINE
+        const TOPIC_COLORS = [
+            'from-blue-400 to-blue-500 text-white', 'from-emerald-400 to-emerald-500 text-white',
+            'from-amber-400 to-amber-500 text-slate-800', 'from-cyan-400 to-cyan-500 text-white',
+            'from-purple-400 to-purple-500 text-white', 'from-rose-400 to-rose-500 text-white',
+            'from-indigo-400 to-indigo-500 text-white', 'from-teal-400 to-teal-500 text-white',
+            'from-orange-400 to-orange-500 text-white'
+        ];
+
+        window.onload = function() {
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.btn-bounce')) { AudioFX.play('pop'); }
+            });
+            loadLocalData();
+        };
+
         function navigateTo(viewId) {
-            const sections = ['viewWelcome', 'viewProfile', 'viewMainMenu', 'viewTopicIntro', 'viewQuiz', 'viewResult', 'viewRecords'];
-            sections.forEach(id => {
+            ['viewWelcome', 'viewProfile', 'viewMainMenu', 'viewTopicIntro', 'viewQuiz', 'viewResult', 'viewRecords'].forEach(id => {
                 document.getElementById(id).classList.add('hidden');
             });
             document.getElementById(viewId).classList.remove('hidden');
 
-            // Header Management
             const header = document.getElementById('appHeader');
             if (viewId === 'viewWelcome' || viewId === 'viewProfile') {
                 header.classList.add('hidden');
+                if(viewId === 'viewProfile') { renderExistingProfilesList(); }
             } else {
                 header.classList.remove('hidden');
-                if (currentProfile) {
-                    document.getElementById('headerName').textContent = currentProfile.name;
-                    document.getElementById('headerStars').textContent = currentProfile.stars || 0;
-                    renderLives();
-                }
+                updateHeaderUI();
             }
-            window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // LANGUAGE SYSTEM
-        function toggleLanguage() {
-            currentLang = currentLang === 'ms' ? 'en' : 'ms';
-            updateLanguageUI();
-            
-            if (document.getElementById('viewMainMenu').classList.contains('hidden') === false) {
-                renderMainMenu();
+        function loadLocalData() {
+            const savedActiveName = localStorage.getItem('bijak_math_active_profile_v2');
+            const savedProfilesList = localStorage.getItem('bijak_math_profiles_list_v2');
+            const savedSound = localStorage.getItem('bijak_math_sound');
+
+            if (savedSound !== null) {
+                AudioFX.enabled = (savedSound === 'true');
+                updateSoundButtonUI();
             }
-            if (document.getElementById('viewTopicIntro').classList.contains('hidden') === false) {
-                setupTopicIntro(activeTopicKey);
+
+            if (savedProfilesList) {
+                allProfiles = JSON.parse(savedProfilesList);
+            }
+
+            if (savedActiveName && allProfiles[savedActiveName]) {
+                userProfile = allProfiles[savedActiveName];
+                performanceRecords = userProfile.records || [];
+                buildMainMenuTopics();
+                renderBadges();
+                navigateTo('viewMainMenu');
+            } else {
+                navigateTo('viewWelcome');
             }
         }
 
-        function updateLanguageUI() {
-            const dict = I18N_DICTIONARY[currentLang];
-            
-            // Welcome View
-            document.getElementById('welcomeTitle').innerHTML = dict.welcomeTitle;
-            document.getElementById('welcomeMascot').textContent = dict.welcomeMascot;
-            document.getElementById('btnWelcomeStart').textContent = dict.btnWelcomeStart;
-            document.getElementById('btnWelcomeLangToggle').textContent = currentLang === 'ms' ? '🌐 EN' : '🌐 MS';
-            document.getElementById('btnLangToggle').textContent = currentLang === 'ms' ? '🌐 EN' : '🌐 MS';
-
-            // Profile View
-            document.getElementById('profileTitle').textContent = dict.profileTitle;
-            document.getElementById('profileDesc').textContent = dict.profileDesc;
-            document.getElementById('profileLabel').textContent = dict.profileLabel;
-            document.getElementById('usernameInput').placeholder = dict.usernameInputPlaceholder;
-            document.getElementById('btnSaveProfile').textContent = dict.btnSaveProfile;
-            document.getElementById('existingProfilesTitle').textContent = dict.existingProfilesTitle;
-
-            // Main Menu View
-            document.getElementById('mainMenuTitle').innerHTML = dict.mainMenuTitle;
-            document.getElementById('mainMenuDesc').textContent = dict.mainMenuDesc;
-            document.getElementById('btnPerformanceRecords').innerHTML = dict.btnPerformanceRecords;
-            document.getElementById('badgeHeading').textContent = dict.badgeHeading;
-
-            // Topic Intro View
-            document.getElementById('topicIntroHint').textContent = dict.topicIntroHint;
-            document.getElementById('btnIntroBack').textContent = dict.btnIntroBack;
-            document.getElementById('btnIntroStart').textContent = dict.btnIntroStart;
-
-            // Quiz View
-            document.getElementById('btnExitQuiz').textContent = dict.btnExitQuiz;
-
-            // Result View
-            document.getElementById('resLblCorrect').textContent = dict.resLblCorrect;
-            document.getElementById('resLblWrong').textContent = dict.resLblWrong;
-            document.getElementById('resLblStars').textContent = dict.resLblStars;
-            document.getElementById('btnResultRetry').textContent = dict.btnResultRetry;
-            document.getElementById('btnResultBack').textContent = dict.btnResultBack;
-
-            // Records View
-            document.getElementById('recordsTitle').textContent = dict.recordsTitle;
-            document.getElementById('recordsDesc').textContent = dict.recordsDesc;
-            document.getElementById('btnClearRecords').textContent = dict.btnClearRecords;
-            document.getElementById('btnRecordsMainMenu').textContent = dict.btnRecordsMainMenu;
-
-            // Settings Modal
-            document.getElementById('settingsTitle').textContent = dict.settingsTitle;
-            document.getElementById('settingsSound').textContent = dict.settingsSound;
-            document.getElementById('btnSoundToggle').textContent = soundEnabled ? dict.settingsSoundOn : dict.settingsSoundOff;
-            document.getElementById('settingsReset').textContent = dict.settingsReset;
-            document.getElementById('settingsDelete').textContent = dict.settingsDelete;
-            document.getElementById('settingsBranding').innerHTML = dict.brandingText;
-
-            // Footer
-            document.getElementById('footerText').textContent = dict.footerText;
-        }
-
-        // PROFILE ENGINE
-        function checkExistingProfiles() {
-            const profiles = JSON.parse(localStorage.getItem('bijak_math_profiles') || '[]');
+        function renderExistingProfilesList() {
             const container = document.getElementById('existingProfilesContainer');
             const section = document.getElementById('existingProfilesSection');
+            container.innerHTML = '';
             
-            if (profiles.length > 0) {
-                section.classList.remove('hidden');
-                container.innerHTML = '';
-                profiles.forEach(p => {
-                    const btn = document.createElement('button');
-                    btn.className = "w-full text-left bg-slate-100 hover:bg-slate-200 p-3 rounded-xl font-bold flex justify-between items-center text-sm border border-slate-200 btn-bounce cursor-pointer";
-                    btn.innerHTML = `<span>👤 ${p.name}</span> <span class='text-xs text-yellow-600 font-black'>⭐ ${p.stars || 0}</span>`;
-                    btn.onclick = () => loginAsProfile(p.name);
-                    container.appendChild(btn);
-                });
-            } else {
+            const keys = Object.keys(allProfiles);
+            if(keys.length === 0) {
                 section.classList.add('hidden');
+                return;
             }
+            
+            section.classList.remove('hidden');
+            keys.forEach(name => {
+                const p = allProfiles[name];
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left bg-slate-50 border-2 border-slate-200/80 p-3 rounded-xl font-bold flex justify-between items-center hover:bg-blue-50 hover:border-blue-300 transition-colors cursor-pointer text-sm btn-bounce";
+                btn.onclick = () => switchProfile(name);
+                btn.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <span class="text-xl">👤</span>
+                        <span class="text-slate-700 font-black truncate max-w-[150px]">${name}</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs text-amber-500 bg-white px-2 py-1 rounded-lg border border-slate-100 shadow-sm">
+                        <span>⭐ <span class="font-black text-slate-700">${p.stars}</span></span>
+                        <span class="text-slate-300">|</span>
+                        <span>🏆 <span class="font-black text-slate-700">${p.badges.length}</span></span>
+                    </div>
+                `;
+                container.appendChild(btn);
+            });
         }
 
         function saveProfile() {
             const input = document.getElementById('usernameInput');
             const name = input.value.trim().toUpperCase();
+            if (!name) { alert("Sila masukkan namamu terlebih dahulu! 😊"); return; }
             
-            if (!name) {
-                alert(I18N_DICTIONARY[currentLang].alertNameEmpty);
-                return;
+            if (!allProfiles[name]) {
+                allProfiles[name] = { name: name, stars: 0, badges: [], records: [] };
             }
-
-            let profiles = JSON.parse(localStorage.getItem('bijak_math_profiles') || '[]');
-            let found = profiles.find(p => p.name === name);
-
-            if (!found) {
-                found = { name: name, stars: 0, badges: [], records: [] };
-                profiles.push(found);
-                localStorage.setItem('bijak_math_profiles', JSON.stringify(profiles));
-            }
-
-            currentProfile = found;
+            
+            localStorage.setItem('bijak_math_profiles_list_v2', JSON.stringify(allProfiles));
+            switchProfile(name);
             input.value = '';
-            checkExistingProfiles();
-            enterMainMenu();
         }
 
-        function loginAsProfile(name) {
-            const profiles = JSON.parse(localStorage.getItem('bijak_math_profiles') || '[]');
-            const found = profiles.find(p => p.name === name);
-            if (found) {
-                currentProfile = found;
-                enterMainMenu();
-            }
-        }
-
-        function logoutProfile() {
-            if (confirm(I18N_DICTIONARY[currentLang].alertLogoutProfile)) {
-                closeSettings();
-                currentProfile = null;
-                checkExistingProfiles();
-                navigateTo('viewWelcome');
-            }
-        }
-
-        function syncProfileToStorage() {
-            if (!currentProfile) return;
-            let profiles = JSON.parse(localStorage.getItem('bijak_math_profiles') || '[]');
-            const idx = profiles.findIndex(p => p.name === currentProfile.name);
-            if (idx !== -1) {
-                profiles[idx] = currentProfile;
-                localStorage.setItem('bijak_math_profiles', JSON.stringify(profiles));
-            }
-            // Update Header
-            document.getElementById('headerStars').textContent = currentProfile.stars || 0;
-        }
-
-        // MAIN MENU ENGINE
-        function enterMainMenu() {
-            renderMainMenu();
+        function switchProfile(name) {
+            userProfile = allProfiles[name];
+            performanceRecords = userProfile.records || [];
+            localStorage.setItem('bijak_math_active_profile_v2', name);
+            
+            buildMainMenuTopics();
+            renderBadges();
             navigateTo('viewMainMenu');
         }
 
-        function renderMainMenu() {
-            const grid = document.getElementById('topicsGrid');
-            grid.innerHTML = '';
-
-            Object.keys(BANK_SOALAN).forEach(key => {
-                const topic = BANK_SOALAN[key];
-                const title = topic.title[currentLang] || topic.title['ms'];
-                const totalQ = topic.questions.length;
-                
-                // Cari rekod tertinggi jika ada
-                const topRecord = currentProfile.records ? currentProfile.records.filter(r => r.topicKey === key).sort((a,b) => b.score - a.score)[0] : null;
-                const highscoreStr = topRecord ? `Best: ${topRecord.correct}/${totalQ}` : `${totalQ} ${I18N_DICTIONARY[currentLang].questionsUnit}`;
-
-                const card = document.createElement('button');
-                card.className = "bg-white p-4 rounded-2xl shadow-md border-2 border-slate-100 hover:border-blue-400 flex flex-col items-center justify-center text-center space-y-2 btn-bounce transition-all relative cursor-pointer group";
-                card.onclick = () => {
-                    activeTopicKey = key;
-                    setupTopicIntro(key);
-                };
-
-                // Badge Complete indicator
-                if (topRecord && topRecord.score === 100) {
-                    card.classList.add('bg-emerald-50/50', 'border-emerald-300', 'hover:border-emerald-500');
-                }
-
-                card.innerHTML = `
-                    <div class="text-4xl group-hover:scale-110 transition-transform">${topic.icon}</div>
-                    <div class="font-black text-xs text-slate-700 tracking-tight leading-tight uppercase">${title}</div>
-                    <div class="text-[10px] font-bold text-slate-400">${highscoreStr}</div>
-                `;
-                grid.appendChild(card);
-            });
-
-            renderBadges();
-        }
-
-        function renderBadges() {
-            const container = document.getElementById('badgesContainer');
-            container.innerHTML = '';
-            
-            if (!currentProfile.badges || currentProfile.badges.length === 0) {
-                const p = document.createElement('p');
-                p.className = "text-xs font-bold text-slate-400 italic py-1";
-                p.textContent = I18N_DICTIONARY[currentLang].badgeEmpty;
-                container.appendChild(p);
-                return;
-            }
-
-            currentProfile.badges.forEach(bText => {
-                const chunk = document.createElement('span');
-                chunk.className = "bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-900 font-black text-xs px-3 py-1.5 rounded-full shadow-sm animate-pulse border border-yellow-300";
-                chunk.textContent = bText;
-                container.appendChild(chunk);
-            });
-        }
-
-        // TOPIC INTRO ENGINE
-        function setupTopicIntro(key) {
-            const topic = BANK_SOALAN[key];
-            const title = topic.title[currentLang] || topic.title['ms'];
-            
-            document.getElementById('topicIntroIcon').textContent = topic.icon;
-            document.getElementById('topicIntroTitle').textContent = title;
-            document.getElementById('topicIntroDetails').textContent = `${topic.questions.length} ${I18N_DICTIONARY[currentLang].topicIntroDetailsSuffix}`;
-            
-            navigateTo('viewTopicIntro');
-        }
-
-        // QUIZ PLAYGROUND ENGINE
-        function startQuiz() {
-            const topic = BANK_SOALAN[activeTopicKey];
-            // Klon soalan dan acak
-            quizQuestions = JSON.parse(JSON.stringify(topic.questions));
-            shuffleArray(quizQuestions);
-            
-            currentQuestionIndex = 0;
-            quizScore = 0;
-            quizCorrectCount = 0;
-            quizWrongCount = 0;
-            userLives = 3;
-
+        function updateHeaderUI() {
+            document.getElementById('headerName').innerText = userProfile.name;
+            document.getElementById('headerStars').innerText = userProfile.stars;
             renderLives();
-            showQuestion();
-            navigateTo('viewQuiz');
         }
 
         function renderLives() {
             const container = document.getElementById('livesContainer');
             container.innerHTML = '';
-            for(let i=0; i<3; i++) {
+            for (let i = 0; i < 3; i++) {
                 const heart = document.createElement('span');
-                heart.textContent = i < userLives ? '❤️' : '🖤';
+                heart.innerText = i < quizState.lives ? '❤️' : '🖤';
                 container.appendChild(heart);
             }
         }
 
+        function buildMainMenuTopics() {
+            const grid = document.getElementById('topicsGrid');
+            grid.innerHTML = '';
+            Object.keys(BANK_SOALAN).forEach((key, index) => {
+                const topic = BANK_SOALAN[key];
+                const colorClass = TOPIC_COLORS[index % TOPIC_COLORS.length];
+                const card = document.createElement('button');
+                card.className = `btn-bounce bg-gradient-to-br ${colorClass} p-4 rounded-2xl shadow-md text-left flex flex-col justify-between h-32 border-b-4 border-black/10 cursor-pointer transform hover:scale-[1.02] transition-transform`;
+                card.onclick = () => selectTopic(key);
+                
+                card.innerHTML = `<div class="text-3xl">${topic.icon}</div><div><div class="font-black text-sm leading-tight uppercase">${topic.title}</div><div class="text-[10px] opacity-90 font-bold mt-1">${topic.questions.length} Soalan</div></div>`;
+                grid.appendChild(card);
+            });
+        }
+
+        function renderBadges() {
+            const container = document.getElementById('badgesContainer');
+            container.innerHTML = '';
+            if (userProfile.badges.length === 0) {
+                container.innerHTML = `<span class="text-xs text-slate-400 italic">Selesaikan topik dengan markah 100% untuk kumpul lencana!</span>`;
+                return;
+            }
+            userProfile.badges.forEach(badgeText => {
+                const badge = document.createElement('span');
+                badge.className = "bg-yellow-100 border border-yellow-300 text-yellow-800 font-black text-[11px] px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1";
+                badge.innerHTML = badgeText;
+                container.appendChild(badge);
+            });
+        }
+
+        function selectTopic(topicId) {
+            quizState.currentTopicId = topicId;
+            const topic = BANK_SOALAN[topicId];
+            
+            document.getElementById('topicIntroIcon').innerText = topic.icon;
+            document.getElementById('topicIntroTitle').innerText = topic.title;
+            document.getElementById('topicIntroDetails').innerText = `${topic.questions.length} Soalan Latih Tubi`;
+            navigateTo('viewTopicIntro');
+        }
+
+        function startQuiz() {
+            quizState.currentQuestionIndex = 0;
+            quizState.score = 0; quizState.correctCount = 0; quizState.wrongCount = 0; quizState.starsEarned = 0;
+            quizState.lives = 3; quizState.isAnswering = false;
+            navigateTo('viewQuiz');
+            showQuestion();
+        }
+
+        function confirmExitQuiz() {
+            if (confirm("Adakah anda pasti mahu berhenti menjawab dan kembali ke Menu Utama?")) {
+                navigateTo('viewMainMenu');
+            }
+        }
+
         function showQuestion() {
-            if (currentQuestionIndex >= quizQuestions.length || userLives <= 0) {
+            quizState.isAnswering = false;
+            renderLives();
+            const topic = BANK_SOALAN[quizState.currentTopicId];
+            const totalQuestions = topic.questions.length;
+            
+            if (quizState.lives <= 0 || quizState.currentQuestionIndex >= totalQuestions) {
                 endQuiz();
                 return;
             }
 
-            const dict = I18N_DICTIONARY[currentLang];
-            // Update Top Info
-            document.getElementById('quizProgressText').textContent = `${dict.quizProgressText} ${currentQuestionIndex + 1} / ${quizQuestions.length}`;
-            document.getElementById('quizScoreText').textContent = `${dict.quizScoreText}: ${quizScore}`;
+            document.getElementById('quizProgressText').innerText = `Soalan ${quizState.currentQuestionIndex + 1} / ${totalQuestions}`;
+            document.getElementById('quizScoreText').innerText = `Markah: ${quizState.score}`;
             
-            const progressPercent = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
-            document.getElementById('quizProgressBar').style.width = `${progressPercent}%`;
+            const pct = ((quizState.currentQuestionIndex) / totalQuestions) * 100;
+            document.getElementById('quizProgressBar').style.width = `${pct}%`;
 
-            // Setup Soalan & Pilihan Jawapan
-            const rawQ = quizQuestions[currentQuestionIndex];
-            
-            // Tapis soalan mengandungi objek bahasa atau string biasa
-            let qText = "";
-            if (typeof rawQ.q === 'object') {
-                qText = rawQ.q[currentLang] || rawQ.q['ms'];
-            } else {
-                qText = rawQ.q;
-            }
-            document.getElementById('questionTextPrimary').innerHTML = qText;
-
-            // Dapatkan Pilihan & Jawapan Betul
-            let rawOptions = [];
-            let rightAnswer = "";
-
-            if (typeof rawQ.a === 'object' && !Array.isArray(rawQ.a)) {
-                rawOptions = JSON.parse(JSON.stringify(rawQ.a[currentLang] || rawQ.a['ms']));
-                rightAnswer = rawQ.c[currentLang] || rawQ.c['ms'];
-            } else {
-                rawOptions = JSON.parse(JSON.stringify(rawQ.a));
-                rightAnswer = rawQ.c;
-            }
+            const currentQuestion = topic.questions[quizState.currentQuestionIndex];
+            document.getElementById('questionTextPrimary').innerHTML = currentQuestion.q;
 
             const optionsContainer = document.getElementById('optionsContainer');
             optionsContainer.innerHTML = '';
-
-            rawOptions.forEach(opt => {
+            
+            currentQuestion.a.forEach((option) => {
                 const btn = document.createElement('button');
-                btn.className = "w-full text-left bg-white hover:bg-slate-50 border-2 border-slate-100 hover:border-blue-300 p-4 rounded-xl font-bold text-slate-700 transition-all shadow-sm btn-bounce text-sm flex justify-between items-center cursor-pointer";
-                btn.innerHTML = `<span>${opt}</span> <span class='text-slate-300 font-normal text-xs'>👉</span>`;
-                btn.onclick = () => checkAnswer(btn, opt, rightAnswer);
+                btn.className = "w-full text-left bg-white text-slate-700 font-bold p-4 rounded-xl border-2 border-slate-200/80 shadow-sm hover:border-blue-400 transition-colors btn-bounce cursor-pointer flex justify-between items-center text-base";
+                btn.onclick = () => checkAnswer(btn, option, currentQuestion.c);
+                btn.innerHTML = `<span>${option}</span><span class='opt-status text-lg'></span>`;
                 optionsContainer.appendChild(btn);
             });
         }
 
         function checkAnswer(selectedButton, selectedValue, correctValue) {
-            // Disable kesemua butang pilihan jawapan buat sementara waktu
-            const buttons = document.getElementById('optionsContainer').querySelectorAll('button');
-            buttons.forEach(b => b.disabled = true);
+            if (quizState.isAnswering) return;
+            quizState.isAnswering = true;
 
-            if (selectedValue === correctValue) {
-                // BETUL
-                selectedButton.classList.remove('border-slate-100', 'hover:border-blue-300');
-                selectedButton.classList.add('bg-green-500', 'text-white', 'border-green-600');
-                quizCorrectCount++;
-                quizScore += 10;
-                playSound('correct');
-                
-                // Tambah kesan confetti kecil setiap kali jawapan betul
-                confetti({ particleCount: 15, angle: 60, spread: 55, origin: { x: 0 } });
-                confetti({ particleCount: 15, angle: 120, spread: 55, origin: { x: 1 } });
-            } else {
-                // SALAH
-                selectedButton.classList.remove('border-slate-100', 'hover:border-blue-300');
-                selectedButton.classList.add('bg-red-500', 'text-white', 'border-red-600', 'animate-shake');
-                quizWrongCount++;
-                userLives--;
-                renderLives();
-                playSound('wrong');
-
-                // Tunjukkan butang jawapan yang betul
-                buttons.forEach(b => {
-                    if (b.querySelector('span').textContent === correctValue) {
-                        b.classList.add('border-green-500', 'bg-green-50');
-                    }
-                });
-            }
-
-            // Tunggu 1.5 saat sebelum beralih ke soalan seterusnya
-            setTimeout(() => {
-                currentQuestionIndex++;
-                showQuestion();
-            }, 1500);
-        }
-
-        function confirmExitQuiz() {
-            if (confirm(I18N_DICTIONARY[currentLang].alertExitQuiz)) {
-                navigateTo('viewMainMenu');
-            }
-        }
-
-        // END QUIZ ENGINE
-        function endQuiz() {
-            const finalPercent = Math.round((quizCorrectCount / quizQuestions.length) * 100);
-            const dict = I18N_DICTIONARY[currentLang];
+            const buttons = document.getElementById('optionsContainer').getElementsByTagName('button');
             
-            let calculatedStars = 0;
-            if (finalPercent === 100) calculatedStars = 3;
-            else if (finalPercent >= 75) calculatedStars = 2;
-            else if (finalPercent >= 40) calculatedStars = 1;
+            if (selectedValue === correctValue) {
+                AudioFX.play('ding');
+                selectedButton.classList.remove('bg-white', 'border-slate-200/80');
+                selectedButton.classList.add('bg-green-50', 'border-green-400', 'text-green-700');
+                selectedButton.querySelector('.opt-status').innerText = '✅';
+                quizState.score += 5;
+                quizState.correctCount++;
+            } else {
+                AudioFX.play('buzz');
+                selectedButton.classList.remove('bg-white', 'border-slate-200/80');
+                selectedButton.classList.add('bg-red-50', 'border-red-400', 'text-red-700', 'animate-shake');
+                selectedButton.querySelector('.opt-status').innerText = '❌';
+                quizState.wrongCount++;
+                quizState.lives--;
 
-            // Simpan Rekod Prestasi Baru
-            if (!currentProfile.records) currentProfile.records = [];
-            currentProfile.records.push({
-                topicKey: activeTopicKey,
-                timestamp: new Date().getTime(),
-                score: finalPercent,
-                correct: quizCorrectCount,
-                total: quizQuestions.length
-            });
-
-            // Ganjaran Bintang
-            currentProfile.stars = (currentProfile.stars || 0) + calculatedStars;
-
-            // Buka Lencana Jika Skor Sempurna 100%
-            if (finalPercent === 100) {
-                const badgeText = BANK_SOALAN[activeTopicKey].badge[currentLang] || BANK_SOALAN[activeTopicKey].badge['ms'];
-                if (!currentProfile.badges) currentProfile.badges = [];
-                if (!currentProfile.badges.includes(badgeText)) {
-                    currentProfile.badges.push(badgeText);
+                for (let btn of buttons) {
+                    if (btn.innerText.trim().startsWith(correctValue)) {
+                        btn.classList.remove('bg-white', 'border-slate-200/80');
+                        btn.classList.add('bg-green-50/50', 'border-green-400', 'text-green-700');
+                        btn.querySelector('.opt-status').innerText = '💡';
+                    }
                 }
             }
 
-            syncProfileToStorage();
+            setTimeout(() => {
+                quizState.currentQuestionIndex++;
+                showQuestion();
+            }, 1800);
+        }
 
-            // Sediakan Paparan Hasil
-            document.getElementById('resultScore').textContent = `${finalPercent}%`;
-            document.getElementById('resultCorrect').textContent = quizCorrectCount;
-            document.getElementById('resultWrong').textContent = quizWrongCount;
-            document.getElementById('resultStars').textContent = `+${calculatedStars}`;
-
-            const resEmoji = document.getElementById('resultEmoji');
-            const resTitle = document.getElementById('resultTitle');
+        function endQuiz() {
+            const topic = BANK_SOALAN[quizState.currentTopicId];
+            const finalPercent = Math.round((quizState.correctCount / topic.questions.length) * 100);
 
             if (finalPercent === 100) {
-                resEmoji.textContent = "🏆";
-                resTitle.textContent = dict.resultTitleSuccess;
-                // Letupan besar confetti untuk pemenang 100%
-                triggerMassiveConfetti();
-            } else if (finalPercent >= 40) {
-                resEmoji.textContent = "🎉";
-                resTitle.textContent = dict.resultTitleNormal;
+                quizState.starsEarned = 3;
+                document.getElementById('resultTitle').innerText = "Sempurna 100%!";
+                document.getElementById('resultEmoji').innerText = "🏆";
+                AudioFX.play('victory');
+                triggerConfetti();
+                
+                if (!userProfile.badges.includes(topic.badge)) {
+                    userProfile.badges.push(topic.badge);
+                }
+            } else if (finalPercent >= 50) {
+                quizState.starsEarned = 2;
+                document.getElementById('resultTitle').innerText = "Tahniah! Selesai!";
+                document.getElementById('resultEmoji').innerText = "🎉";
+                AudioFX.play('victory');
             } else {
-                resEmoji.textContent = "💪";
-                resTitle.textContent = dict.resultTitleFail;
+                quizState.starsEarned = 0;
+                document.getElementById('resultTitle').innerText = "Cuba Lagi!";
+                document.getElementById('resultEmoji').innerText = "💪";
             }
 
+            userProfile.stars += quizState.starsEarned;
+            
+            const timestamp = new Date().toLocaleString();
+            const record = {
+                topicTitle: topic.title,
+                score: finalPercent,
+                correct: quizState.correctCount,
+                total: topic.questions.length,
+                time: timestamp
+            };
+            performanceRecords.unshift(record);
+            userProfile.records = performanceRecords;
+
+            allProfiles[userProfile.name] = userProfile;
+            localStorage.setItem('bijak_math_profiles_list_v2', JSON.stringify(allProfiles));
+
+            document.getElementById('resultScore').innerText = `${finalPercent}%`;
+            document.getElementById('resultCorrect').innerText = quizState.correctCount;
+            document.getElementById('resultWrong').innerText = quizState.wrongCount;
+            document.getElementById('resultStars').innerText = `+${quizState.starsEarned}`;
+
+            updateHeaderUI();
             navigateTo('viewResult');
         }
 
-        // RECORDS MANAGEMENT ENGINE
-        function openPerformanceRecords() {
-            renderPerformanceRecords();
-            navigateTo('viewRecords');
+        function triggerConfetti() {
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
         }
 
-        function renderPerformanceRecords() {
+        function openPerformanceRecords() {
+            navigateTo('viewRecords');
             const container = document.getElementById('recordsListContainer');
             container.innerHTML = '';
-            const dict = I18N_DICTIONARY[currentLang];
 
-            if (!currentProfile.records || currentProfile.records.length === 0) {
-                container.innerHTML = `<div class='text-center py-8 text-slate-400 font-bold text-sm italic'>${dict.recordsEmpty}</div>`;
+            if (performanceRecords.length === 0) {
+                container.innerHTML = `<div class="text-center py-8 text-slate-400 font-medium text-sm">Belum ada rekod jawapan. Sila pilih topik dan selesaikan kuiz dahulu!</div>`;
                 return;
             }
 
-            // Papar rekod terbaru di atas sekali
-            const reversedRecords = [...currentProfile.records].reverse();
+            performanceRecords.forEach(rec => {
+                const item = document.createElement('div');
+                item.className = "bg-slate-50 p-3 rounded-xl border border-slate-100 flex justify-between items-center text-xs";
 
-            reversedRecords.forEach(r => {
-                const topic = BANK_SOALAN[r.topicKey];
-                const topicTitle = topic ? (topic.title[currentLang] || topic.title['ms']) : "Topik Lama";
-                const dateObj = new Date(r.timestamp);
-                const dateStr = `${dateObj.getDate()}/${dateObj.getMonth()+1} ${dateObj.getHours()}:${String(dateObj.getMinutes()).padStart(2,'0')}`;
-
-                const box = document.createElement('div');
-                box.className = "bg-slate-50 p-3 rounded-xl border border-slate-200 flex justify-between items-center text-xs";
-                box.innerHTML = `
+                item.innerHTML = `
                     <div>
-                        <div class="font-black text-slate-700 uppercase">${topicTitle}</div>
-                        <div class="text-[10px] text-slate-400 font-bold mt-0.5">${dateStr}</div>
+                        <div class="font-black text-slate-700 text-sm uppercase">${rec.topicTitle}</div>
+                        <div class="text-slate-400 font-bold mt-0.5">${rec.time}</div>
                     </div>
                     <div class="text-right">
-                        <div class="text-base font-black ${r.score >= 75 ? 'text-green-600' : (r.score >= 40 ? 'text-orange-500' : 'text-red-500')}">${r.score}%</div>
-                        <div class="text-[9px] text-slate-400 font-bold">${dict.recordsScoreLabel}: ${r.correct}/${r.total}</div>
+                        <div class="text-base font-black ${rec.score === 100 ? 'text-emerald-500' : rec.score >= 50 ? 'text-blue-500' : 'text-orange-500'}">${rec.score}%</div>
+                        <div class="text-[10px] text-slate-400 font-bold">Betul: ${rec.correct}/${rec.total}</div>
                     </div>
                 `;
-                container.appendChild(box);
+                container.appendChild(item);
             });
         }
 
         function clearPerformanceRecords() {
-            if (confirm(I18N_DICTIONARY[currentLang].alertClearRecords)) {
-                currentProfile.records = [];
-                syncProfileToStorage();
-                renderPerformanceRecords();
+            if (confirm("Adakah anda pasti mahu memadam semua sejarah rekod prestasi ini?")) {
+                performanceRecords = [];
+                userProfile.records = [];
+                allProfiles[userProfile.name] = userProfile;
+                localStorage.setItem('bijak_math_profiles_list_v2', JSON.stringify(allProfiles));
+                openPerformanceRecords();
             }
         }
 
-        // SETTINGS SYSTEM ENGINE
-        function openSettings() {
-            document.getElementById('modalSettings').classList.remove('hidden');
-        }
-
-        function closeSettings() {
-            document.getElementById('modalSettings').classList.add('hidden');
-        }
+        function openSettings() { document.getElementById('modalSettings').classList.remove('hidden'); }
+        function closeSettings() { document.getElementById('modalSettings').classList.add('hidden'); }
 
         function toggleSound() {
-            soundEnabled = !soundEnabled;
-            const dict = I18N_DICTIONARY[currentLang];
+            AudioFX.enabled = !AudioFX.enabled;
+            localStorage.setItem('bijak_math_sound', AudioFX.enabled);
+            updateSoundButtonUI();
+        }
+
+        function updateSoundButtonUI() {
             const btn = document.getElementById('btnSoundToggle');
-            btn.textContent = soundEnabled ? dict.settingsSoundOn : dict.settingsSoundOff;
-            if (soundEnabled) {
+            if(!btn) return;
+            if (AudioFX.enabled) {
+                btn.innerText = "HIDUP";
                 btn.className = "px-4 py-2 bg-green-500 text-white font-bold rounded-lg text-xs tracking-wide uppercase shadow btn-bounce cursor-pointer";
             } else {
+                btn.innerText = "MATI";
                 btn.className = "px-4 py-2 bg-slate-400 text-white font-bold rounded-lg text-xs tracking-wide uppercase shadow btn-bounce cursor-pointer";
             }
         }
 
         function resetProgress() {
-            if (confirm(I18N_DICTIONARY[currentLang].alertResetProgress)) {
-                currentProfile.stars = 0;
-                currentProfile.badges = [];
-                currentProfile.records = [];
-                syncProfileToStorage();
+            if (confirm("Adakah anda pasti mahu mengosongkan semua kutipan lencana, bintang dan rekod prestasi kembali ke 0?")) {
+                userProfile.stars = 0;
+                userProfile.badges = [];
+                userProfile.records = [];
+                performanceRecords = [];
+                allProfiles[userProfile.name] = userProfile;
+                localStorage.setItem('bijak_math_profiles_list_v2', JSON.stringify(allProfiles));
                 closeSettings();
-                enterMainMenu();
+                buildMainMenuTopics();
+                renderBadges();
+                updateHeaderUI(); 
             }
         }
 
-        // UTILITY AUDIO ENGINE (Web Audio API Synthesizer)
-        function playSound(type) {
-            if (!soundEnabled) return;
-            try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-
-                if (type === 'correct') {
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
-                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1); // E5
-                    gain.gain.setValueAtTime(0.3, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.3);
-                } else if (type === 'wrong') {
-                    osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(180, ctx.currentTime);
-                    osc.frequency.setValueAtTime(120, ctx.currentTime + 0.15);
-                    gain.gain.setValueAtTime(0.3, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.4);
-                }
-            } catch(e) { console.log("Audio contexts not supported/allowed yet."); }
-        }
-
-        // UTILITY CONFETTI BLASTS
-        function triggerMassiveConfetti() {
-            const duration = 2.5 * 1000;
-            const end = Date.now() + duration;
-
-            (function frame() {
-                confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 } });
-                confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 } });
-                if (Date.now() < end) { requestAnimationFrame(frame); }
-            }());
-        }
-
-        // UTILITY ARRAY SHUFFLER (Fisher-Yates Algorithm)
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
+        function logoutProfile() {
+            if (confirm("Adakah anda pasti mahu log keluar? Profil anda tidak akan dipadam dan anda boleh log masuk semula pada bila-bila masa.")) {
+                localStorage.removeItem('bijak_math_active_profile_v2');
+                closeSettings();
+                navigateTo('viewWelcome');
             }
         }
     </script>
