@@ -1,7 +1,7 @@
 
 (function(){
 'use strict';
-const URLS=['SJ2gqVu','RDASQn4','fw6URGC','g4Q0iMt','z9s1tuc','PtPSiMn','UdFTV4y','Kucf6tM','l5dYLWi','5hUwpK9'].map(id=>'https://i.imgur.com/'+id+'.jpeg');
+const URLS=['SJ2gqVu','RDASQn4','fw6URGC','g4Q0iMt','z9s1tuc','PtPSiMn','UdFTV4y','Kucf6tM','l5dYLWi','5hUwpK9','t7sl5Vn','N9pbFrS','a6SzP0A','xSCejhU','gsN9t7B','r8RtGov','NAcipw0','XsVffaj','BJ7B5W4'].map(id=>'https://i.imgur.com/'+id+'.jpeg');
 const NS='http://www.w3.org/2000/svg';
 let session=0,round=0,order=[],timer=0,loadingTimer=0,pieces=[],selected=null,drag=null,done=0,busy=false,W=900,H=600,imageURL='';
 const el=id=>document.getElementById(id);
@@ -9,14 +9,14 @@ const ms=()=>typeof currentGlobalLang!=='undefined'&&currentGlobalLang==='ms';
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function svg(tag,attrs={}){const n=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));return n;}
 const screen=document.createElement('div');screen.id='puzzle-screen';screen.className='card';
-screen.innerHTML='<div class="pz-top"><h2>🧩 Puzzle</h2><span id="pz-progress"></span></div><p id="pz-instruction"></p><div id="pz-board"></div><div id="pz-tray"></div><p id="pz-status" role="status" aria-live="polite"></p><div id="pz-controls"><button id="pz-retry" class="action-btn" type="button" hidden></button><button id="pz-home" class="action-btn home-btn" type="button"></button></div>';
+screen.innerHTML='<div class="pz-top"><h2>ðŸ§© Puzzle</h2><span id="pz-progress"></span></div><p id="pz-instruction"></p><div id="pz-board"></div><div id="pz-tray"></div><p id="pz-status" role="status" aria-live="polite"></p><div id="pz-controls"><button id="pz-retry" class="action-btn" type="button" hidden></button><button id="pz-home" class="action-btn home-btn" type="button"></button></div>';
 el('home-screen').parentNode.appendChild(screen);
 // Capture taps before piece dragging prevents the browser click event.
 function puzzleClickSound(){if(typeof playClickSound==='function')playClickSound();}
 screen.addEventListener('pointerdown',e=>{if(e.isPrimary!==false&&e.button===0)puzzleClickSound();},true);
 screen.addEventListener('click',e=>{if(e.detail===0)puzzleClickSound();},true);
 screen.addEventListener('keydown',e=>{if(!e.repeat&&(e.key==='Enter'||e.key===' ')&&e.target.matches('.pz-target'))puzzleClickSound();},true);
-function labels(){el('pz-instruction').textContent=ms()?'Seret kepingan ke tempatnya, atau tekan kepingan kemudian tekan ruang yang sepadan.':'Drag each piece into place, or tap a piece then its matching space.';el('pz-home').textContent=ms()?'Kembali ke Utama 🏠':'Back to Home 🏠';el('pz-retry').textContent=ms()?'Cuba lagi':'Try again';}
+function labels(){el('pz-instruction').textContent=ms()?'Seret kepingan ke tempatnya, atau tekan kepingan kemudian tekan ruang yang sepadan.':'Drag each piece into place, or tap a piece then its matching space.';el('pz-home').textContent=ms()?'Kembali ke Utama ðŸ ':'Back to Home ðŸ ';el('pz-retry').textContent=ms()?'Cuba lagi':'Try again';}
 function status(){el('pz-status').textContent=done+' / 6 '+(ms()?'kepingan siap':'pieces placed');}
 function cancelDrag(){if(drag){drag.ghost.remove();drag=null;}}
 function stop(){if(screen.classList.contains('active'))window.speechSynthesis?.cancel();session++;clearTimeout(timer);clearTimeout(loadingTimer);cancelDrag();selected=null;busy=true;el('pz-pop').hidden=true;}
@@ -24,12 +24,12 @@ el('pz-home').onclick=()=>{stop();showScreen('home-screen');};
 const priorShow=window.showScreen;
 window.showScreen=function(id){if(id!=='puzzle-screen'&&screen.classList.contains('active'))stop();return priorShow.apply(this,arguments);};
 new MutationObserver(()=>{if(!screen.classList.contains('active')&&!busy)stop();}).observe(screen,{attributes:true,attributeFilter:['class']});
-window.openPuzzleModule=function(){stop();labels();round=0;order=shuffle(URLS);showScreen('puzzle-screen');busy=false;loadRound();};
+window.openPuzzleModule=function(){stop();labels();round=0;order=shuffle(URLS).slice(0,10);showScreen('puzzle-screen');busy=false;loadRound();};
 el('pz-retry').onclick=()=>loadRound();
 function loadRound(){
  clearTimeout(timer);clearTimeout(loadingTimer);cancelDrag();selected=null;busy=true;done=0;pieces=[];
  el('pz-pop').hidden=true;el('pz-retry').hidden=true;el('pz-board').replaceChildren();el('pz-tray').replaceChildren();
- el('pz-progress').textContent=(round+1)+' / 10';el('pz-status').textContent=ms()?'Gambar sedang dimuat…':'Loading picture…';
+ el('pz-progress').textContent=(round+1)+' / 10';el('pz-status').textContent=ms()?'Gambar sedang dimuatâ€¦':'Loading pictureâ€¦';
  const token=++session;let settled=false;const img=new Image();
  function fail(){if(token!==session||settled)return;settled=true;clearTimeout(loadingTimer);el('pz-status').textContent=ms()?'Gambar gagal dimuat. Semak internet dan tekan Cuba lagi.':'Picture could not load. Check your connection and try again.';el('pz-retry').hidden=false;}
  img.onload=()=>{if(token!==session||settled)return;if(!img.naturalWidth){fail();return;}settled=true;clearTimeout(loadingTimer);W=900;H=900*img.naturalHeight/img.naturalWidth;imageURL=order[round];build();busy=false;status();if(round<9){const next=new Image();next.src=order[round+1];}};
