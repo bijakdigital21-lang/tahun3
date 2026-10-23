@@ -1,0 +1,15 @@
+
+#topic-image-loader { position:fixed; inset:0; z-index:100000; background:rgba(19,27,65,.72); display:none; align-items:center; justify-content:center; padding:18px; }
+#topic-image-loader.open { display:flex; }
+#topic-image-loader .loading-card { position:relative; width:min(420px,100%); padding:28px 25px 24px; border-radius:28px; background:linear-gradient(165deg,#0e60ee 0%,#5b2bce 47%,#fff 48%,#fff 100%); box-shadow:0 18px 55px #06144380; text-align:center; font-family:inherit; color:#253369; }
+#topic-image-loader .monster { height:154px; width:154px; display:block; margin:0 auto 9px; animation:monster-hop .75s ease-in-out infinite alternate; filter:drop-shadow(0 8px 5px #1528685c); }
+@keyframes monster-hop { from { transform:translateY(9px) scaleX(1.04) scaleY(.96) } to { transform:translateY(-15px) scaleX(.97) scaleY(1.03) } }
+#topic-image-loader .loader-title { margin:4px 0 7px; font-size:clamp(20px,5vw,26px); font-weight:900; }
+#topic-image-loader .loader-detail { margin:0 0 14px; font-size:14px; font-weight:650; }
+#topic-image-loader .loader-track { height:24px; border:5px solid #d4befb; background:#d0b6f8; border-radius:25px; overflow:hidden; }
+#topic-image-loader .loader-fill { height:100%; width:0; border-radius:25px; background:linear-gradient(90deg,#1458fe,#7043ef); transition:width .2s ease; }
+#topic-image-loader .loader-count { font-weight:800; margin-top:9px; font-size:13px; }
+#topic-image-loader .loader-actions { display:none; gap:8px; justify-content:center; margin-top:15px; flex-wrap:wrap; }
+#topic-image-loader .loader-actions button { background:#2357db; border:0; border-radius:12px; color:white; padding:9px 15px; font:inherit; font-weight:700; cursor:pointer; }
+#topic-image-loader .loader-actions .loader-continue { background:#edf0ff; color:#293c8b; }
+@media (prefers-reduced-motion:reduce) { #topic-image-loader .monster { animation:none } }

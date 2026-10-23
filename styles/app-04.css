@@ -1,0 +1,24 @@
+
+#puzzle-screen{max-width:1050px;margin:0 auto;padding:clamp(12px,3vw,28px)}
+#puzzle-screen .pz-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+#puzzle-screen h2{color:#7043ce;margin:6px 0;font-size:clamp(1.5rem,5vw,2.4rem)}
+#pz-progress{background:#f0e5ff;border-radius:30px;padding:8px 16px;color:#6636b5;font-weight:900}
+#pz-instruction{font-weight:700;color:#4b4969;margin:12px 0}
+#pz-board{width:min(100%,610px);margin:auto;background:#eee6ff;border:5px solid white;border-radius:16px;overflow:hidden;box-shadow:0 5px 20px #6e4b9830;line-height:0}
+#pz-board svg{width:100%;height:auto;display:block}
+#pz-board path.pz-target{cursor:pointer;outline:none;stroke:none;stroke-width:0;fill:transparent;pointer-events:all}
+#pz-board path.pz-target:focus{stroke:none;outline:none}
+#pz-tray{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:660px;margin:18px auto}
+#pz-tray button{min-width:0;height:clamp(80px,17vw,120px);background:#faf5ff;border:3px solid #e0d2f4;border-radius:16px;padding:5px;touch-action:none;cursor:grab;transition:background .15s}
+#pz-tray button.pz-selected{border-color:#f5a000;background:#fff2c4;box-shadow:0 0 0 3px #ffd55c66}
+#pz-tray button:disabled{opacity:.18;cursor:default}
+#pz-tray svg{width:100%;height:100%;overflow:visible;pointer-events:none}
+#pz-controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+#pz-status{min-height:24px;color:#664c8b;font-weight:700}
+#pz-retry[hidden],#pz-pop[hidden]{display:none!important}
+#pz-pop{position:fixed;inset:0;z-index:100010;background:#30204d88;display:flex;align-items:center;justify-content:center;padding:20px}
+#pz-pop .pz-pop-card{width:min(410px,100%);background:white;border:6px solid #ffda67;border-radius:30px;padding:30px 18px;box-shadow:0 20px 80px #29164666;text-align:center}
+#pz-pop-title{font-size:clamp(2rem,8vw,3.6rem);color:#773dc4;font-weight:900;margin:12px 0}
+#pz-pop .pz-stars{font-size:3rem}
+.pz-drag{position:fixed;pointer-events:none;z-index:100005;filter:drop-shadow(0 7px 4px #27143a66);overflow:visible}
+@media(max-width:480px){#pz-tray{gap:7px;margin:12px auto}#puzzle-screen .action-btn{font-size:.9rem;padding:10px 16px}}
