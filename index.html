@@ -63,7 +63,7 @@
 #lb-picture .lb-target.lb-wrong{background:#ffe0e0;border-color:#dd3d3d}
 #lb-bank{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;background:#f3ecff;padding:16px;border-radius:18px;margin:10px auto 22px;max-width:780px}
 .lb-choice{touch-action:none;user-select:none;border:2px solid #8e64dc;border-radius:12px;background:white;color:#48277e;font:700 16px Quicksand,sans-serif;padding:10px 14px;cursor:grab;display:flex;flex-direction:column;align-items:center;gap:3px;box-shadow:0 3px 0 #d2b9f4}
-.lb-choice small{font-size:12px;font-weight:600}.lb-choice[aria-pressed="true"]{background:#e0ceff;outline:3px solid #703cc4}.lb-choice:disabled{opacity:.45;cursor:default;box-shadow:none}.lb-ghost{position:fixed;z-index:2147483647;pointer-events:none;transform:translate(-50%,-120%);box-shadow:0 5px 20px #0003}#lb-message{min-height:2.5em;font-weight:700;color:#583490}#label-body-screen .action-btn{margin:5px}
+.lb-choice small{font-size:12px;font-weight:600}.lb-choice[aria-pressed="true"]{background:#e0ceff;outline:3px solid #703cc4}.lb-choice:disabled{opacity:.45;cursor:default;box-shadow:none}.lb-ghost{position:fixed;z-index:2147483647;pointer-events:none;transform:translate(-50%,-50%);box-shadow:0 5px 20px #0003}#lb-message{min-height:2.5em;font-weight:700;color:#583490}#label-body-screen .action-btn{margin:5px}
 
 body.lb-wide .main-content .container{max-width:none!important;width:100%!important;box-sizing:border-box}
 body.lb-wide #label-body-screen{max-width:none!important;width:100%!important;padding:12px 4px!important;box-sizing:border-box}
@@ -75,6 +75,13 @@ body.lb-wide #label-body-screen{max-width:none!important;width:100%!important;pa
 #lb-done .pz-stars{font-size:clamp(30px,6vw,65px);margin-bottom:15px}
 @keyframes lb-pop{from{transform:scale(.65)}to{transform:scale(1)}}
 @media(max-width:600px){body.lb-wide .main-content,body.lb-wide .main-content .container{padding-left:2px!important;padding-right:2px!important}#lb-bank{gap:7px;padding:8px}.lb-choice{font-size:15px;padding:10px 12px}#lb-done .pz-pop-card{padding:25px}}
+
+#label-body-screen .lb-choice{touch-action:none!important;-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none;pointer-events:auto!important}
+#lb-picture .lb-target{pointer-events:auto!important;touch-action:none}
+.lb-choice.lb-dragging{opacity:.35}
+.lb-ghost{pointer-events:none!important;touch-action:none!important;transform:translate(-50%,-50%)!important;margin:0!important;opacity:1!important;cursor:grabbing!important}
+#lb-picture .lb-target.lb-over{background:#d8f9c7;border:3px solid #48a329;box-shadow:0 0 0 4px #9aeb71}
+body.lb-wide{overscroll-behavior:none}
 </style>
 </head>
 <body class="login-mode">
@@ -1571,7 +1578,7 @@ function stop(){clearTimeout(timer);cancelDrag();busy=false;byId('lb-done').hidd
 function complete(){busy=true;byId('lb-done-title').textContent=text('Semua Selesai!','All Done!');byId('lb-done').hidden=false;
 if(typeof announceAllDone==='function')announceAllDone();else if(typeof speakAppFeedback==='function')speakAppFeedback(text('Semua selesai!','All Done!'));
 timer=setTimeout(()=>{stop();if(typeof openBodyPartMenu==='function')openBodyPartMenu();else if(typeof showScreen==='function')showScreen('body-part-menu-screen');},2000);}
-function cancelDrag(){cancelAnimationFrame(raf);if(drag){drag.ghost?.remove();drag=null;}document.querySelectorAll('.lb-over').forEach(b=>b.classList.remove('lb-over'));}
+function cancelDrag(){cancelAnimationFrame(raf);if(drag){const d=drag;drag=null;d.ghost?.remove();d.button.classList.remove('lb-dragging');try{if(d.button.hasPointerCapture?.(d.pointer))d.button.releasePointerCapture(d.pointer);}catch(_){}}document.querySelectorAll('.lb-over').forEach(b=>b.classList.remove('lb-over'));}
 function place(target,id){
 if(busy||!target||!id||done.has(id)||done.has(target.dataset.lbPart))return;
 if(target.dataset.lbPart!==id){target.classList.add('lb-wrong');setTimeout(()=>target.classList.remove('lb-wrong'),600);if(typeof playWrongSound==='function')playWrongSound();byId('lb-message').textContent=text('Cuba lagi!','Try again!');return;}
@@ -1580,8 +1587,25 @@ const choice=byId('lb-bank').querySelector('[data-lb-answer="'+id+'"]');choice.d
 byId('lb-progress').textContent=done.size+' / '+parts.length;
 byId('lb-message').textContent=text('✅ Betul!','✅ Correct!');if(done.size===parts.length)complete();
 }
-function targetAt(x,y){return document.elementFromPoint(x,y)?.closest('#lb-picture .lb-target');}
-function scrollDrag(){if(!drag||!drag.active)return;const edge=90;let dy=drag.y<edge?-12:drag.y>innerHeight-edge?12:0;if(dy){let node=byId('label-body-screen');while(node){if(node.scrollHeight>node.clientHeight&&/(auto|scroll)/.test(getComputedStyle(node).overflowY)){node.scrollTop+=dy;break;}node=node.parentElement;}if(!node)window.scrollBy(0,dy);}raf=requestAnimationFrame(scrollDrag);}
+// Use box geometry: pointer capture and the fixed answer tray must not hide drop targets.
+function targetAt(x,y){
+let best=null,distance=Infinity;
+byId('lb-picture').querySelectorAll('.lb-target').forEach(t=>{
+if(done.has(t.dataset.lbPart))return;
+const r=t.getBoundingClientRect(),pad=10;
+if(x<r.left-pad||x>r.right+pad||y<r.top-pad||y>r.bottom+pad)return;
+const d=Math.hypot(x-(r.left+r.right)/2,y-(r.top+r.bottom)/2);
+if(d<distance){distance=d;best=t;}
+});return best;
+}
+function updateHover(){document.querySelectorAll('.lb-over').forEach(t=>t.classList.remove('lb-over'));if(drag&&drag.active){const t=targetAt(drag.x,drag.y);if(t)t.classList.add('lb-over');}}
+function scrollDrag(){if(!drag||!drag.active)return;
+const edge=100;let dy=drag.y<edge?-14:drag.y>innerHeight-edge?14:0;
+if(dy){let node=byId('label-body-screen'),scrolled=false;
+while(node){if(node.scrollHeight>node.clientHeight&&/(auto|scroll)/.test(getComputedStyle(node).overflowY)){const before=node.scrollTop;node.scrollTop+=dy;if(node.scrollTop!==before){scrolled=true;break;}}node=node.parentElement;}
+if(!scrolled)window.scrollBy(0,dy);}
+updateHover();raf=requestAnimationFrame(scrollDrag);
+}
 window.stopBodyLabelExercise=function(){stop();if(typeof openBodyPartMenu==='function')openBodyPartMenu();};
 window.openBodyLabelExercise=function(){
 stop();done=new Set();document.body.classList.add('lb-wide');
@@ -1590,21 +1614,37 @@ else{document.querySelectorAll('.card').forEach(el=>{el.style.display=el.id==='l
 const board=byId('lb-picture');board.querySelectorAll('.lb-target').forEach(b=>b.remove());
 parts.forEach((p,i)=>{const b=document.createElement('button');b.type='button';b.className='lb-target';b.dataset.lbPart=p[0];b.style.cssText=`left:${p[3]/1024*100}%;top:${p[4]/1280*100}%;width:${p[5]/1024*100}%;height:${p[6]/1280*100}%;`;b.textContent=String(i+1);b.setAttribute('aria-label',text('Kotak jawapan ','Answer box ')+(i+1));board.append(b);});
 const bank=byId('lb-bank');bank.replaceChildren();const shuffled=[...parts];for(let i=shuffled.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]];}
-shuffled.forEach(p=>{const b=document.createElement('button');b.type='button';b.className='lb-choice';b.dataset.lbAnswer=p[0];words(b,p);b.onpointerdown=e=>{if(e.button!==0||b.disabled||busy)return;e.preventDefault();cancelDrag();b.setPointerCapture(e.pointerId);drag={id:p[0],pointer:e.pointerId,x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY,button:b,active:false};};bank.append(b);});
+shuffled.forEach(p=>{const b=document.createElement('button');b.type='button';b.className='lb-choice';b.dataset.lbAnswer=p[0];words(b,p);b.draggable=false;b.onpointerdown=e=>{
+if((e.button!==0&&e.pointerType!=='touch')||b.disabled||busy)return;
+e.preventDefault();e.stopPropagation();cancelDrag();
+drag={id:p[0],pointer:e.pointerId,x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY,button:b,active:false};
+try{b.setPointerCapture(e.pointerId);}catch(_){}
+};bank.append(b);});
 byId('lb-progress').textContent='0 / '+parts.length;labels();
 };
-document.addEventListener('pointermove',e=>{if(!drag||drag.pointer!==e.pointerId)return;drag.x=e.clientX;drag.y=e.clientY;
-if(!drag.active&&Math.hypot(e.clientX-drag.startX,e.clientY-drag.startY)>6){drag.active=true;drag.ghost=drag.button.cloneNode(true);drag.ghost.classList.add('lb-ghost');drag.ghost.removeAttribute('data-lb-answer');document.body.append(drag.ghost);scrollDrag();}
-if(!drag.active)return;e.preventDefault();drag.ghost.style.left=e.clientX+'px';drag.ghost.style.top=e.clientY+'px';document.querySelectorAll('.lb-over').forEach(b=>b.classList.remove('lb-over'));const t=targetAt(e.clientX,e.clientY);if(t&&!done.has(t.dataset.lbPart))t.classList.add('lb-over');
-},{passive:false});
-document.addEventListener('pointerup',e=>{if(!drag||drag.pointer!==e.pointerId)return;const d=drag;if(d.active)place(targetAt(e.clientX,e.clientY),d.id);cancelDrag();});
+// Capture on window before other modules can consume pointer events.
+window.addEventListener('pointermove',e=>{
+if(!drag||drag.pointer!==e.pointerId)return;
+e.preventDefault();e.stopImmediatePropagation();drag.x=e.clientX;drag.y=e.clientY;
+if(!drag.active&&Math.hypot(e.clientX-drag.startX,e.clientY-drag.startY)>4){
+drag.active=true;drag.button.classList.add('lb-dragging');drag.ghost=drag.button.cloneNode(true);
+drag.ghost.classList.remove('lb-dragging');drag.ghost.classList.add('lb-ghost');drag.ghost.removeAttribute('data-lb-answer');
+drag.ghost.setAttribute('aria-hidden','true');document.body.append(drag.ghost);scrollDrag();}
+if(!drag.active)return;
+drag.ghost.style.left=e.clientX+'px';drag.ghost.style.top=e.clientY+'px';updateHover();
+},{capture:true,passive:false});
+window.addEventListener('pointerup',e=>{
+if(!drag||drag.pointer!==e.pointerId)return;
+e.preventDefault();e.stopImmediatePropagation();const d=drag,target=d.active?targetAt(e.clientX,e.clientY):null;
+cancelDrag();if(d.active){if(target)place(target,d.id);else byId('lb-message').textContent=text('Lepaskan jawapan di dalam kotak.','Release the answer inside a box.');}
+},{capture:true,passive:false});
 const screen=byId('label-body-screen');
 screen.addEventListener('pointerdown',e=>{if(e.isPrimary!==false&&e.button===0)clickSound();},true);
 screen.addEventListener('click',e=>{if(e.detail===0)clickSound();},true);
 new MutationObserver(()=>{if(!screen.classList.contains('active')&&document.body.classList.contains('lb-wide'))stop();}).observe(screen,{attributes:true,attributeFilter:['class']});
 for(const id of ['lang-btn-ms','lang-btn-en']){const button=byId(id);if(button)new MutationObserver(()=>{cancelDrag();labels();}).observe(button,{attributes:true,attributeFilter:['class']});}
 new MutationObserver(()=>{if(busy)byId('lb-done-title').textContent=text('Semua Selesai!','All Done!');}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
-document.addEventListener('pointercancel',cancelDrag);window.addEventListener('blur',cancelDrag);
+window.addEventListener('pointercancel',cancelDrag,true);window.addEventListener('blur',cancelDrag);
 })();
 </script>
 
