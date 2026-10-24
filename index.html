@@ -1546,6 +1546,34 @@ body.lb-wide{overscroll-behavior:none}
 <link rel="stylesheet" href="styles/app-04.css">
 <div id="pz-pop" role="dialog" aria-modal="true" aria-labelledby="pz-pop-title" hidden><div class="pz-pop-card"><div class="pz-stars">🌟 🎉 🌟</div><div id="pz-pop-title">Excellent!</div></div></div>
 <script src="scripts/app-09.js"></script>
+<script id="puzzle-home-icon-fix">
+(function(){
+'use strict';
+const button=document.getElementById('pz-home');
+if(!button)return;
+const ns='http://www.w3.org/2000/svg';
+function fixHomeIcon(){
+ if(button.querySelector('[data-puzzle-home-icon]'))return;
+ const label=button.textContent.replace(/[\u{1F3E0}-\u{1F3E1}\u{1F3D8}\u{2302}\u{FE0F}]/gu,'').trim();
+ if(!label)return;
+ const icon=document.createElementNS(ns,'svg');
+ icon.setAttribute('data-puzzle-home-icon','');
+ icon.setAttribute('viewBox','0 0 24 24');
+ icon.setAttribute('width','22');icon.setAttribute('height','22');
+ icon.setAttribute('fill','none');icon.setAttribute('stroke','currentColor');
+ icon.setAttribute('stroke-width','2');icon.setAttribute('stroke-linecap','round');
+ icon.setAttribute('stroke-linejoin','round');icon.setAttribute('aria-hidden','true');
+ icon.setAttribute('focusable','false');
+ icon.style.cssText='display:inline-block;vertical-align:middle;margin-left:6px;pointer-events:none;flex-shrink:0';
+ const path=document.createElementNS(ns,'path');
+ path.setAttribute('d','M3 10 12 3l9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V10Z');
+ icon.appendChild(path);
+ button.replaceChildren(document.createTextNode(label),icon);
+}
+new MutationObserver(fixHomeIcon).observe(button,{childList:true,characterData:true,subtree:true});
+fixHomeIcon();
+})();
+</script>
 <!-- END PUZZLE MODULE -->
 
 <!-- SPACE ADVENTURE: isolated module, all learning assets drawn locally. -->
