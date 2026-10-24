@@ -1286,8 +1286,8 @@ body.lb-wide{overscroll-behavior:none}
 <div class="mt-status"><span id="mt-set"></span><span id="mt-score"></span></div>
 <div id="mt-board"><svg id="mt-lines" aria-hidden="true"></svg><div class="mt-column" id="mt-left"></div><div class="mt-column" id="mt-right"></div></div>
 <p id="mt-feedback" role="status" aria-live="polite"></p>
-<button id="mt-next" class="action-btn" type="button" hidden></button>
-<button id="mt-back" class="action-btn home-btn" type="button"></button>
+<div id="mt-actions"><button id="mt-next" class="action-btn" type="button" hidden></button>
+<button id="mt-back" class="action-btn home-btn" type="button"></button></div>
 </div>
 <!-- LEARN TRANSPORT CATEGORIES -->
             <div id="learn-transport-cat-screen" class="card">
@@ -1705,6 +1705,39 @@ window.addEventListener('pointercancel',cancelDrag,true);window.addEventListener
 #mt-feedback{min-height:26px;font-weight:800;color:#254b6a}#mt-next[hidden]{display:none!important}
 #mt-complete[hidden]{display:none!important}#mt-complete{position:fixed;inset:0;background:#15244888;z-index:100000;display:grid;place-items:center}#mt-complete div{background:white;padding:36px;border:6px solid #ffde59;border-radius:28px;text-align:center;color:#5e17eb;font:800 2rem 'Quicksand',sans-serif}
 @media(max-width:480px){.mt-column{width:31%}.mt-choice{padding:5px;border-radius:12px}#mt-left .mt-port{right:-36px}#mt-right .mt-port{left:-36px}.mt-port:before{width:14px;height:14px}.mt-column{gap:10px}}
+
+/* The viewport lock belongs only to this activity. */
+html.mt-screen-lock,body.mt-screen-lock{overflow:hidden!important;overscroll-behavior:none!important;height:100%!important}
+body.mt-screen-lock .main-content,body.mt-screen-lock .container{overflow:hidden!important}
+#match-transport-screen.active{position:fixed!important;inset:0!important;z-index:10000!important;width:100%!important;max-width:none!important;height:var(--mt-view-height,100dvh)!important;max-height:var(--mt-view-height,100dvh)!important;margin:0!important;padding: max(8px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))!important;box-sizing:border-box!important;display:grid!important;grid-template-rows:auto auto minmax(0,1fr) auto auto;gap:5px;overflow:hidden!important;overscroll-behavior:none;touch-action:none;background:#fff;border-radius:0!important;transform:none!important}
+#match-transport-screen #mt-title{margin:0!important;font-size:clamp(19px,3vw,30px);line-height:1.15}
+#match-transport-screen .mt-status{width:100%;margin:0 auto!important;line-height:1.2;font-size:14px}
+#match-transport-screen #mt-board{width:100%;height:100%;min-height:0;margin:0 auto!important}
+#match-transport-screen .mt-column{height:100%;min-height:0;display:grid;grid-template-rows:repeat(5,minmax(0,1fr));gap:6px}
+#match-transport-screen .mt-choice{height:100%;min-height:0;display:flex;flex-direction:column;align-items:stretch;justify-content:center;overflow:visible;padding:5px}
+#match-transport-screen .mt-choice img{height:0;min-height:0;flex:1 1 0;width:100%;object-fit:contain}
+#match-transport-screen .mt-label{flex:0 0 auto;line-height:1.1;margin-top:2px;font-size:clamp(10px,1.4vw,14px)}
+#match-transport-screen #mt-feedback{min-height:18px;margin:0!important;line-height:18px;font-size:13px}
+#mt-actions{display:flex;align-items:center;justify-content:center;gap:12px;min-height:36px}
+#mt-actions .action-btn{margin:0!important;padding:7px 16px!important;font-size:14px!important;line-height:20px!important;min-height:34px;box-sizing:border-box}
+@media(max-width:600px){
+#match-transport-screen.active{padding-left:max(3px,env(safe-area-inset-left))!important;padding-right:max(3px,env(safe-area-inset-right))!important;gap:4px}
+#match-transport-screen .mt-column{width:37%;gap:5px}
+#match-transport-screen .mt-choice{padding:2px;border-width:2px;border-radius:11px}
+#match-transport-screen .mt-label{font-size:11px;margin-top:1px}
+#match-transport-screen #mt-title{font-size:21px}
+#match-transport-screen .mt-status{font-size:12px;padding:0 5px;box-sizing:border-box}
+#mt-actions .action-btn{font-size:12px!important;padding:6px 12px!important}
+}
+@media(max-height:450px){
+#match-transport-screen.active{gap:2px;padding-top:3px!important;padding-bottom:3px!important}
+#match-transport-screen #mt-title{font-size:17px}
+#match-transport-screen .mt-status{font-size:11px}
+#match-transport-screen .mt-column{gap:3px}
+#match-transport-screen .mt-label{font-size:9px}
+#match-transport-screen #mt-feedback{font-size:11px;min-height:13px;line-height:13px}
+#mt-actions{min-height:28px}#mt-actions .action-btn{min-height:26px;padding:3px 10px!important;font-size:11px!important}
+}
 </style><div id="mt-complete" role="dialog" aria-modal="true" aria-labelledby="mt-complete-title" hidden><div id="mt-complete-title"></div></div>
 <script id="match-transport-logic">
 (()=>{'use strict';
@@ -1715,6 +1748,14 @@ const ms=()=>typeof currentGlobalLang!=='undefined'?currentGlobalLang==='ms':$('
 const t=(a,b)=>ms()?a:b, sound=()=>{if(typeof playClickSound==='function')playClickSound()};
 const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const active=()=>screen.classList.contains('active');
+let viewportLocked=false,savedScroll={x:0,y:0};
+function fitViewport(){if(!active())return;screen.style.setProperty('--mt-view-height',(window.visualViewport?.height||window.innerHeight)+'px');requestAnimationFrame(draw)}
+function syncViewportLock(){const on=active();if(on&&!viewportLocked){savedScroll={x:window.scrollX,y:window.scrollY};viewportLocked=true;document.documentElement.classList.add('mt-screen-lock');document.body.classList.add('mt-screen-lock');fitViewport()}else if(!on&&viewportLocked){viewportLocked=false;document.documentElement.classList.remove('mt-screen-lock');document.body.classList.remove('mt-screen-lock');screen.style.removeProperty('--mt-view-height');window.scrollTo(savedScroll.x,savedScroll.y)}}
+window.addEventListener('resize',fitViewport);window.visualViewport?.addEventListener('resize',fitViewport);
+window.addEventListener('wheel',e=>{if(active())e.preventDefault()},{passive:false});
+screen.addEventListener('touchmove',e=>{if(active())e.preventDefault()},{passive:false});
+window.addEventListener('keydown',e=>{if(active()&&['ArrowUp','ArrowDown','PageUp','PageDown','Home','End'].includes(e.key))e.preventDefault()});
+
 function labels(){
 $('mt-title').textContent=t('Padankan Kenderaan 🚗','Match the Transport 🚗');
 $('mt-set').textContent=t('Set ','Set ')+(index+1)+' / 2';$('mt-score').textContent=t('Padanan: ','Matched: ')+matched.size+' / 5';
@@ -1741,7 +1782,7 @@ function render(){matched=new Set();chosen(null);drag=null;complete=false;$('mt-
 for(const side of ['left','right']){$('mt-'+side).replaceChildren();shuffle(sets[index]).forEach(p=>{const b=document.createElement('button');b.type='button';b.className='mt-choice';b.dataset.id=p.id;b.dataset.side=side;const img=document.createElement('img');img.src=p.images[side==='left'?0:1];img.draggable=false;const label=document.createElement('span');label.className='mt-label';const port=document.createElement('span');port.className='mt-port';port.setAttribute('aria-hidden','true');b.append(img,label,port);
 b.addEventListener('pointerdown',e=>{if(e.button!==0)return;sound();if(matched.has(p.id)||complete)return;e.preventDefault();drag={b,pointer:e.pointerId,x:e.clientX,y:e.clientY,sx:e.clientX,sy:e.clientY,moved:false};try{b.setPointerCapture(e.pointerId)}catch(_){}});
 b.addEventListener('click',e=>{if(e.detail===0){sound();select(b)}});$('mt-'+side).append(b)})}labels();requestAnimationFrame(draw)}
-window.startMatchTransport=()=>{clearTimeout(timer);$('mt-complete').hidden=true;const all=shuffle(bank);sets=[all.slice(0,5),all.slice(5)];index=0;if(typeof showScreen==='function')showScreen('match-transport-screen');else{document.querySelectorAll('.card.active').forEach(c=>c.classList.remove('active'));screen.classList.add('active')}render()};
+window.startMatchTransport=()=>{clearTimeout(timer);$('mt-complete').hidden=true;const all=shuffle(bank);sets=[all.slice(0,5),all.slice(5)];index=0;if(typeof showScreen==='function')showScreen('match-transport-screen');else{document.querySelectorAll('.card.active').forEach(c=>c.classList.remove('active'));screen.classList.add('active')}syncViewportLock();render()};
 function cancel(){drag=null;draw()}
 window.addEventListener('pointermove',e=>{if(!drag||e.pointerId!==drag.pointer)return;e.preventDefault();drag.x=e.clientX;drag.y=e.clientY;if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)>5)drag.moved=true;draw()},{passive:false});
 window.addEventListener('pointerup',e=>{if(!drag||e.pointerId!==drag.pointer)return;const d=drag;drag=null;try{d.b.releasePointerCapture(e.pointerId)}catch(_){}if(d.moved){const target=targetAt(e.clientX,e.clientY,d.b);if(target&&target!==d.b){sound();pair(d.b,target)}chosen(null)}else select(d.b);draw()});
@@ -1749,7 +1790,7 @@ window.addEventListener('pointercancel',cancel);window.addEventListener('blur',c
 function back(){clearTimeout(timer);complete=false;drag=null;chosen(null);$('mt-complete').hidden=true;if(typeof openTransportMenu==='function')openTransportMenu();else if(typeof showScreen==='function')showScreen('transport-menu-screen')}
 $('mt-back').onclick=()=>{sound();back()};$('mt-next').onclick=()=>{sound();if(index===0&&matched.size===5){index=1;render()}};
 for(const id of ['lang-btn-ms','lang-btn-en'])if($(id))new MutationObserver(()=>{labels();requestAnimationFrame(draw)}).observe($(id),{attributes:true,attributeFilter:['class']});
-new MutationObserver(()=>{if(!active()){clearTimeout(timer);drag=null;chosen(null);$('mt-complete').hidden=true}}).observe(screen,{attributes:true,attributeFilter:['class']});
+new MutationObserver(()=>{syncViewportLock();if(!active()){clearTimeout(timer);drag=null;chosen(null);$('mt-complete').hidden=true}}).observe(screen,{attributes:true,attributeFilter:['class']});
 new ResizeObserver(()=>{if(active())draw()}).observe($('mt-board'));labels();
 })();
 </script>
