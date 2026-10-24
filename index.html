@@ -1709,7 +1709,7 @@ window.addEventListener('pointercancel',cancelDrag,true);window.addEventListener
 /* The viewport lock belongs only to this activity. */
 html.mt-screen-lock,body.mt-screen-lock{overflow:hidden!important;overscroll-behavior:none!important;height:100%!important}
 body.mt-screen-lock .main-content,body.mt-screen-lock .container{overflow:hidden!important}
-#match-transport-screen.active{position:fixed!important;inset:0!important;z-index:10000!important;width:100%!important;max-width:none!important;height:var(--mt-view-height,100dvh)!important;max-height:var(--mt-view-height,100dvh)!important;margin:0!important;padding: max(8px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))!important;box-sizing:border-box!important;display:grid!important;grid-template-rows:auto auto minmax(0,1fr) auto auto;gap:5px;overflow:hidden!important;overscroll-behavior:none;touch-action:none;background:#fff;border-radius:0!important;transform:none!important}
+#match-transport-screen.active{position:fixed!important;inset:0!important;z-index:10000!important;width:100%!important;max-width:none!important;height:var(--mt-view-height,100dvh)!important;max-height:var(--mt-view-height,100dvh)!important;margin:0!important;padding: max(8px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))!important;box-sizing:border-box!important;display:grid!important;grid-template-rows:auto auto minmax(0,1fr) auto auto;gap:5px;overflow:hidden!important;overscroll-behavior:none;touch-action:none;background:transparent!important;border-radius:0!important;transform:none!important}
 #match-transport-screen #mt-title{margin:0!important;font-size:clamp(19px,3vw,30px);line-height:1.15}
 #match-transport-screen .mt-status{width:100%;margin:0 auto!important;line-height:1.2;font-size:14px}
 #match-transport-screen #mt-board{width:100%;height:100%;min-height:0;margin:0 auto!important}
@@ -1748,6 +1748,24 @@ const ms=()=>typeof currentGlobalLang!=='undefined'?currentGlobalLang==='ms':$('
 const t=(a,b)=>ms()?a:b, sound=()=>{if(typeof playClickSound==='function')playClickSound()};
 const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const active=()=>screen.classList.contains('active');
+function sayFeedback(kind){
+ const text=kind==='done'?t('Semua selesai!','All Done!'):t('Betul!','Correct!');
+ try{
+  if(kind==='done'&&typeof announceAllDone==='function'){announceAllDone();return}
+  if(typeof speakAppFeedback==='function'){speakAppFeedback(text);return}
+  if(kind==='correct'&&typeof announceCorrect==='function'){announceCorrect();return}
+  if(window.speechSynthesis&&typeof SpeechSynthesisUtterance!=='undefined'){const speech=new SpeechSynthesisUtterance(text);speech.lang=ms()?'ms-MY':'en-US';speech.rate=1;window.speechSynthesis.cancel();window.speechSynthesis.speak(speech)}
+ }catch(_){}
+}
+function finishSet(){
+ complete=true;clearTimeout(timer);
+ timer=setTimeout(()=>{
+  if(!active())return;
+  if(index===0){index=1;render()}
+  else{$('mt-complete').hidden=false;sayFeedback('done');timer=setTimeout(()=>{if(active())back()},2000)}
+ },1200);
+}
+
 let viewportLocked=false,savedScroll={x:0,y:0};
 function fitViewport(){if(!active())return;screen.style.setProperty('--mt-view-height',(window.visualViewport?.height||window.innerHeight)+'px');requestAnimationFrame(draw)}
 function syncViewportLock(){const on=active();if(on&&!viewportLocked){savedScroll={x:window.scrollX,y:window.scrollY};viewportLocked=true;document.documentElement.classList.add('mt-screen-lock');document.body.classList.add('mt-screen-lock');fitViewport()}else if(!on&&viewportLocked){viewportLocked=false;document.documentElement.classList.remove('mt-screen-lock');document.body.classList.remove('mt-screen-lock');screen.style.removeProperty('--mt-view-height');window.scrollTo(savedScroll.x,savedScroll.y)}}
@@ -1775,8 +1793,8 @@ function draw(){const board=$('mt-board'),r=board.getBoundingClientRect();$('mt-
 if(drag&&drag.moved)line(anchor(drag.b),{x:drag.x-r.left,y:drag.y-r.top},'#8454e8',true)}
 function pair(a,b){if(!a||!b||a.dataset.side===b.dataset.side||matched.has(a.dataset.id)||matched.has(b.dataset.id))return;
 if(a.dataset.id!==b.dataset.id){$('mt-feedback').textContent=t('Cuba lagi!','Try again!');chosen(null);return}
-matched.add(a.dataset.id);a.classList.add('matched');b.classList.add('matched');a.setAttribute('aria-disabled','true');b.setAttribute('aria-disabled','true');chosen(null);labels();$('mt-feedback').textContent=t('Betul! 🌟','Correct! 🌟');draw();
-if(matched.size===5){if(index===0){$('mt-feedback').textContent=t('Hebat! Lima padanan betul.','Excellent! Five correct matches.');$('mt-next').hidden=false}else{complete=true;$('mt-complete').hidden=false;timer=setTimeout(()=>{if(active())back()},2000)}}}
+matched.add(a.dataset.id);a.classList.add('matched');b.classList.add('matched');a.setAttribute('aria-disabled','true');b.setAttribute('aria-disabled','true');chosen(null);labels();$('mt-feedback').textContent=t('Betul! 🌟','Correct! 🌟');sayFeedback('correct');draw();
+if(matched.size===5){$('mt-feedback').textContent=index===0?t('Hebat! Set seterusnya…','Excellent! Next set…'):t('Hebat! Semua padanan betul!','Excellent! All matches correct!');finishSet()}}
 function select(b){if(matched.has(b.dataset.id)||complete)return;if(!selected){chosen(b);return}if(selected===b){chosen(null);return}if(selected.dataset.side===b.dataset.side){chosen(b);return}pair(selected,b)}
 function render(){matched=new Set();chosen(null);drag=null;complete=false;$('mt-next').hidden=true;$('mt-feedback').textContent='';
 for(const side of ['left','right']){$('mt-'+side).replaceChildren();shuffle(sets[index]).forEach(p=>{const b=document.createElement('button');b.type='button';b.className='mt-choice';b.dataset.id=p.id;b.dataset.side=side;const img=document.createElement('img');img.src=p.images[side==='left'?0:1];img.draggable=false;const label=document.createElement('span');label.className='mt-label';const port=document.createElement('span');port.className='mt-port';port.setAttribute('aria-hidden','true');b.append(img,label,port);
