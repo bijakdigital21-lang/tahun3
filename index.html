@@ -1551,29 +1551,22 @@ body.lb-wide{overscroll-behavior:none}
 'use strict';
 const button=document.getElementById('pz-home');
 if(!button)return;
-const ns='http://www.w3.org/2000/svg';
-function fixHomeIcon(){
- if(button.querySelector('[data-puzzle-home-icon]'))return;
- const label=button.textContent.replace(/[\u{1F3E0}-\u{1F3E1}\u{1F3D8}\u{2302}\u{FE0F}]/gu,'').trim();
- if(!label)return;
- const icon=document.createElementNS(ns,'svg');
- icon.setAttribute('data-puzzle-home-icon','');
- icon.setAttribute('viewBox','0 0 24 24');
- icon.setAttribute('width','22');icon.setAttribute('height','22');
- icon.setAttribute('fill','none');icon.setAttribute('stroke','currentColor');
- icon.setAttribute('stroke-width','2');icon.setAttribute('stroke-linecap','round');
- icon.setAttribute('stroke-linejoin','round');icon.setAttribute('aria-hidden','true');
- icon.setAttribute('focusable','false');
- icon.style.cssText='display:inline-block;vertical-align:middle;margin-left:6px;pointer-events:none;flex-shrink:0';
- const path=document.createElementNS(ns,'path');
- path.setAttribute('d','M3 10 12 3l9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V10Z');
- icon.appendChild(path);
- button.replaceChildren(document.createTextNode(label),icon);
+// Use the same plain text, emoji and button classes as the Animal module.
+const animalHome=document.querySelector('#animal-menu-screen .action-btn.home-btn');
+const label='Back to Home 🏠';
+function matchAnimalHome(){
+ const classes=animalHome?animalHome.className:'action-btn home-btn';
+ if(button.className!==classes)button.className=classes;
+ if(button.textContent!==label||button.children.length)button.textContent=label;
 }
-new MutationObserver(fixHomeIcon).observe(button,{childList:true,characterData:true,subtree:true});
-fixHomeIcon();
+new MutationObserver(matchAnimalHome).observe(button,{childList:true,characterData:true,subtree:true});
+matchAnimalHome();
 })();
 </script>
+<style id="puzzle-home-plain-style">
+/* The house is already part of the button text, matching the Animal module. */
+#pz-home::before,#pz-home::after{content:none!important;display:none!important}
+</style>
 <!-- END PUZZLE MODULE -->
 
 <!-- SPACE ADVENTURE: isolated module, all learning assets drawn locally. -->
