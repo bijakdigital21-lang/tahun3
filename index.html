@@ -1892,7 +1892,7 @@ function say(key,text){cancelVoice();if(muted||paused||root.hidden)return;const 
 }
 function click(){if(!muted&&typeof playClickSound==='function')playClickSound()}
 function questionText(){let q=current();if(!q)return'';if(q.type==='find'){const m=money.find(m=>m.value===q.value);return t('Yang mana satu '+(q.value<100?q.value+' sen':'RM'+q.value/100)+'?','Which one is '+m.en+'?')}
- return t('Saya nak beli '+q.product[2].toLowerCase()+'. Bayar tepat '+amount(q.value)+', ya!','I would like '+q.product[3].toLowerCase()+'. Pay exactly '+amount(q.value)+', please!')}
+ return t('Saya nak beli '+q.product[2].toLowerCase()+'. Bayar tepat '+amount(q.value)+','I would like '+q.product[3].toLowerCase()+'. Pay exactly '+amount(q.value)+', please!')}
 function listen(){const q=current();if(q&&!sessionDone)say(q.id,questionText())}
 function stopTimer(){clearTimeout(timer);timer=0;nextAction=null}
 function schedule(fn,delay){stopTimer();nextAction=fn;remaining=delay;due=Date.now()+delay;timer=setTimeout(()=>{timer=0;nextAction=null;if(!root.hidden)fn()},delay)}
