@@ -1855,13 +1855,27 @@ html.lme-lock,body.lme-lock{overflow:hidden!important;overscroll-behavior:none}
 @media(min-width:700px){#lme-scene{background-size:100% auto}#lme-customer{left:10%;height:92%;max-width:50%}#lme-counter{padding:12px 60px;min-height:145px}#lme-bank{padding-left:60px;padding-right:60px}#lme .lme-money img{height:55px}#lme .lme-money img.coin{height:55px;width:55px}#lme-bubble{right:6%;width:57%}#lme-caption{right:7%}}
 @media(max-height:650px){#lme-top{padding:4px 7px;border-bottom-width:3px}#lme-top button{min-height:36px;min-width:36px;font-size:13px}#lme-counter{min-height:84px;padding:5px 10px;border-top-width:5px}#lme-tray{min-height:74px;padding:5px}#lme-item-emoji{font-size:40px}#lme-item-emoji img{display:block;width:clamp(50px,8vh,80px);height:clamp(50px,8vh,80px);object-fit:contain}#lme-item-label{font-size:11px}#lme-price{font-size:15px}#lme-bank{gap:4px;padding:5px 10px}#lme .lme-money{min-height:49px;padding:3px}#lme .lme-money img,#lme .lme-money img.coin{height:30px}#lme-bank.recognise .lme-money{min-height:65px}#lme-bank.recognise .lme-money img{height:45px}#lme-bubble{padding:8px 10px;font-size:15px}#lme-actions button{min-height:36px;padding:6px}#lme-actions{padding:4px 10px 7px}#lme-message{font-size:11px;min-height:18px}#lme-scene{min-height:100px}}
 @media(orientation:landscape) and (max-height:550px){#lme-frame{display:grid;grid-template-columns:55% 45%;grid-template-rows:56px 1fr 40px 22px}#lme-top{grid-column:1 / 3;grid-row:1}#lme-scene{grid-row:2 / 5;grid-column:1;min-height:0}#lme-counter{grid-row:2;grid-column:2;align-self:start;height:52%;min-height:90px;padding:5px}#lme-bank,#lme-bank.recognise{grid-row:2;grid-column:2;align-self:end;padding:5px;height:46%;gap:4px}#lme .lme-money{min-height:0}#lme .lme-money img,#lme .lme-money img.coin{height:26px}#lme-bank.recognise .lme-money{min-height:0}#lme-bank.recognise .lme-money img{height:42px}#lme-actions{grid-row:3;grid-column:2;padding:2px 5px}#lme-message{grid-row:4;grid-column:2}#lme-bubble{font-size:14px;width:68%}#lme-item-emoji{font-size:32px}}
+
+/* Game controls are always in the bottom row, including landscape screens. */
+#lme-top{padding:8px 10px max(8px,env(safe-area-inset-bottom));border-bottom:0;border-top:4px solid #744b22}
+#lme-actions{padding-bottom:8px}
+@media(max-height:650px){#lme-top{padding:4px 7px max(4px,env(safe-area-inset-bottom));border-bottom:0;border-top-width:3px}#lme-actions{padding-bottom:5px}}
+@media(orientation:landscape) and (max-height:550px){
+ #lme-frame{grid-template-rows:minmax(0,1fr) 40px 22px max(56px,calc(48px + env(safe-area-inset-bottom)))}
+ #lme-top{grid-column:1 / 3;grid-row:4}
+ #lme-scene{grid-row:1 / 4;grid-column:1}
+ #lme-counter{grid-row:1;grid-column:2}
+ #lme-bank,#lme-bank.recognise{grid-row:1;grid-column:2}
+ #lme-actions{grid-row:2;grid-column:2}
+ #lme-message{grid-row:3;grid-column:2}
+}
 </style>
 <div id="lme" hidden role="dialog" aria-modal="true" aria-label="Little Money Explorer">
  <div id="lme-frame">
-  <header id="lme-top"><button id="lme-home" type="button">⌂</button><div id="lme-meter"><div id="lme-progress-line"><span id="lme-question-label"></span><b id="lme-progress"></b></div><div id="lme-dots"></div></div><button id="lme-lang" type="button">BM</button><button id="lme-listen" type="button"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-5v16l-5-5H4z" fill="currentColor"/><path d="M16 8q5 4 0 8m3-11q8 7 0 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><button id="lme-mute" type="button">♫</button><button id="lme-pause" type="button">Ⅱ</button></header>
   <div id="lme-scene"><div id="lme-customer" role="img"></div><div id="lme-bubble"><p id="lme-question"></p></div><div id="lme-caption"></div></div>
   <div id="lme-counter"><div id="lme-item"><span id="lme-item-emoji" role="img"></span><div id="lme-item-label"><span id="lme-product"></span><strong id="lme-price"></strong></div></div><div id="lme-tray" tabindex="0"><span id="lme-tray-title"></span><strong id="lme-total"></strong><div id="lme-tray-money"></div></div></div>
   <div id="lme-bank"></div><div id="lme-message" aria-live="polite"></div><div id="lme-actions"><button id="lme-clear" type="button"></button><button id="lme-submit" type="button"></button></div>
+  <footer id="lme-top"><button id="lme-home" type="button">⌂</button><div id="lme-meter"><div id="lme-progress-line"><span id="lme-question-label"></span><b id="lme-progress"></b></div><div id="lme-dots"></div></div><button id="lme-lang" type="button">BM</button><button id="lme-listen" type="button"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-5v16l-5-5H4z" fill="currentColor"/><path d="M16 8q5 4 0 8m3-11q8 7 0 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><button id="lme-mute" type="button">♫</button><button id="lme-pause" type="button">Ⅱ</button></footer>
   <div id="lme-modal" hidden><div id="lme-modal-card"><div id="lme-stars">🌟</div><h2 id="lme-modal-title"></h2><p id="lme-modal-copy"></p><button id="lme-modal-main" type="button"></button><button id="lme-modal-home" class="secondary" type="button"></button></div></div>
  </div>
 </div>
