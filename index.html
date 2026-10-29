@@ -91,6 +91,95 @@ body.lb-wide{overscroll-behavior:none}
 #label-body-screen #lb-picture .lb-target.lb-over{background:#d8f9c7;border:3px solid #48a329;box-shadow:0 0 0 4px #9aeb71}
 #label-body-screen #lb-picture .lb-target.lb-wrong{background:#ffe0e0;border-color:#dd3d3d}
 </style>
+
+<style id="home-large-module-buttons">
+/* Main panel only: let the module tiles use the available screen width. */
+body:has(#home-screen.active) .main-content,
+body:has(#home-screen.active) .main-content > .container {
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: none !important;
+}
+body:has(#home-screen.active) .main-content > .container {
+    width: 100% !important;
+    padding: 0 !important;
+}
+#home-screen {
+    box-sizing: border-box;
+    width: 100% !important;
+    max-width: none !important;
+    padding: 20px !important;
+}
+#home-screen .topic-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    max-width: none !important;
+    gap: 18px !important;
+    margin: 18px 0 0 !important;
+    padding: 0 !important;
+    justify-items: stretch !important;
+    align-items: stretch !important;
+}
+#home-screen .topic-grid > .topic-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 1 / 1.06;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: clamp(20px, 5vw, 34px) !important;
+    overflow: hidden;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+#home-screen .topic-grid > .topic-btn > img {
+    display: block !important;
+    box-sizing: border-box;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    object-fit: contain !important;
+    border-radius: inherit;
+}
+@media (min-width: 701px) and (max-width: 1100px) {
+    #home-screen .topic-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+}
+@media (max-width: 700px) {
+    body:has(#home-screen.active) .main-content {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: max(12px, env(safe-area-inset-left)) !important;
+        padding-right: max(12px, env(safe-area-inset-right)) !important;
+    }
+    #home-screen {
+        padding: 12px 0 20px !important;
+        background: transparent !important;
+        border: 0 !important;
+        box-shadow: none !important;
+    }
+    #home-screen .home-header { margin-bottom: 14px !important; }
+    #home-screen .topic-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px !important;
+        margin-top: 12px !important;
+    }
+}
+</style>
 </head>
 <body class="login-mode">
 
