@@ -1826,49 +1826,147 @@ Malay narration: ms-MY-YasminNeural. English narration: en-US-AnaNeural.
 <style id="little-money-style">
 html.lme-lock,body.lme-lock{overflow:hidden!important;overscroll-behavior:none}
 #lme[hidden],#lme [hidden]{display:none!important}
-#lme{position:fixed;inset:0;z-index:2147483600;background:#27180e;overflow:hidden;color:#392616;font:700 16px/1.3 Quicksand,'Arial',sans-serif;text-align:center;touch-action:manipulation}
+#lme{
+ --navy:#17336b;--navy-2:#0f2756;--cream:#fff6df;--cream-2:#fffbf0;--line:#f0dfb8;--yellow:#ffd54a;--gold:#ffe14a;--brown:#4a2c17;
+ --spark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cg stroke='%23ffc62e' stroke-width='3.4' stroke-linecap='round' fill='none'%3E%3Cpath d='M3 20l8-4M5 8l7 3M17 3v7'/%3E%3C/g%3E%3C/svg%3E");
+ position:fixed;inset:0;z-index:2147483600;background:#14275a;overflow:hidden;color:var(--navy);font:700 16px/1.3 Quicksand,'Nunito','Arial',sans-serif;text-align:center;touch-action:manipulation}
 #lme *{box-sizing:border-box}#lme button{font:inherit;cursor:pointer;touch-action:manipulation}#lme button:focus-visible{outline:4px solid #ffdb4d;outline-offset:2px}#lme button:disabled{cursor:default;opacity:.65}
-#lme-frame{height:100%;height:100dvh;max-width:1000px;margin:auto;display:flex;flex-direction:column;background:#402817;position:relative;isolation:isolate;box-shadow:0 0 80px #0008}
-#lme-top{flex:none;display:flex;align-items:center;gap:7px;padding:max(8px,env(safe-area-inset-top)) 10px 8px;background:#fff6e8;border-bottom:5px solid #744b22;z-index:5}
-#lme-top button{border:2px solid #e8dfd0;background:white;border-radius:16px;min-height:44px;min-width:44px;color:#342b39;padding:5px 8px}
-#lme-meter{flex:1;min-width:0;padding:6px 8px;border-radius:15px;background:white;text-align:left}
-#lme-progress-line{display:flex;justify-content:space-between;font-size:12px;color:#686375}#lme-progress-line b{font-size:14px}#lme-question-label{font-size:10px;letter-spacing:.3px}#lme-dots{display:flex;gap:3px;margin-top:4px}#lme-dots i{height:7px;flex:1;border-radius:6px;background:#e1dbcd}#lme-dots i.passed{background:#28a668}#lme-dots i.current{background:#f1b424}
-#lme-scene{flex:1;min-height:130px;position:relative;overflow:hidden;background-image:linear-gradient(#0002,#0000),var(--lme-bg);background-position:center top;background-size:cover}
-#lme-customer{position:absolute;left:1%;bottom:-2px;height:85%;aspect-ratio:var(--lme-person-ratio,.6);max-width:60%;background-image:var(--lme-people);background-size:500% 100%;background-repeat:no-repeat;filter:drop-shadow(0 3px 4px #2c160b55);pointer-events:none}
-#lme-bubble{position:absolute;right:3%;top:6%;width:65%;max-width:470px;padding:13px 15px;background:#fff5d9;border:3px solid #5b381b;border-radius:24px;box-shadow:0 5px 0 #0002;z-index:2;font-size:clamp(16px,2.7vw,23px);text-align:left}
-#lme-bubble:after{content:'';position:absolute;bottom:-15px;left:25px;border-top:16px solid #fff5d9;border-right:18px solid transparent}#lme-bubble p{margin:0}#lme-bubble strong{color:#b94b24}
-#lme-caption{position:absolute;bottom:10px;right:10px;padding:4px 9px;background:#fff3d9ed;border-radius:8px;font-size:12px;max-width:42%}
-#lme-counter{position:relative;flex:none;min-height:108px;display:flex;gap:10px;align-items:stretch;padding:10px 14px;background-image:linear-gradient(#b6772222,#a3541922),var(--lme-bg);background-position:center bottom;background-size:100% auto;border-top:9px solid #8e521f;box-shadow:0 -3px 0 #eaba65;z-index:3}
-#lme-item{flex:0 0 28%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px}#lme-item-emoji{font-size:clamp(44px,8vh,75px);line-height:1.05;filter:drop-shadow(0 4px 3px #0005)}#lme-item-emoji img{display:block;width:clamp(50px,8vh,80px);height:clamp(50px,8vh,80px);object-fit:contain}#lme-item-label{background:#fff4d7;border:2px solid #694923;border-radius:8px;padding:3px 8px;max-width:100%;font-size:13px}#lme-price{display:block;font-size:19px}
-#lme-tray{flex:1;min-width:0;min-height:100px;background:radial-gradient(ellipse at top,#234d88,#102c54);border:4px solid #0b2042;box-shadow:inset 0 0 14px #050f2670;border-radius:23px;display:flex;flex-direction:column;justify-content:center;padding:8px;color:#f9f1c9}
-#lme-tray.over{outline:4px solid #ffd44e;background:#1c427a}#lme-tray-title{font-size:14px}#lme-total{color:#ffdc50;font-size:23px}#lme-tray-money{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;max-height:60px;overflow:auto;margin-top:4px}
-#lme-tray-money button{display:flex;align-items:center;gap:3px;background:#fff8dc;border:1px solid #e6c780;border-radius:7px;padding:2px 5px;color:#392616;font-size:12px;min-height:27px}#lme-tray-money img{width:35px;height:20px;object-fit:contain}#lme-tray-money img.coin{width:21px}
-#lme-bank{flex:none;padding:10px 12px 7px;background:linear-gradient(#342014,#24160f);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;z-index:4}
-#lme-bank.recognise{grid-template-columns:repeat(3,minmax(0,1fr));padding:13px}
-#lme .lme-money{min-height:64px;position:relative;border-radius:14px;border:2px solid #6b4b2b;background:#170f09;box-shadow:0 3px 0 #0008;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:5px;gap:3px;color:#fff2cc;touch-action:none;user-select:none;-webkit-user-select:none}
-#lme .lme-money img{width:100%;height:44px;object-fit:contain;pointer-events:none;user-select:none}#lme .lme-money img.coin{height:44px;width:44px}#lme .lme-money small{font-size:11px}#lme-bank.recognise .lme-money{min-height:92px}#lme-bank.recognise .lme-money img{height:60px}#lme-bank.recognise .lme-money img.coin{width:60px}
-#lme-bank .lme-money[data-value="100"],#lme-bank .lme-money[data-value="500"],#lme-bank .lme-money[data-value="1000"]{grid-column:auto}#lme-bank.pay .lme-money:nth-child(n+5){grid-column:span 1}#lme-bank.pay{grid-template-columns:repeat(4,minmax(0,1fr))}
-#lme-actions{flex:none;display:flex;gap:10px;padding:6px 12px max(10px,env(safe-area-inset-bottom));background:#24160f}#lme-actions button{border:0;border-radius:14px;padding:10px 12px;color:#fff4d3;min-height:44px}#lme-clear{flex:1;background:#78552e}#lme-submit{flex:1.6;background:#269e59;box-shadow:0 4px 0 #1c683c}
-#lme-message{background:#24160f;color:#ffe9b4;padding:2px 8px 4px;min-height:23px;font-size:13px;flex:none}
-.lme-ghost{position:fixed;z-index:2147483647;pointer-events:none;transform:translate(-50%,-50%);width:100px;height:70px;object-fit:contain;filter:drop-shadow(0 6px 7px #0007)}
-#lme-modal{position:absolute;inset:0;z-index:10;background:#1c110cb8;display:flex;align-items:center;justify-content:center;padding:24px}#lme-modal-card{max-width:440px;width:100%;padding:28px 20px;background:#fff5d8;border:5px solid #f5c758;border-radius:28px;box-shadow:0 15px 50px #0006}#lme-modal-title{font-size:30px;margin:8px 0;color:#207a54}#lme-modal-copy{font-size:16px;margin:12px 0}#lme-modal-card button{display:block;width:100%;border:0;border-radius:14px;background:#258958;color:white;margin-top:12px;padding:13px}#lme-modal-card button.secondary{background:#78552e}#lme-stars{font-size:46px}#lme .lme-wrong{animation:lme-shake .3s} @keyframes lme-shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-@media(min-width:700px){#lme-scene{background-size:100% auto}#lme-customer{left:10%;height:92%;max-width:50%}#lme-counter{padding:12px 60px;min-height:145px}#lme-bank{padding-left:60px;padding-right:60px}#lme .lme-money img{height:55px}#lme .lme-money img.coin{height:55px;width:55px}#lme-bubble{right:6%;width:57%}#lme-caption{right:7%}}
-@media(max-height:650px){#lme-top{padding:4px 7px;border-bottom-width:3px}#lme-top button{min-height:36px;min-width:36px;font-size:13px}#lme-counter{min-height:84px;padding:5px 10px;border-top-width:5px}#lme-tray{min-height:74px;padding:5px}#lme-item-emoji{font-size:40px}#lme-item-emoji img{display:block;width:clamp(50px,8vh,80px);height:clamp(50px,8vh,80px);object-fit:contain}#lme-item-label{font-size:11px}#lme-price{font-size:15px}#lme-bank{gap:4px;padding:5px 10px}#lme .lme-money{min-height:49px;padding:3px}#lme .lme-money img,#lme .lme-money img.coin{height:30px}#lme-bank.recognise .lme-money{min-height:65px}#lme-bank.recognise .lme-money img{height:45px}#lme-bubble{padding:8px 10px;font-size:15px}#lme-actions button{min-height:36px;padding:6px}#lme-actions{padding:4px 10px 7px}#lme-message{font-size:11px;min-height:18px}#lme-scene{min-height:100px}}
-@media(orientation:landscape) and (max-height:550px){#lme-frame{display:grid;grid-template-columns:55% 45%;grid-template-rows:56px 1fr 40px 22px}#lme-top{grid-column:1 / 3;grid-row:1}#lme-scene{grid-row:2 / 5;grid-column:1;min-height:0}#lme-counter{grid-row:2;grid-column:2;align-self:start;height:52%;min-height:90px;padding:5px}#lme-bank,#lme-bank.recognise{grid-row:2;grid-column:2;align-self:end;padding:5px;height:46%;gap:4px}#lme .lme-money{min-height:0}#lme .lme-money img,#lme .lme-money img.coin{height:26px}#lme-bank.recognise .lme-money{min-height:0}#lme-bank.recognise .lme-money img{height:42px}#lme-actions{grid-row:3;grid-column:2;padding:2px 5px}#lme-message{grid-row:4;grid-column:2}#lme-bubble{font-size:14px;width:68%}#lme-item-emoji{font-size:32px}}
+#lme-frame{height:100%;height:100dvh;max-width:1000px;margin:auto;display:flex;flex-direction:column;background:var(--cream);position:relative;isolation:isolate;box-shadow:0 0 80px #0008}
 
-/* Game controls are always in the bottom row, including landscape screens. */
-#lme-top{padding:8px 10px max(8px,env(safe-area-inset-bottom));border-bottom:0;border-top:4px solid #744b22}
-#lme-actions{padding-bottom:8px}
-@media(max-height:650px){#lme-top{padding:4px 7px max(4px,env(safe-area-inset-bottom));border-bottom:0;border-top-width:3px}#lme-actions{padding-bottom:5px}}
-@media(orientation:landscape) and (max-height:550px){
- #lme-frame{grid-template-rows:minmax(0,1fr) 40px 22px max(56px,calc(48px + env(safe-area-inset-bottom)))}
- #lme-top{grid-column:1 / 3;grid-row:4}
- #lme-scene{grid-row:1 / 4;grid-column:1}
- #lme-counter{grid-row:1;grid-column:2}
- #lme-bank,#lme-bank.recognise{grid-row:1;grid-column:2}
- #lme-actions{grid-row:2;grid-column:2}
- #lme-message{grid-row:3;grid-column:2}
+/* ---------- Scene: shop, shopkeeper, title, speech bubble ---------- */
+#lme-scene{flex:1;min-height:130px;position:relative;overflow:hidden;background-image:var(--lme-bg);background-position:center top;background-size:cover;background-color:#f6e3c2}
+#lme-customer{position:absolute;left:2%;bottom:-2px;height:86%;aspect-ratio:var(--lme-person-ratio,.6);max-width:60%;background-image:var(--lme-people);background-size:500% 100%;background-repeat:no-repeat;filter:drop-shadow(0 4px 5px #2c160b44);pointer-events:none}
+#lme-caption{position:absolute;top:8px;left:50%;transform:translateX(-50%);bottom:auto;right:auto;z-index:3;max-width:none;white-space:nowrap;padding:3px 22px 4px;border-radius:20px;background:linear-gradient(#ffe98c,#ffcd3c);border:3px solid #fff3c6;box-shadow:0 4px 0 #e0a92866,0 7px 14px #0003;font-size:0;line-height:1.05;color:var(--navy)}
+#lme-caption b{display:block;font-size:clamp(16px,4.2vw,22px);letter-spacing:.2px;color:var(--navy)}
+#lme-caption span{display:block;font-size:clamp(11px,3vw,15px);color:#6b4414}
+#lme-caption:after{content:'';position:absolute;right:-26px;top:4px;width:22px;height:22px;background:var(--spark) center/contain no-repeat}
+#lme-bubble{position:absolute;right:6%;top:56px;width:50%;max-width:470px;padding:12px 14px 13px;background:#fff5d8;border:2px solid #f0dba6;border-radius:24px;box-shadow:0 5px 0 #0000001c,0 8px 16px #0002;z-index:2;font-size:clamp(14px,4.3vw,24px);line-height:1.2;color:var(--brown);text-align:center}
+#lme-bubble:after{content:'';position:absolute;left:-10px;bottom:24px;width:20px;height:20px;background:#fff5d8;border-left:2px solid #f0dba6;border-bottom:2px solid #f0dba6;transform:rotate(45deg);border-radius:0 0 0 5px}
+#lme-bubble:before{content:'';position:absolute;right:-24px;bottom:-14px;width:24px;height:24px;background:var(--spark) center/contain no-repeat;transform:scaleX(-1)}
+#lme-bubble p{margin:0}#lme-bubble strong{color:#b94b24}
+
+/* ---------- Counter: product card + blue payment display ---------- */
+#lme-counter{position:relative;flex:none;min-height:104px;display:flex;gap:12px;align-items:stretch;padding:0 14px 24px;background:
+ repeating-linear-gradient(90deg,#0000 0 46px,#8a561f12 46px 48px),
+ linear-gradient(#f4d39a 0,#f4d39a 5px,#dcaa66 5px,#c98f48 100%);
+ border-top:0;box-shadow:0 -2px 0 #ffe4ae inset;z-index:3}
+#lme-item{flex:0 0 45%;margin-top:9px;display:flex;flex-direction:row;justify-content:flex-start;align-items:center;gap:6px;padding:6px 8px;background:linear-gradient(#fffaf0,#fff2d6);border:2px solid #f6e5bd;border-radius:22px;box-shadow:0 4px 0 #a9692a55,0 7px 12px #5a2e0a30;min-width:0;text-align:left}
+#lme-item-emoji{flex:none;font-size:clamp(40px,7vh,60px);line-height:1;filter:drop-shadow(0 3px 2px #0003)}
+#lme-item-emoji img{display:block;width:clamp(46px,7.4vh,66px);height:clamp(46px,7.4vh,66px);object-fit:contain}
+#lme-item-label{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0;max-width:100%;background:none;border:0;padding:0;font-size:clamp(13px,3.6vw,17px);color:var(--navy);line-height:1.1}#lme-product{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#lme-price{display:inline-block;padding:2px 9px;border-radius:11px;background:#ffe289;white-space:nowrap;font-size:clamp(15px,4vw,20px);color:var(--navy);letter-spacing:.2px}
+#lme-tray{position:relative;flex:1;min-width:0;min-height:98px;margin-top:-16px;background:radial-gradient(ellipse at 50% 0,#2b5db8 0,#183b80 55%,#0f2756 100%);border:4px solid #2a52a0;box-shadow:0 0 0 3px #0e2554,0 6px 0 3px #0a1b4099,0 10px 16px #0005,inset 0 0 14px #050f2660;border-radius:26px;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:6px 10px 7px;color:#fff}
+#lme-tray:before{content:attr(data-head);order:0;font-size:clamp(11px,3vw,14px);letter-spacing:.9px;color:#fff;text-transform:uppercase}
+#lme-tray:after{content:'';position:absolute;right:-12px;bottom:6px;width:20px;height:20px;background:var(--spark) center/contain no-repeat;transform:scaleX(-1);pointer-events:none}
+#lme-tray.over{outline:4px solid #ffd44e;background:#1c4aa0}
+#lme-counter:has(#lme-item[hidden]){min-height:84px}#lme-counter:has(#lme-item[hidden]) #lme-tray{margin-top:2px;min-height:62px}#lme-counter:has(#lme-item[hidden]) #lme-total{font-size:22px;width:60%}
+#lme-total{order:1;display:block;width:88%;margin:3px 0 2px;padding:1px 10px;background:#0a1b45;border:2px solid #25427f;border-radius:14px;box-shadow:inset 0 3px 8px #0008;color:var(--gold);font-size:clamp(22px,7vw,34px);line-height:1.15;text-shadow:0 2px 0 #0006;white-space:nowrap}
+#lme-tray-title{order:2;font-size:clamp(11px,3vw,14px);color:#9fcbff}
+#lme-tray-money{order:3;display:flex;flex-wrap:wrap;gap:4px;justify-content:center;max-height:58px;overflow:auto;margin-top:4px}
+#lme-tray-money:empty{display:none}
+#lme-tray:has(#lme-tray-money button) #lme-tray-title{display:none}
+#lme-tray-money button{display:flex;align-items:center;gap:3px;background:#fff8dc;border:1px solid #e6c780;border-radius:8px;padding:2px 6px;color:var(--navy);font-size:12px;min-height:27px}#lme-tray-money img{width:35px;height:20px;object-fit:contain}#lme-tray-money img.coin{width:21px}
+
+/* ---------- Bottom sheet: choose your money ---------- */
+#lme-bank{flex:none;position:relative;margin-top:-20px;padding:11px 14px 4px;background:var(--cream);border-radius:30px 30px 0 0;box-shadow:0 -5px 14px #3b1f0a2e;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:7px;z-index:4}
+#lme-bank:before{content:attr(data-head);grid-column:1 / -1;justify-self:center;margin-bottom:1px;padding:3px 24px 4px;border-radius:999px;background:linear-gradient(#ffe27a,#ffcb34);box-shadow:0 3px 0 #e0a92855;color:var(--navy);font-size:clamp(15px,4.2vw,20px);line-height:1.15}
+#lme-bank:after{content:'';position:absolute;top:13px;left:0;right:0;height:22px;pointer-events:none;background:var(--spark) no-repeat calc(50% - 124px) 0/22px 22px,var(--spark) no-repeat calc(50% + 124px) 0/22px 22px}
+#lme-bank.recognise{padding:13px 14px 12px}
+#lme .lme-money{grid-column:span 4;min-height:clamp(62px,10.4vh,88px);position:relative;border-radius:20px;border:2px solid var(--line);background:linear-gradient(#fffdf6,#fff6e2);box-shadow:0 3px 0 #e7d3a4,0 5px 8px #7a4a1a1a;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:5px 4px 6px;gap:3px;color:var(--navy);touch-action:none;user-select:none;-webkit-user-select:none}
+#lme-bank.pay .lme-money[data-value="5"],#lme-bank.pay .lme-money[data-value="10"],#lme-bank.pay .lme-money[data-value="20"],#lme-bank.pay .lme-money[data-value="50"]{grid-column:span 3}
+#lme .lme-money:active{transform:translateY(2px);box-shadow:0 1px 0 #e7d3a4}
+#lme .lme-money img{width:100%;height:clamp(32px,5.8vh,50px);object-fit:contain;pointer-events:none;user-select:none;filter:drop-shadow(0 2px 2px #0003)}
+#lme .lme-money img.coin{height:clamp(36px,6.4vh,56px);width:clamp(36px,6.4vh,56px)}
+#lme .lme-money small{font-size:clamp(12px,3.2vw,15px);color:var(--navy)}
+#lme-bank.recognise .lme-money{min-height:clamp(86px,14vh,120px)}
+#lme-bank.recognise .lme-money img{height:clamp(46px,8vh,72px)}
+#lme-bank.recognise .lme-money img.coin{width:clamp(50px,9vh,78px);height:clamp(50px,9vh,78px)}
+#lme-message{background:var(--cream);color:var(--navy);padding:4px 10px 2px;min-height:24px;font-size:clamp(12px,3.4vw,15px);flex:none;position:relative;z-index:4}
+#lme-actions{flex:none;display:flex;gap:12px;padding:4px 14px 10px;background:var(--cream);position:relative;z-index:4}
+#lme-actions button{border-radius:20px;padding:10px 12px;min-height:46px;font-size:clamp(16px,4.6vw,22px)}
+#lme-clear{flex:1;background:linear-gradient(#fff8e4,#fff0cc);border:3px solid #e7cd92;color:#3b2a18;box-shadow:0 3px 0 #dcc080}
+#lme-submit{flex:1.2;background:linear-gradient(#4b94ff,#1f66e0);border:2px solid #7db0ff;color:#fff;box-shadow:0 4px 0 #174ba6,0 7px 12px #1747a055;text-shadow:0 1px 0 #0a2f7a88}
+#lme-submit:active,#lme-clear:active{transform:translateY(2px)}
+
+/* ---------- Bottom bar ---------- */
+#lme-top{flex:none;display:flex;align-items:center;gap:6px;padding:8px 12px max(8px,env(safe-area-inset-bottom));background:var(--cream);border-top:2px solid #f1e1ba;z-index:5}
+#lme-top button{border:2.5px solid #cfd9ee;background:linear-gradient(#fff,#f7f9ff);border-radius:17px;min-height:46px;min-width:44px;color:var(--navy);padding:5px 6px;box-shadow:0 2px 0 #c3cfe6;font-size:clamp(15px,4.4vw,20px)}
+#lme-top button svg{display:block;margin:auto}
+#lme-listen{border-color:#ffc933!important;box-shadow:0 0 0 3px #ffe08a,0 2px 0 #e0a928!important}
+#lme-meter{flex:1;min-width:0;padding:5px 12px 6px;border-radius:17px;background:linear-gradient(#fff,#f7f9ff);border:2.5px solid #cfd9ee;box-shadow:0 2px 0 #c3cfe6;text-align:left}
+#lme-progress-line{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:var(--navy)}#lme-progress-line b{font-size:15px}#lme-question-label{font-size:11px;letter-spacing:.8px}
+#lme-dots{display:flex;justify-content:space-between;gap:2px;margin-top:4px}#lme-dots i{flex:1 1 0;min-width:0;max-width:12px;aspect-ratio:1/1;height:auto;border-radius:50%;background:#d6d6d6}#lme-dots i.passed{background:#2fb04a}#lme-dots i.current{background:#ffc42b;box-shadow:0 0 0 2px #fff0b0}
+
+.lme-ghost{position:fixed;z-index:2147483647;pointer-events:none;transform:translate(-50%,-50%);width:100px;height:70px;object-fit:contain;filter:drop-shadow(0 6px 7px #0007)}
+
+/* ---------- Result / pause dialog ---------- */
+#lme-modal{position:absolute;inset:0;z-index:10;background:#0c1d4cbf;display:flex;align-items:center;justify-content:center;padding:24px}
+#lme-modal-card{max-width:440px;width:100%;padding:26px 20px 22px;background:linear-gradient(#fffaf0,#fff3d8);border:5px solid var(--yellow);border-radius:30px;box-shadow:0 15px 50px #0006}
+#lme-modal-title{font-size:30px;margin:8px 0;color:var(--navy)}#lme-modal-copy{font-size:16px;margin:12px 0;color:var(--navy)}
+#lme-modal-card button{display:block;width:100%;border:2px solid #7db0ff;border-radius:18px;background:linear-gradient(#4b94ff,#1f66e0);box-shadow:0 4px 0 #174ba6;color:#fff;margin-top:12px;padding:13px}
+#lme-modal-card button.secondary{background:linear-gradient(#fff8e4,#fff0cc);border:3px solid #e7cd92;color:#3b2a18;box-shadow:0 3px 0 #dcc080}
+#lme-stars{font-size:46px}
+#lme .lme-wrong{animation:lme-shake .3s} @keyframes lme-shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* ---------- Larger screens ---------- */
+@media(min-width:700px){
+ #lme-customer{left:8%;height:92%;max-width:50%}
+ #lme-bubble{right:6%;width:52%;padding:16px 20px 17px}
+ #lme-counter{padding:0 60px 28px;min-height:140px}
+ #lme-bank{padding-left:60px;padding-right:60px}
+ #lme-message{font-size:16px}
+ #lme-actions{padding-left:60px;padding-right:60px}
+ #lme .lme-money img{height:56px}#lme .lme-money img.coin{height:60px;width:60px}
+ #lme-tray{min-height:118px}
+ #lme-item-emoji img{width:80px;height:80px}
 }
+
+/* ---------- Short screens ---------- */
+@media(max-height:700px){
+ #lme-caption{top:5px;padding:2px 18px 3px}
+ #lme-bubble{padding:8px 11px 9px;top:46px}
+ #lme-counter{min-height:88px;padding-bottom:22px}
+ #lme-tray{min-height:84px;padding:4px 8px 5px}
+ #lme-total{font-size:clamp(20px,6vw,26px)}
+ #lme-bank{padding-top:8px;gap:6px}
+ #lme-bank:before{padding:1px 20px 2px}
+ #lme-bank:after{top:9px}
+ #lme .lme-money{min-height:56px;padding:3px 3px 4px;border-radius:16px;gap:1px}
+ #lme-bank.recognise .lme-money{min-height:72px}
+ #lme-actions{padding-bottom:6px}
+ #lme-actions button{min-height:40px;padding:6px 10px}
+ #lme-top{padding-top:5px;padding-bottom:max(5px,env(safe-area-inset-bottom))}
+ #lme-top button{min-height:40px;min-width:40px}
+ #lme-message{min-height:20px;padding-top:2px}
+ #lme-scene{min-height:100px}
+}
+
+/* ---------- Landscape phones ---------- */
+@media(orientation:landscape) and (max-height:550px){
+ #lme-frame{display:grid;grid-template-columns:55% 45%;grid-template-rows:minmax(0,1fr) 40px 22px max(56px,calc(48px + env(safe-area-inset-bottom)))}
+ #lme-top{grid-column:1 / 3;grid-row:4;padding:4px 8px max(4px,env(safe-area-inset-bottom))}
+ #lme-scene{grid-row:1 / 4;grid-column:1;min-height:0}
+ #lme-customer{left:3%;height:80%}
+ #lme-caption{top:5px}
+ #lme-caption b{font-size:15px}#lme-caption span{font-size:11px}
+ #lme-bubble{font-size:14px;width:62%;top:44px;padding:8px 10px}
+ #lme-counter{grid-row:1;grid-column:2;align-self:start;height:52%;min-height:90px;padding:6px 8px 4px;gap:8px}
+ #lme-tray{margin-top:0;min-height:0}
+ #lme-item{margin-top:0;padding:4px 6px}
+ #lme-item-emoji{font-size:32px}#lme-item-emoji img{width:38px;height:38px}
+ #lme-bank,#lme-bank.recognise{grid-row:1;grid-column:2;align-self:end;margin-top:0;padding:5px 8px;height:46%;gap:4px;border-radius:0;box-shadow:none}
+ #lme-bank:before,#lme-bank:after{display:none}
+ #lme .lme-money{min-height:0;border-radius:12px;padding:2px}
+ #lme .lme-money img,#lme .lme-money img.coin{height:26px}
+ #lme .lme-money small{font-size:10px}
+ #lme-bank.recognise .lme-money{min-height:0}
+ #lme-bank.recognise .lme-money img{height:42px}
+ #lme-actions{grid-row:2;grid-column:2;padding:2px 8px}
+ #lme-message{grid-row:3;grid-column:2;font-size:11px;min-height:18px}
+ #lme-total{font-size:20px;margin:1px 0}
+}
+
+@media(max-width:390px){#lme-question-label{font-size:10px;letter-spacing:.2px}#lme-meter{padding-left:9px;padding-right:9px}}
 </style>
 <div id="lme" hidden role="dialog" aria-modal="true" aria-label="Little Money Explorer">
  <div id="lme-frame">
@@ -1912,13 +2010,13 @@ function listen(){const q=current();if(q&&!sessionDone)say(q.id,questionText())}
 function stopTimer(){clearTimeout(timer);timer=0;nextAction=null}
 function schedule(fn,delay){stopTimer();nextAction=fn;remaining=delay;due=Date.now()+delay;timer=setTimeout(()=>{timer=0;nextAction=null;if(!root.hidden)fn()},delay)}
 function clearDrag(){if(drag){try{drag.button.releasePointerCapture(drag.pointer)}catch(_){}drag.ghost?.remove();drag=null}$('tray').classList.remove('over')}
-function labels(){root.lang=ms()?'ms':'en';$('question-label').textContent=t('SOALAN','QUESTION');$('lang').textContent=ms()?'EN':'BM';$('lang').setAttribute('aria-label',t('Tukar ke English','Switch to Bahasa Melayu'));$('listen').setAttribute('aria-label',t('Dengar soalan','Listen to the question'));$('home').setAttribute('aria-label',t('Kembali ke menu utama','Back to Home'));$('pause').setAttribute('aria-label',t('Jeda','Pause'));$('mute').setAttribute('aria-label',muted?t('Hidupkan bunyi','Turn sound on'):t('Senyapkan bunyi','Mute sound'));$('mute').textContent=muted?'🔇':'♫';$('mute').setAttribute('aria-pressed',String(muted));$('clear').textContent=t('↶ Kosongkan','↶ Clear');$('submit').textContent=t('✓ Siap','✓ Done');$('caption').textContent=t('Little Money Explorer · Kedai Runcit','Little Money Explorer · Grocery Shop');
+function labels(){root.lang=ms()?'ms':'en';$('question-label').textContent=t('SOALAN','QUESTION');$('lang').textContent=ms()?'EN':'BM';$('lang').setAttribute('aria-label',t('Tukar ke English','Switch to Bahasa Melayu'));$('listen').setAttribute('aria-label',t('Dengar soalan','Listen to the question'));$('home').setAttribute('aria-label',t('Kembali ke menu utama','Back to Home'));$('pause').setAttribute('aria-label',t('Jeda','Pause'));$('mute').setAttribute('aria-label',muted?t('Hidupkan bunyi','Turn sound on'):t('Senyapkan bunyi','Mute sound'));$('mute').textContent=muted?'🔇':'♫';$('mute').setAttribute('aria-pressed',String(muted));$('clear').textContent=t('↺ Kosongkan','↺ Clear');$('submit').textContent=t('✓ Siap','✓ Done');$('caption').innerHTML='<b>Little Money Explorer</b><span>'+t('Kedai Runcit','Grocery Shop')+'</span>';$('bank').dataset.head=t('Pilih wang anda','Choose your money');$('tray').dataset.head=current()?.type==='pay'?t('Bayaran anda','Your payment'):'';
  if(!current())return;$('question').textContent=questionText();$('progress').textContent=(index+1)+'/10';$('tray-title').textContent=current().type==='pay'?t('Seret atau tekan wang','Drag or tap the money'):t('Tekan wang yang betul','Tap the correct money');$('tray').setAttribute('aria-label',t('Kotak bayaran','Payment box'));$('customer').setAttribute('aria-label',t('Pelanggan di depan kaunter','Customer at the counter'));
  if(current().type==='pay'){$('product').textContent=current().product[ms()?2:3];$('item-emoji').setAttribute('aria-label',current().product[ms()?2:3]);const picture=$('item-emoji').querySelector('img');if(picture)picture.alt=current().product[ms()?2:3]}
  $('bank').querySelectorAll('button').forEach(b=>{const m=money.find(m=>m.value===Number(b.dataset.value));b.setAttribute('aria-label',ms()?m.ms:m.en)});
  updatePaid();if(modalKind)modal(modalKind,false)
 }
-function updatePaid(){const pay=current()?.type==='pay';$('total').textContent=pay?t('Bayaran ','Payment ')+amount(total()):'✓';$('tray-money').replaceChildren();if(!pay)return;paid.forEach((v,i)=>{const m=money.find(m=>m.value===v),b=document.createElement('button');b.type='button';b.setAttribute('aria-label',t('Buang ','Remove ')+(ms()?m.ms:m.en));b.innerHTML=`<img src="${m.image}" class="${v<100?'coin':''}" alt="">${v<100?v+' sen':amount(v)} ×`;b.onclick=()=>{if(locked||paused)return;paid.splice(i,1);click();updatePaid()};$('tray-money').append(b)})}
+function updatePaid(){const pay=current()?.type==='pay';$('total').textContent=pay?amount(total()):'✓';$('tray-money').replaceChildren();if(!pay)return;paid.forEach((v,i)=>{const m=money.find(m=>m.value===v),b=document.createElement('button');b.type='button';b.setAttribute('aria-label',t('Buang ','Remove ')+(ms()?m.ms:m.en));b.innerHTML=`<img src="${m.image}" class="${v<100?'coin':''}" alt="">${v<100?v+' sen':amount(v)} ×`;b.onclick=()=>{if(locked||paused)return;paid.splice(i,1);click();updatePaid()};$('tray-money').append(b)})}
 function message(kind){const text=kind==='over'?t('Terlalu banyak. Buang wang atau kosongkan kotak.','Too much. Remove money or clear the box.'):kind==='under'?t('Belum cukup. Tambah wang lagi.','Not enough yet. Add more money.'):t('Cuba lagi. Dengar soalan sekali lagi.','Try again. Listen to the question again.');$('message').textContent=text;say(kind,text)}
 function add(v){if(locked||paused||root.hidden||current()?.type!=='pay')return;if(paid.length>=200){$('message').textContent=t('Kosongkan kotak dan cuba nilai wang lebih besar.','Clear the box and try larger money values.');return}paid.push(v);click();updatePaid();$('message').textContent=t('Tekan wang dalam kotak untuk buang.','Tap money in the box to remove it.')}
 function correct(){if(locked||paused)return;locked=true;attempts++;$('bank').querySelectorAll('button').forEach(b=>b.disabled=true);$('submit').disabled=true;modal('correct');say('good',t('Hebat!','Good job!'));schedule(()=>{modalKind='';$('modal').hidden=true;if(index===9)finish();else{index++;render();listen()}},1800)}
