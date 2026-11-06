@@ -2732,6 +2732,30 @@ console.info('KIDDORA guided tracing v2 loaded');
     speak(question().id, prompt());
   }
 
+  let tone;
+  function click() {
+    try {
+      if (typeof playClickSound === 'function') { playClickSound(); return; }
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return;
+      tone = tone || new Ctx();
+      const osc = tone.createOscillator(), gain = tone.createGain();
+      osc.frequency.value = 660;
+      gain.gain.setValueAtTime(.12, tone.currentTime);
+      gain.gain.exponentialRampToValueAtTime(.001, tone.currentTime + .12);
+      osc.connect(gain).connect(tone.destination);
+      osc.start(); osc.stop(tone.currentTime + .12);
+    } catch (_) {}
+  }
+
+  function sayRetry() {
+    stopAudio();
+    if (!window.speechSynthesis) return;
+    const line = new SpeechSynthesisUtterance(lang === 'ms' ? 'Cuba lagi' : 'Try again');
+    line.lang = lang === 'ms' ? 'ms-MY' : 'en-US';
+    window.speechSynthesis.speak(line);
+  }
+
   function updateScore() {
     $('score').textContent = score;
     $('score').setAttribute('aria-label', words().stars + ': ' + score);
@@ -2796,6 +2820,7 @@ console.info('KIDDORA guided tracing v2 loaded');
       choices.forEach(choice => { delete choice.dataset.wrong; });
       button.dataset.wrong = 'true';
       $('message').textContent = words().retry;
+      sayRetry();
       return;
     }
     score++;
@@ -2854,6 +2879,7 @@ console.info('KIDDORA guided tracing v2 loaded');
     listen();
   };
   choices.forEach(button => { button.onclick = () => answer(button); });
+  dialog.addEventListener('click', e => { if (e.target.closest('button')) click(); }, true);
 })();
 </script>
 </body>
