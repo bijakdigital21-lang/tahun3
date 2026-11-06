@@ -2417,6 +2417,7 @@ function createTracer(cfg){
  }
 
  const api={
+  root,
   open(){
    set=isNum?'num':set;
    if(typeof showScreen==='function')showScreen(cfg.screen);
@@ -2434,11 +2435,38 @@ function createTracer(cfg){
  return api;
 }
 
-const abc=createTracer({mode:'abc',screen:'abc-tracing-screen',back:'abc',menuScreen:'abc-menu-screen'});
-const num=createTracer({mode:'num',screen:'num123-tracing-screen',back:'123',menuScreen:'num123-menu-screen'});
-window.kiddoraTrace={abc,num};
-if(abc)window.startABCTracing=()=>abc.open();
-if(num)window.start123Tracing=()=>num.open();
+const CFG={
+ abc:{mode:'abc',screen:'abc-tracing-screen',back:'abc',menuScreen:'abc-menu-screen',fn:'startABCTracing',label:'abc tracing'},
+ num:{mode:'num',screen:'num123-tracing-screen',back:'123',menuScreen:'num123-menu-screen',fn:'start123Tracing',label:'123 tracing'}};
+const inst={};
+function ensure(mode){
+ const cfg=CFG[mode],card=document.getElementById(cfg.screen);if(!card)return null;
+ if(!inst[mode]||!card.contains(inst[mode].root)){try{inst[mode]=createTracer(cfg)}catch(err){console.error('KIDDORA tracing:',err);inst[mode]=null}}
+ return inst[mode];
+}
+window.kiddoraTrace={get abc(){return ensure('abc')},get num(){return ensure('num')}};
+const hook=()=>{for(const m of ['abc','num']){const cfg=CFG[m];window[cfg.fn]=()=>{const t=ensure(m);if(t)t.open()}}};
+hook();
+// Pintas klik pada butang menu ABC/123 walau dibina semula oleh skrip lain
+function modeFromEl(el){
+ for(let n=el;n&&n!==document;n=n.parentElement){
+  const oc=(n.getAttribute&&n.getAttribute('onclick'))||'',al=((n.getAttribute&&n.getAttribute('aria-label'))||'').toLowerCase();
+  for(const m of ['abc','num']){const c=CFG[m];if(oc.includes(c.fn)||oc.includes('kiddoraTrace.'+m)||al===c.label)return m}
+ }
+ return null;
+}
+window.addEventListener('click',e=>{
+ if(e.target&&e.target.closest&&e.target.closest('.kdt'))return;
+ const m=modeFromEl(e.target);if(!m)return;
+ e.preventDefault();e.stopImmediatePropagation();clickSound();
+ const t=ensure(m);if(t)t.open();
+},true);
+// Jika skrin tracing diaktifkan oleh kod lain, pastikan UI baharu wujud
+new MutationObserver(()=>{for(const m of ['abc','num']){const c=document.getElementById(CFG[m].screen);if(c&&c.classList.contains('active')&&!c.querySelector(':scope>.kdt'))ensure(m)}}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class']});
+ensure('abc');ensure('num');
+document.addEventListener('DOMContentLoaded',hook);window.addEventListener('load',hook);setTimeout(hook,1500);setTimeout(hook,4000);
+document.documentElement.setAttribute('data-kd-trace','2');
+console.info('KIDDORA guided tracing v2 loaded');
 })();
 </script>
 
