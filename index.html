@@ -2890,7 +2890,7 @@ console.info('KIDDORA guided tracing v2 loaded');
 </style>
 <dialog id="kr-module" aria-label="KiddyReads"><div id="kr-shell"><div id="kr-bar"><span>KiddyReads 📚</span><button type="button" id="kr-close">🏠 KIDDORA</button></div><iframe id="kr-frame" title="KiddyReads storybooks" allow="autoplay"></iframe></div></dialog>
 <script>
-(()=>{const d=document.getElementById('kr-module'),f=document.getElementById('kr-frame');let scrollY=0;function close(){f.src='about:blank';d.close();document.documentElement.classList.remove('kr-lock');window.scrollTo(0,scrollY);document.getElementById('kr-open').focus()}document.getElementById('kr-open').addEventListener('click',()=>{scrollY=window.scrollY;try{if(typeof playClickSound==='function')playClickSound();window.speechSynthesis?.cancel()}catch(_){}f.src='kiddyreads/reader.html';d.showModal();document.documentElement.classList.add('kr-lock')});document.getElementById('kr-close').onclick=close;d.addEventListener('cancel',e=>{e.preventDefault();close()})})();
+(()=>{const d=document.getElementById('kr-module'),f=document.getElementById('kr-frame');let scrollY=0;function close(){f.src='about:blank';d.close();document.documentElement.classList.remove('kr-lock');window.scrollTo(0,scrollY);document.getElementById('kr-open').focus()}document.getElementById('kr-open').addEventListener('click',()=>{scrollY=window.scrollY;try{if(typeof playClickSound==='function')playClickSound();window.speechSynthesis?.cancel()}catch(_){}f.src='kiddyreads/reader-autoread-v3.html?v=3';d.showModal();document.documentElement.classList.add('kr-lock')});document.getElementById('kr-close').onclick=close;d.addEventListener('cancel',e=>{e.preventDefault();close()})})();
 </script>
 </body>
 </html>
